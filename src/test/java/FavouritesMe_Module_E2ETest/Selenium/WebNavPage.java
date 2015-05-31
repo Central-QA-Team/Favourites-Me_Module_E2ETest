@@ -1,24 +1,21 @@
 package FavouritesMe_Module_E2ETest.Selenium;
 
 
-
 import junit.framework.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-
 import org.openqa.selenium.internal.seleniumemulation.JavascriptLibrary;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.*;
+import org.openqa.selenium.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import static acceptance.step.ClientStepDef.SharedDriver.getDriver;
-import static junit.framework.Assert.assertEquals;
+import static FavouritesMe_Module_E2ETest.SharedDriver.getDriver;
 import static junit.framework.Assert.fail;
 import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.assertEquals;
 /**
  * Created by IntelliJ IDEA.
  * User: Vinod Kumar M

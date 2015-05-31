@@ -1,6 +1,7 @@
 package FavouritesMe_Module_E2ETest.ClientSteps;
 
-import acceptance.step.ClientStepDef.selenium.WebNavPage;
+
+import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

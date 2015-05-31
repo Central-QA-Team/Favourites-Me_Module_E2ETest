@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 @Cucumber.Options(
         format = {"pretty", "html:target/cucumber-report", "json:target/cucumber-report.json"},
         features = {"classpath:acceptance/feature"},
-        glue = {"acceptance/step/ClientStepDef"},
+        glue = {"FavouritesMe_Module_E2ETest"},
         tags = {"@web"},
         strict = true)
 public class AcceptanceITCase {
