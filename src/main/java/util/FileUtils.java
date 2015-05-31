@@ -1,6 +1,6 @@
 package util;
 
-import com.amazonaws.util.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.Closeable;
 import java.io.FileNotFoundException;
