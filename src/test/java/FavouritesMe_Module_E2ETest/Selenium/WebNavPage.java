@@ -44,6 +44,14 @@ public class WebNavPage {
 
     }
 
+    public static void sleepInSeconds(int timeInSecs) {
+        try {
+            Thread.sleep(timeInSecs * 1000);
+        } catch (InterruptedException e) {
+        }
+    }
+
+
     public static void pressEnterKey(String fieldLocator){
 
         WebElement element =  getDriver().findElement(By.xpath(fieldLocator));
@@ -120,6 +128,10 @@ public class WebNavPage {
     //To Click a Links
     public static void clickALink(String locator){
         getDriver().findElement(By.xpath(locator)).click();
+        //WebElement element = getDriver().findElement(By.xpath(locator));
+        //JavascriptExecutor executor = (JavascriptExecutor)getDriver();
+        //executor.executeScript("arguments[0].click();", element);
+
     }
     public static void clickParentLink(String locator){
         WebElement childElement=  getDriver().findElement(By.xpath(locator));
