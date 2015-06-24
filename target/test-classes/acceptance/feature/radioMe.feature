@@ -1,4 +1,4 @@
-
+@web
 Feature: Radio Me Module
 
 
@@ -96,7 +96,7 @@ Scenario Outline: Tab description
     Then Benefits page should have "Save stuff for later.,Get the latest updates.,All on any device."
     And Benefits page should have ID CTA
 
-@web
+
   Scenario Outline: Benefits page
     Given I am on Radio me module
     And I change page language to "<lang>"
