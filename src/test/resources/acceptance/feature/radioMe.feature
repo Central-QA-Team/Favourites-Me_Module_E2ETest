@@ -1,19 +1,20 @@
 
 Feature: Radio Me Module
 
+
 Scenario Outline: Tab label is capitalized for "Programme Updates"
   Given I am on Radio me module
-  And I signed in from benefits page
+  And I signed in from benefits page as a normal user
   Then Title of the "<tab>" should be "<text>"
 Examples:
     |tab|text|
-    |first_tab|Programme Updatex|
+    |first_tab|Programme Updates|
     |second_tab|Episodes & Clips|
 
 
 Scenario Outline: Translations for "Programme Updates"
   Given I am on Radio me module
-  And I signed in from benefits page
+  And I signed in from benefits page as a normal user
   And I change page language to "<lang>"
   Then Title of the "first_tab" should be "<title>"
 
@@ -26,7 +27,7 @@ Examples:
 
   Scenario Outline: Translations for "Episodes & Clips"
     Given I am on Radio me module
-    And I signed in from benefits page
+    And I signed in from benefits page as a normal user
     And I change page language to "<lang>"
     Then Title of the "second_tab" should be "<title>"
 
@@ -36,10 +37,10 @@ Examples:
     | Gaeilge  | Gearrthóga & Eagráin     |
     | Gàidhlig | Criomagan & Prògraman    |
 
-@web
+
 Scenario Outline: Tab description
    Given I am on Radio me module
-   And I signed in from benefits page
+   And I signed in from benefits page as a normal user
    And I click on the "<tab>" tab
    Then description text "<description>" should be displayed at the top
  Examples:
@@ -50,7 +51,7 @@ Scenario Outline: Tab description
 
   Scenario Outline: Translations of Tab description for "Programme Updates"
     Given I am on Radio me module
-    And I signed in from benefits page
+    And I signed in from benefits page as a normal user
     And I change page language to "<lang>"
     And I click on the "Programme Updates" tab
     Then description text "<description>" should be displayed at the top
@@ -63,7 +64,7 @@ Scenario Outline: Tab description
 
   Scenario Outline: Translations of Tab description for "Episodes & Clips"
     Given I am on Radio me module
-    And I signed in from benefits page
+    And I signed in from benefits page as a normal user
     And I change page language to "<lang>"
     And I click on the "Episodes & Clips" tab
     Then description text "<description>" should be displayed at the top
@@ -95,7 +96,7 @@ Scenario Outline: Tab description
     Then Benefits page should have "Save stuff for later.,Get the latest updates.,All on any device."
     And Benefits page should have ID CTA
 
-
+@web
   Scenario Outline: Benefits page
     Given I am on Radio me module
     And I change page language to "<lang>"
@@ -106,3 +107,27 @@ Scenario Outline: Tab description
   | Cymraeg  | Arbed cynnwys tan wedyn.,Derbyn diweddariadau.,Popeth mewn unrhyw ddyfais.|
   | Gaeilge  | Sábháil ábhar anois agus pill air níos moille.,Faigh na nuashonruithe is déanaí.,Ar fáil ar gach gléas.|
   | Gàidhlig | Sàbhail do stuth airson àm eile.,Am fiosrachadh as ùire.,Air inneal sam bith.|
+
+
+  Scenario: Empty page
+    Given I am on Radio me module
+    And I signed in from benefits page as a new user
+    Then Empty page should have first line "There are no programmes in your Favourites right now."
+    And Empty page should have second line "Add programmes to get updates when new episodes become available"
+    And Empty page should have desired image on it
+
+
+  Scenario Outline: Empty page translations
+    Given I am on Radio me module
+    And I signed in from benefits page as a new user
+    And I change page language to "<lang>"
+    Then Empty page should have first line "<first_line>"
+    And Empty page should have second line "<second_line>"
+    And Empty page should have desired image on it
+  Examples:
+    |lang|first_line|second_line|
+    | Cymraeg  | Does dim rhaglenni yn eich Ffefrynnau ar hyn o bryd. | Rhaid ychwanegu rhaglenni er mwyn cael gwybod pan fydd penodau newydd ar gael |
+    | Gaeilge  | Níl cláir ar bith i do Cheanáin faoi láthair. | Cuir cláir leis le nuashonraithe a fháil nuair a bheidh eagráin úra ar fáil |
+    | Gàidhlig | Chan eil prògraman nad Roghainnean an-dràsta. | Cuir prògraman ris airson fios mu fheadhainn ùra fhaighinn |
+
+
