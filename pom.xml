@@ -81,11 +81,7 @@
 
 
         <!--PhantomJs-->
-        <dependency>
-            <groupId>com.github.detro.ghostdriver</groupId>
-            <artifactId>phantomjsdriver</artifactId>
-            <version>${phantomJsDriverVer}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>com.github.detro.ghostdriver</groupId>
@@ -93,6 +89,7 @@
             <version>1.0.4</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.phantomjs</groupId>
             <artifactId>phantomjs</artifactId>
@@ -100,6 +97,7 @@
             <classifier>linux</classifier>
             <type>tar.bz2</type>
         </dependency>
+        -->
 
         <!--Selenium-->
 
