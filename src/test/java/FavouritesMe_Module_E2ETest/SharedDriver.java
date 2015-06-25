@@ -47,8 +47,8 @@ public class SharedDriver extends WebDriverException {
     private static String phantomJsDriver4Linux = directory + File.separator + "target"
             + File.separator + "phantomJs" + File.separator + "phantomjs-1.9.1-linux-x86_64"
             + File.separator + "bin";
-    private static final String FIREFOX_LOCATION="C:\\Users\\chelln01\\AppData\\Local\\Mozilla Firefox\\firefox.exe";
-    private static final String CHROME_LOCATION="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+    private static final String FIREFOX_LOCATION="/Applications/Firefox.app/Contents/MacOS/firefox";
+    private static final String CHROME_LOCATION="/Applications/Google Chrome.app/Contents/Google Chrome";
     private static final String CONFIG = "browser.config";
     //private static final File FIREFOX_LOCATION = new File (getConfigFile().getProperty("firefox.path"));
     //private static final String CHROME_LOCATION= getConfigFile().getProperty("chrome.path");
@@ -110,11 +110,11 @@ public class SharedDriver extends WebDriverException {
         FirefoxProfile _profile = new FirefoxProfile();
         File f = new File(FIREFOX_LOCATION);
         FirefoxBinary _ffbinary = new FirefoxBinary(f);
-//        _profile.setPreference("network.proxy.type", 1);
-//        _profile.setPreference("network.proxy.http", "www-cache.reith.bbc.co.uk");
-//        _profile.setPreference("network.proxy.http_port", 80);
-//        _profile.setPreference("network.proxy.ssl", "www-cache.reith.bbc.co.uk");
-//        _profile.setPreference("network.proxy.ssl_port", 80);
+        //_profile.setPreference("network.proxy.type", 1);
+        //_profile.setPreference("network.proxy.http", "www-cache.reith.bbc.co.uk");
+        //_profile.setPreference("network.proxy.http_port", 80);
+        //_profile.setPreference("network.proxy.ssl", "www-cache.reith.bbc.co.uk");
+        //_profile.setPreference("network.proxy.ssl_port", 80);
         driver = new FirefoxDriver(_ffbinary, _profile);
     }
         
