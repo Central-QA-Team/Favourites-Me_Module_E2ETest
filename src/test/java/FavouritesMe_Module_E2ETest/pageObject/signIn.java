@@ -22,7 +22,7 @@ public class SignIn {
     By signInButton = By.cssSelector("#bbcid_submit_button");
     By cancelButton = By.cssSelector(".bbcid-button.cancel");
     By signInFromBenifitsPage = By.cssSelector(".id4-cta-signin.id4-cta-button");
-
+    //public static String signIn = ".id4-cta-signin.id4-cta-button";
     public WebElement usernameInputBox(){
 
         element = getDriver().findElement(usernameInputBox);

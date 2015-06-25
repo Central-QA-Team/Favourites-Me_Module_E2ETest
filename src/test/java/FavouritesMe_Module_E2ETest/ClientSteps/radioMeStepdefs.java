@@ -15,7 +15,7 @@ import org.openqa.selenium.By;
 /**
  * Created by patilk01 on 18/06/2015.
  */
-public class RadioMeStepdefs{
+public class RadioMeStepdefs {
 
     private RadioMeModule radioMePage = new RadioMeModule();
 
