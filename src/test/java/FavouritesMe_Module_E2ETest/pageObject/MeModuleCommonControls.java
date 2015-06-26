@@ -10,31 +10,9 @@ import static FavouritesMe_Module_E2ETest.SharedDriver.getDriver;
  */
 public class MeModuleCommonControls {
 
-    private static WebElement element = null;
-
-    By benefitOne = By.xpath(".//*[@class='my-benefits-list']/li[1]");
-    By benefitTwo = By.xpath(".//*[@class='my-benefits-list']/li[2]");
-    By benefitThree = By.xpath(".//*[@class='my-benefits-list']/li[3]");
-    By benefitImage = By.xpath(".//*[@class='my-icon-benefits']");
-
-    public WebElement benefitOne(){
-        element = getDriver().findElement(benefitOne);
-        return element;
-    }
-
-    public WebElement benefitTwo(){
-        element = getDriver().findElement(benefitTwo);
-        return element;
-    }
-
-    public WebElement benefitThree(){
-        element = getDriver().findElement(benefitThree);
-        return element;
-    }
-
-    public WebElement benefitImage(){
-        element = getDriver().findElement(benefitImage);
-        return element;
-    }
+    public By benefitOne = By.xpath(".//*[@class='my-benefits-list']/li[1]");
+    public By benefitTwo = By.xpath(".//*[@class='my-benefits-list']/li[2]");
+    public By benefitThree = By.xpath(".//*[@class='my-benefits-list']/li[3]");
+    public By benefitImage = By.xpath(".//*[@class='my-icon-benefits']");
 
 }

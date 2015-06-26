@@ -13,63 +13,23 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by patilk01 on 19/06/2015.
  */
-public class SignIn {
+public class SignIn extends WebNavPage{
 
-    private static WebElement element = null;
+    public By usernameInputBox = By.cssSelector("#bbcid_unique");
+    public By passwordInputBox = By.cssSelector("#bbcid_password");
+    public By signInButton = By.cssSelector("#bbcid_submit_button");
+    public By cancelButton = By.cssSelector(".bbcid-button.cancel");
+    public By signInFromBenifitsPage = By.cssSelector(".id4-cta-signin.id4-cta-button");
 
-    By usernameInputBox = By.cssSelector("#bbcid_unique");
-    By passwordInputBox = By.cssSelector("#bbcid_password");
-    By signInButton = By.cssSelector("#bbcid_submit_button");
-    By cancelButton = By.cssSelector(".bbcid-button.cancel");
-    By signInFromBenifitsPage = By.cssSelector(".id4-cta-signin.id4-cta-button");
-    //public static String signIn = ".id4-cta-signin.id4-cta-button";
-    public WebElement usernameInputBox(){
-
-        element = getDriver().findElement(usernameInputBox);
-
-        return element;
-
-    }
-
-    public WebElement passwordInputBox(){
-
-        element = getDriver().findElement(passwordInputBox);
-
-        return element;
-
-    }
-
-    public WebElement signInButton(){
-
-        element = getDriver().findElement(signInButton);
-
-        return element;
-
-    }
-
-    public WebElement cancelButton(){
-
-        element = getDriver().findElement(cancelButton);
-
-        return element;
-
-    }
-
-
-    public WebElement signInFromBenifitsPage(){
-
-        element = getDriver().findElement(signInFromBenifitsPage);
-        return element;
-
-    }
 
     public void sign_In(String userID, String password) {
 
-        usernameInputBox().clear();
-        usernameInputBox().sendKeys(userID);
-        passwordInputBox().clear();
-        passwordInputBox().sendKeys(password);
-        signInButton().click();
+        clearAnyFieldUsingBy(usernameInputBox);
+        enterAnyTextInAFieldUsingBy(usernameInputBox, userID);
+        clearAnyFieldUsingBy(passwordInputBox);
+        enterAnyTextInAFieldUsingBy(passwordInputBox, password);
+        clickALinkUsingBy(signInButton);
+
     }
 
 

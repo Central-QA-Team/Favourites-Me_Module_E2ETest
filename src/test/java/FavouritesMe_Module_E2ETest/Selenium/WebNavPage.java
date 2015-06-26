@@ -33,7 +33,7 @@ public class WebNavPage {
     }
 
 
-    //To return a WebElement based on locator strategy
+    //To return a WebElement based on string locator strategy
     private static WebElement getWebElement(String locatorBy,String locator){
         WebElement element=null;
 
@@ -53,6 +53,15 @@ public class WebNavPage {
         }
         return element;
     }
+
+
+    //To return a WebElement using By
+    private static WebElement getWebElementUsingBy(By locator){
+        WebElement element=null;
+        element= getDriver().findElement(locator);
+        return element;
+    }
+
 
     //To return list of WebElements based on locator strategy
     protected static List<WebElement> getWebElements(String locatorBy,String locator){
@@ -185,6 +194,11 @@ public class WebNavPage {
         getWebElement(locatorBy,locator).click();
     }
 
+    //To Click a Links using By
+    public static void clickALinkUsingBy(By locator){
+        getWebElementUsingBy(locator).click();
+    }
+
     //need to modify
     public static void clickParentLink(String locator){
         WebElement childElement=  getDriver().findElement(By.xpath(locator));
@@ -210,6 +224,12 @@ public class WebNavPage {
         getWebElement(locatorBy,fieldLocator).sendKeys(Text);
     }
 
+    //To Enter Text in a field identified using By//
+    public static void enterAnyTextInAFieldUsingBy(By locator, String Text){
+
+        getWebElementUsingBy(locator).sendKeys(Text);
+    }
+
     public static void enterAnyNumberInAField(String locatorBy,String fieldLocator, int anynumber){
 
         String Text =  Integer.toString(anynumber);
@@ -220,6 +240,12 @@ public class WebNavPage {
     public static void clearAnyField(String locatorBy,String fieldLocator){
 
         getWebElement(locatorBy,fieldLocator).clear();
+    }
+
+    //To clear field using By
+    public static void clearAnyFieldUsingBy(By locator){
+
+        getWebElementUsingBy(locator).clear();
     }
 
     public static String returnFutureDate(int noOfDaysFromToday){
@@ -286,6 +312,11 @@ public class WebNavPage {
     //To get text from WebElement
     public static String getText(String locatorBy,String locator) {
         return getWebElement(locatorBy,locator).getText();
+    }
+
+    //To get text from WebElement using By class
+    public static String getTextUsingBy(By locator) {
+        return getWebElementUsingBy(locator).getText();
     }
 
     //need to revisit
@@ -383,6 +414,8 @@ public class WebNavPage {
     }
 
 
+
+
     public static boolean assertPageTitle(String expPageTitle){
         boolean key = true;
         try {
@@ -394,9 +427,15 @@ public class WebNavPage {
 
         return key;
     }
-    public static boolean elementWithXPathIsVisible(String xPath) {
+    public static boolean elementIsVisible(String xPath) {
         boolean displayed = false;
         displayed = getDriver().findElement(By.xpath(xPath)).isDisplayed() ;
+        return displayed;
+    }
+
+    public static boolean elementIsVisibleUsingBy(By locator) {
+        boolean displayed = false;
+        displayed = getDriver().findElement(locator).isDisplayed() ;
         return displayed;
     }
 
@@ -471,7 +510,6 @@ public class WebNavPage {
 
         String textToVerify = getText(locatorBy,locator).toUpperCase();
         assertTrue("Expected Text Found"+"The text present was: "+textToVerify, textToVerify.contains(textToBePresent.toUpperCase()));
-
         return Boolean.TRUE;
     }
 
@@ -672,7 +710,7 @@ public class WebNavPage {
                 {
                     if (elementWithXPathExists("xpath",elementLocator))
                     {
-                        if (elementWithXPathIsVisible(elementLocator))
+                        if (elementIsVisible(elementLocator))
                         {
                             if (elementWithXPathIsEnabled(elementLocator))
                             {
