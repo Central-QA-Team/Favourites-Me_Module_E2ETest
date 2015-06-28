@@ -1,4 +1,4 @@
-@web
+@automated
 Feature: Radio Me Module
 
 
@@ -94,19 +94,19 @@ Scenario Outline: Tab description
   Scenario: Benefits page
     Given I am on Radio me module
     Then Benefits page should have "Save stuff for later.,Get the latest updates.,All on any device."
-    And Benefits page should have ID CTA
+    And Benefits page should have ID CTA with text "Sign inwith your BBC iD,or Register to Add to Your Favourites"
 
 
   Scenario Outline: Benefits page
     Given I am on Radio me module
     And I change page language to "<lang>"
     Then Benefits page should have "<benefits>"
-    And Benefits page should have ID CTA
+    And Benefits page should have ID CTA with text "<message>"
   Examples:
-  | lang     | benefits                    |
-  | Cymraeg  | Arbed cynnwys tan wedyn.,Derbyn diweddariadau.,Popeth mewn unrhyw ddyfais.|
-  | Gaeilge  | Sábháil ábhar anois agus pill air níos moille.,Faigh na nuashonruithe is déanaí.,Ar fáil ar gach gléas.|
-  | Gàidhlig | Sàbhail do stuth airson àm eile.,Am fiosrachadh as ùire.,Air inneal sam bith.|
+  | lang     | benefits                    |message |
+  | Cymraeg  | Arbed cynnwys tan wedyn.,Derbyn diweddariadau.,Popeth mewn unrhyw ddyfais.|Mewngofnodigyda'ch BBC iD,neu Gofrestru i Add to Your Favourites|
+  | Gaeilge  | Sábháil ábhar anois agus pill air níos moille.,Faigh na nuashonruithe is déanaí.,Ar fáil ar gach gléas.|Sínigh isteachle do BBC iD,nó Cláraigh le Add to Your Favourites|
+  | Gàidhlig | Sàbhail do stuth airson àm eile.,Am fiosrachadh as ùire.,Air inneal sam bith.| Log a-steachleis am BBC iD agad,no Clàraich airson Add to Your Favourites|
 
 
   Scenario: Empty page

@@ -4,6 +4,9 @@ import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.*;
 
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+
+import static junit.framework.TestCase.assertEquals;
 
 /**
  * Created by patilk01 on 19/06/2015.
@@ -23,5 +26,13 @@ public class SignInStepdefs extends WebNavPage{
         clickALinkUsingBy(signInPage.signInFromBenifitsPage);
         signInPage.sign_In("NEWUSER@gmail.com", "NEWUSER");
     }
+
+    @Then("^Benefits page should have ID CTA with text \"([^\"]*)\"$")
+    public void Benefits_page_should_have_ID_CTA_with_text(String arg1) throws Throwable {
+        elementIsVisibleUsingBy(signInPage.idCTA);
+        assertEquals(true,signInPage.signInCTAContaints(arg1));
+    }
+
+
 
 }

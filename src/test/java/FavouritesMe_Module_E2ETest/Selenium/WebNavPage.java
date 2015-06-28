@@ -344,6 +344,13 @@ public class WebNavPage {
 
     }
 
+    //this method is to find element using By class and return value of its specific attribute
+    public static String getPropertyOfElementUsingBy(By locator, String attribName){
+
+        return getWebElementUsingBy(locator).getAttribute(attribName);
+
+    }
+
     public static String getPropertyOfElement(String locatorBy,String locator, String attribName){
 
         return getWebElement(locatorBy,locator).getAttribute(attribName);
@@ -413,6 +420,23 @@ public class WebNavPage {
         return exists;
     }
 
+    //verify if element with given locator exists using By class
+    public static boolean elementExistsUsingBy(By locator) {
+        boolean exists = false;
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        try
+        {
+            if (getWebElementUsingBy(locator) != null)
+                exists = true;
+            System.out.println("The Element exists and its Value is :"+getTextUsingBy(locator));
+        }
+        catch(Exception e)
+        {
+
+        }
+        getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        return exists;
+    }
 
 
 

@@ -21,7 +21,7 @@ public class RadioMeStepdefs extends WebNavPage{
 
     @Given("^I am on Radio me module$")
     public void I_am_on_Radio_me_module() throws Throwable {
-        openWebPage("http://www.test.bbc.co.uk/radio/favourites");
+        openWebPage("http://www.test.bbc.co.uk" + "/radio/favourites");
         sleepInSeconds(3);
     }
 
@@ -73,11 +73,7 @@ public class RadioMeStepdefs extends WebNavPage{
 
     @Then("^Benefits page should have \"([^\"]*)\"$")
     public void Benefits_page_should_have(String arg1) throws Throwable {
-        String[] array = arg1.split(",");
-        assertIfTwoTextsEqual(array[0],getTextUsingBy(radioMePage.benefitOne));
-        assertIfTwoTextsEqual(array[1],getTextUsingBy(radioMePage.benefitTwo));
-        assertIfTwoTextsEqual(array[2],getTextUsingBy(radioMePage.benefitThree));
-        elementIsVisibleUsingBy(radioMePage.benefitImage);
+        assertEquals(true,radioMePage.verifyBenefitsPageContents(arg1));
 
     }
 
@@ -97,11 +93,6 @@ public class RadioMeStepdefs extends WebNavPage{
     @Then("^Empty page should have desired image on it$")
     public void Empty_page_should_have_desired_image_on_it() throws Throwable {
         elementIsVisibleUsingBy(radioMePage.emptyPageImage);
-    }
-
-
-    @Then("^Benefits page should have ID CTA$")
-    public void Benefits_page_should_have_ID_CTA() throws Throwable {
     }
 
 
