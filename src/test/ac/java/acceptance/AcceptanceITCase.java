@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         format = {"pretty", "html:target/cucumber-report", "json:target/cucumber-report.json"},
         features = {"classpath:acceptance/feature"},
         glue = {"FavouritesMe_Module_E2ETest"},
-        tags = {"@web"},
+        tags = {"@automated"},
         strict = true)
 public class AcceptanceITCase {
 

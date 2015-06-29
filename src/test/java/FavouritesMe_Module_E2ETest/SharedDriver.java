@@ -47,14 +47,39 @@ public class SharedDriver extends WebDriverException {
     private static String phantomJsDriver4Linux = directory + File.separator + "target"
             + File.separator + "phantomJs" + File.separator + "phantomjs-1.9.1-linux-x86_64"
             + File.separator + "bin";
-    private static final String FIREFOX_LOCATION="C:\\Users\\chelln01\\AppData\\Local\\Mozilla Firefox\\firefox.exe";
-    private static final String CHROME_LOCATION="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+    private static String phantomJsDriver4macOSx =  directory + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "drivers"
+            + File.separator + "phantomJs" + File.separator + "macOSx" + File.separator + "phantomjs-macosx" + File.separator +
+            "bin";
+    private static final String FIREFOX_LOCATION="/Applications/Firefox.app/Contents/MacOS/firefox";
+    private static final String CHROME_LOCATION="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
     private static final String CONFIG = "browser.config";
     //private static final File FIREFOX_LOCATION = new File (getConfigFile().getProperty("firefox.path"));
     //private static final String CHROME_LOCATION= getConfigFile().getProperty("chrome.path");
-    private static String browserCapabilities = "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0";
+
+    private static String browserCapabilities = capabilities();
     String getSessionId;
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SharedDriver.class);
+
+    public static String capabilities(){
+        String capabilities = System.getProperty("capabilities");
+        String key = "safari";    //user agent;
+        if (key.equalsIgnoreCase("firefox")) {
+            return "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0";
+        } else if (key.equalsIgnoreCase("chrome")) {
+            return "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
+        } else if (key.equalsIgnoreCase("opera")) {
+            return "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16";
+        } else if (key.equalsIgnoreCase("safari")) {
+            return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A";
+        } else if (key.equalsIgnoreCase("IE11")){
+            return "Mozilla/5.0 (compatible, MSIE 11, Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko";
+        } else if (key.equalsIgnoreCase("IE9")){
+            return "Mozilla/5.0 (Windows; U; MSIE 9.0; WIndows NT 9.0; en-US))";
+        } else {
+            return "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0";
+        }
+
+    }
 
 
     public static Properties getConfigFile() {
@@ -71,7 +96,8 @@ public class SharedDriver extends WebDriverException {
     @Before("~@noWebDriver")
     public static void setUp() throws Exception {
         String browser = System.getProperty("browser");
-        String key = "firefox";    //browser;
+        String key = "phantomJs";    //browser;
+        System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
         System.out.println("The Browser used is: " + key);
         if (key.equalsIgnoreCase("chrome")) {
             setChromeDriver();
@@ -110,11 +136,11 @@ public class SharedDriver extends WebDriverException {
         FirefoxProfile _profile = new FirefoxProfile();
         File f = new File(FIREFOX_LOCATION);
         FirefoxBinary _ffbinary = new FirefoxBinary(f);
-//        _profile.setPreference("network.proxy.type", 1);
-//        _profile.setPreference("network.proxy.http", "www-cache.reith.bbc.co.uk");
-//        _profile.setPreference("network.proxy.http_port", 80);
-//        _profile.setPreference("network.proxy.ssl", "www-cache.reith.bbc.co.uk");
-//        _profile.setPreference("network.proxy.ssl_port", 80);
+        //_profile.setPreference("network.proxy.type", 1);
+        //_profile.setPreference("network.proxy.http", "www-cache.reith.bbc.co.uk");
+        //_profile.setPreference("network.proxy.http_port", 80);
+        //_profile.setPreference("network.proxy.ssl", "www-cache.reith.bbc.co.uk");
+        //_profile.setPreference("network.proxy.ssl_port", 80);
         driver = new FirefoxDriver(_ffbinary, _profile);
     }
         
@@ -174,8 +200,14 @@ public class SharedDriver extends WebDriverException {
     }*/
 
     public static void setChromeDriver() {
+        String OSIAmIn = System.getProperty("os.name").toLowerCase();
+        if (OSIAmIn.contains("windows")) {
+            System.setProperty("webdriver.chrome.driver", drivers + File.separator + "chromedriver" + File.separator  + "win" + File.separator  + "chromedriver.exe");
+        } else if(OSIAmIn.contains("mac os x")) {
+            System.setProperty("webdriver.chrome.driver", drivers + File.separator + "chromedriver" + File.separator  + "mac" + File.separator  + "chromedriver");
+        }
 
-        System.setProperty("webdriver.chrome.driver", drivers + File.separator + "chromedriver" + File.separator + "chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", drivers + File.separator + "chromedriver" + File.separator  + "win" + File.separator  + "chromedriver.exe");
         ChromeOptions browser_setup = new ChromeOptions();
         browser_setup.setBinary(new File(CHROME_LOCATION));
         driver = new ChromeDriver(browser_setup);
@@ -195,8 +227,8 @@ public class SharedDriver extends WebDriverException {
 
         if (OSIAmIn.contains("windows")) {
             _capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, drivers + File.separator + "phantomJs" + File.separator + "phantomjs.exe");
-        } else {
-            //_capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomJsDriver4Linux + File.separator + "phantomjs");
+        } else if(OSIAmIn.contains("mac os x")) {
+            _capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomJsDriver4macOSx + File.separator + "phantomjs");
         }
 
 
