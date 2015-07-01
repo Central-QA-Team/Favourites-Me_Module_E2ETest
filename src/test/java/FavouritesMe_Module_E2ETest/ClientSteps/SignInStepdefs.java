@@ -16,21 +16,21 @@ public class SignInStepdefs extends WebNavPage{
 
     @Given("^I signed in from benefits page as a normal user$")
     public void I_signed_in_from_benefits_page_as_a_normal_user() throws Throwable {
-        clickALinkUsingBy(signInPage.signInFromBenifitsPage);
-        signInPage.sign_In("richard.mass123@gmail.com", "BBCpsptest5");
+        clickALink(signInPage.signInFromBenifitsPage);
+        signInPage.sign_In(System.getProperty("userWithFav"), System.getProperty("passWithFav"));
 
     }
 
     @Given("^I signed in from benefits page as a new user$")
     public void I_signed_in_from_benefits_page_as_a_new_user() throws Throwable {
-        clickALinkUsingBy(signInPage.signInFromBenifitsPage);
-        signInPage.sign_In("NEWUSER@gmail.com", "NEWUSER");
+        clickALink(signInPage.signInFromBenifitsPage);
+        signInPage.sign_In(System.getProperty("userWithNoFav"), System.getProperty("passWithNoFav"));
     }
 
     @Then("^Benefits page should have ID CTA with text \"([^\"]*)\"$")
-    public void Benefits_page_should_have_ID_CTA_with_text(String arg1) throws Throwable {
-        elementIsVisibleUsingBy(signInPage.idCTA);
-        assertEquals(true,signInPage.signInCTAContaints(arg1));
+    public void Benefits_page_should_have_ID_CTA_with_text(String cta_text) throws Throwable {
+        elementIsVisible(signInPage.idCTA);
+        assertEquals(true,signInPage.signInCTAContaints(cta_text));
     }
 
 

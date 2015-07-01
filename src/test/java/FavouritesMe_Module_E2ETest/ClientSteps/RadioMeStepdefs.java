@@ -2,15 +2,12 @@ package FavouritesMe_Module_E2ETest.ClientSteps;
 
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.*;
-import static FavouritesMe_Module_E2ETest.SharedDriver.getDriver;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.fail;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import junit.framework.Assert;
-import org.openqa.selenium.By;
 
 /**
  * Created by patilk01 on 18/06/2015.
@@ -21,7 +18,7 @@ public class RadioMeStepdefs extends WebNavPage{
 
     @Given("^I am on Radio me module$")
     public void I_am_on_Radio_me_module() throws Throwable {
-        openWebPage("http://www.test.bbc.co.uk" + "/radio/favourites");
+        openWebPage(System.getProperty("baseUrl") + "/radio/favourites");
         sleepInSeconds(3);
     }
 
@@ -40,11 +37,11 @@ public class RadioMeStepdefs extends WebNavPage{
     @Given("^I change page language to \"([^\"]*)\"$")
     public void I_change_page_language_to(String arg1) throws Throwable {
         if(arg1.equals("Cymraeg")){
-            clickALinkUsingBy(radioMePage.cyLanguage);
+            clickALink(radioMePage.cyLanguage);
         }else if(arg1.equals("Gaeilge")){
-            clickALinkUsingBy(radioMePage.gaLanguage);
+            clickALink(radioMePage.gaLanguage);
         }else if(arg1.equals("Gàidhlig")){
-            clickALinkUsingBy(radioMePage.gdLanguage);
+            clickALink(radioMePage.gdLanguage);
         }
     }
 
@@ -52,9 +49,9 @@ public class RadioMeStepdefs extends WebNavPage{
     @Given("^I click on the \"([^\"]*)\" tab$")
     public void I_click_on_the_tab(String arg1) throws Throwable {
         if(arg1.equals("Programme Updates")){
-            clickALinkUsingBy(radioMePage.programmeUpdate);
+            clickALink(radioMePage.programmeUpdate);
         }else if(arg1.equals("Episodes & Clips")){
-            clickALinkUsingBy(radioMePage.episodesClips);
+            clickALink(radioMePage.episodesClips);
         }
     }
 
@@ -92,7 +89,7 @@ public class RadioMeStepdefs extends WebNavPage{
 
     @Then("^Empty page should have desired image on it$")
     public void Empty_page_should_have_desired_image_on_it() throws Throwable {
-        elementIsVisibleUsingBy(radioMePage.emptyPageImage);
+        elementIsVisible(radioMePage.emptyPageImage);
     }
 
 

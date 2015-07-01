@@ -28,64 +28,61 @@ public class WebNavPage {
     public static void sleepInSeconds(int timeInSecs) {
         try {
             Thread.sleep(timeInSecs * 1000);
-            } catch (InterruptedException e) {
-            }
+        } catch (InterruptedException e) {
+        }
     }
 
 
     //To return a WebElement based on string locator strategy
-    private static WebElement getWebElement(String locatorBy,String locator){
-        WebElement element=null;
-
-        switch (locatorBy.toLowerCase()){
-            case "xpath":
-                element= getDriver().findElement(By.xpath(locator));
-                break;
-            case "id":
-                element= getDriver().findElement(By.id(locator));
-                break;
-            case "css":
-                element= getDriver().findElement(By.cssSelector(locator));
-                break;
-            case "linktext":
-                element= getDriver().findElement(By.linkText(locator));
-                break;
-        }
-        return element;
-    }
-
+//    private static WebElement getWebElement(String locatorBy,String locator){
+//        WebElement element=null;
+//
+//        switch (locatorBy.toLowerCase()){
+//            case "xpath":
+//                element= getDriver().findElement(By.xpath(locator));
+//                break;
+//            case "id":
+//                element= getDriver().findElement(By.id(locator));
+//                break;
+//            case "css":
+//                element= getDriver().findElement(By.cssSelector(locator));
+//                break;
+//            case "linktext":
+//                element= getDriver().findElement(By.linkText(locator));
+//                break;
+//        }
+//        return element;
+//    }
 
     //To return a WebElement using By
-    private static WebElement getWebElementUsingBy(By locator){
-        WebElement element=null;
-        element= getDriver().findElement(locator);
+    private static WebElement getWebElement(By locator){
+        WebElement element= getDriver().findElement(locator);
         return element;
     }
 
 
     //To return list of WebElements based on locator strategy
-    protected static List<WebElement> getWebElements(String locatorBy,String locator){
+    protected static List<WebElement> getWebElements(By locator){
         List<WebElement> elements = new ArrayList<WebElement>();
-
-        switch (locatorBy.toLowerCase()){
-            case "xpath":
-                elements= getDriver().findElements(By.xpath(locator));
-                break;
-            case "id":
-                elements= getDriver().findElements(By.id(locator));
-                break;
-            case "css":
-                elements = getDriver().findElements(By.cssSelector(locator));
-                break;
-        }
+        elements= getDriver().findElements(locator);
+//        switch (locatorBy.toLowerCase()){
+//            case "xpath":
+//                elements= getDriver().findElements(By.xpath(locator));
+//                break;
+//            case "id":
+//                elements= getDriver().findElements(By.id(locator));
+//                break;
+//            case "css":
+//                elements = getDriver().findElements(By.cssSelector(locator));
+//                break;
+//        }
         return elements;
     }
 
     //To check is passed text is present in List of WebElements
-    public static boolean textBelongsToWebElementList(String locatorBy,String locator,String text){
-        //System.out.println(getWebElements(locatorBy,locator)[1].);
+    public static boolean textBelongsToWebElementList(By locator,String text){
         boolean flag=false;
-        List<WebElement> elements=getWebElements(locatorBy,locator);
+        List<WebElement> elements=getWebElements(locator);
         Iterator <WebElement>iterator = elements.iterator();
         String textFromWebElement=null;
 
@@ -119,24 +116,24 @@ public class WebNavPage {
         getDriver().navigate().refresh();
 
     }
-    //need to modify
-    public static void pressEnterKey(String fieldLocator){
+    //presses enter key on WebElement
+    public static void pressEnterKey(By fieldLocator){
 
-        WebElement element =  getDriver().findElement(By.xpath(fieldLocator));
+        WebElement element =  getWebElement(fieldLocator);
         element.sendKeys(Keys.RETURN);
 
     }
-    //need to modify
-    public static void pressKeybordEnterKey(String fieldLocator){
+    //Redundant to above method-- And no usage in this project********
+    public static void pressKeybordEnterKey(By fieldLocator){
 
-        WebElement element =  getDriver().findElement(By.xpath(fieldLocator));
+        WebElement element =  getWebElement(fieldLocator);
         element.sendKeys(Keys.ENTER);
 
     }
-    //need to modify
-    public static void pressTABKey(String fieldLocator){
+    //presses tab key on WebElement
+    public static void pressTABKey(By fieldLocator){
 
-        WebElement element =  getDriver().findElement(By.xpath(fieldLocator));
+        WebElement element = getWebElement(fieldLocator);
         element.sendKeys(Keys.TAB);
 
     }
@@ -190,13 +187,13 @@ public class WebNavPage {
     }
 
     //To Click a Links
-    public static void clickALink(String locatorBy, String locator){
-        getWebElement(locatorBy,locator).click();
-    }
+//    public static void clickALink(String locatorBy, String locator){
+//        getWebElement(locatorBy,locator).click();
+//    }
 
     //To Click a Links using By
-    public static void clickALinkUsingBy(By locator){
-        getWebElementUsingBy(locator).click();
+    public static void clickALink(By locator){
+        getWebElement(locator).click();
     }
 
     //need to modify
@@ -218,34 +215,29 @@ public class WebNavPage {
         //
     }
 
-    //To Enter Text in a field//
-    public static void enterAnyTextInAField(String locatorBy, String fieldLocator, String Text){
-
-        getWebElement(locatorBy,fieldLocator).sendKeys(Text);
-    }
 
     //To Enter Text in a field identified using By//
-    public static void enterAnyTextInAFieldUsingBy(By locator, String Text){
+    public static void enterAnyTextInAField(By locator, String Text){
 
-        getWebElementUsingBy(locator).sendKeys(Text);
+        getWebElement(locator).sendKeys(Text);
     }
 
-    public static void enterAnyNumberInAField(String locatorBy,String fieldLocator, int anynumber){
+    public static void enterAnyNumberInAField(By fieldLocator, int anynumber){
 
         String Text =  Integer.toString(anynumber);
-        getWebElement(locatorBy,fieldLocator).sendKeys(Text);
+        getWebElement(fieldLocator).sendKeys(Text);
     }
 
     //To clear field
-    public static void clearAnyField(String locatorBy,String fieldLocator){
+    public static void clearAnyField(By fieldLocator){
 
-        getWebElement(locatorBy,fieldLocator).clear();
+        getWebElement(fieldLocator).clear();
     }
 
     //To clear field using By
     public static void clearAnyFieldUsingBy(By locator){
 
-        getWebElementUsingBy(locator).clear();
+        getWebElement(locator).clear();
     }
 
     public static String returnFutureDate(int noOfDaysFromToday){
@@ -280,13 +272,15 @@ public class WebNavPage {
 
         selectingAnOptionFromList(ListOption, listLocator);
     }
-    public static void iSubmitFormWithId(String locatorBy,String formId) {
-        getWebElement(locatorBy,formId).submit();
+
+    //Submit the form with ID as string argument
+    public static void iSubmitFormWithId(String formId) {
+        getWebElement(By.id(formId)).submit();
     }
 
-    public static void checkACheckBox(String locatorBy,String checkBoxLocator){
+    public static void checkACheckBox(By locator){
 
-        WebElement element = getWebElement(locatorBy,checkBoxLocator);
+        WebElement element = getWebElement(locator);
 
         try{
             element.click();
@@ -310,13 +304,13 @@ public class WebNavPage {
     }
 
     //To get text from WebElement
-    public static String getText(String locatorBy,String locator) {
-        return getWebElement(locatorBy,locator).getText();
+    public static String getText(By locator) {
+        return getWebElement(locator).getText();
     }
 
     //To get text from WebElement using By class
     public static String getTextUsingBy(By locator) {
-        return getWebElementUsingBy(locator).getText();
+        return getWebElement(locator).getText();
     }
 
     //need to revisit
@@ -329,7 +323,7 @@ public class WebNavPage {
         if(numberofresult == 1)
             return xPathLink;
         for(int j = numberofresult; j >0; j--)
-        {	if(WebNavPage.getText("xpath","//span[contains(text(),'" + text + "')])[" + j + "]").length()>0)
+        {	if(WebNavPage.getText(By.xpath("//span[contains(text(),'" + text + "')])[" + j + "]")).length()>0)
             return "(//span[contains(text(),'" + text + "')])[" + j + "]";
         }
 
@@ -338,22 +332,15 @@ public class WebNavPage {
 
 
     // need to understand this method
-    public static String getAttributesOfElement(String locatorBy,String locator, String attribName){
+    public static String getAttributesOfElement(By locator, String attribName){
 
-        return getWebElement(locatorBy,locator).getCssValue(attribName);
-
-    }
-
-    //this method is to find element using By class and return value of its specific attribute
-    public static String getPropertyOfElementUsingBy(By locator, String attribName){
-
-        return getWebElementUsingBy(locator).getAttribute(attribName);
+        return getWebElement(locator).getCssValue(attribName);
 
     }
 
-    public static String getPropertyOfElement(String locatorBy,String locator, String attribName){
+    public static String getPropertyOfElement(By locator, String attributeName){
 
-        return getWebElement(locatorBy,locator).getAttribute(attribName);
+        return getWebElement(locator).getAttribute(attributeName);
 
     }
 
@@ -362,14 +349,15 @@ public class WebNavPage {
         return getDriver().findElement(By.xpath(xpath)).getAttribute("value");
     }
 
+    //To retrieve the title of page
     public static String getTitle(){
         return getDriver().getTitle();
 
     }
 
     //To get tool tip message text
-    public static String getHoverText(String locatorBy,String locator){
-        String toolTip = getWebElement(locatorBy,locator).getAttribute("title");
+    public static String getHoverText(By locator){
+        String toolTip = getWebElement(locator).getAttribute("title");
         //System.out.println("The Tool tip is :"+toolTip);
         return  toolTip;
     }
@@ -380,7 +368,7 @@ public class WebNavPage {
         boolean flag = false;
         try{
             flag=true;
-            Assert.assertEquals(text1,text2);
+            Assert.assertEquals(text1, text2);
         } catch (Exception e) {
             flag = false;
             e.printStackTrace();
@@ -403,14 +391,14 @@ public class WebNavPage {
 
 
     // not for verification
-    public static boolean elementWithXPathExists(String locatorBy,String locator) {
+    public static boolean elementWithXPathExists(String xpath) {
         boolean exists = false;
         getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         try
         {
-            if (getWebElement(locatorBy,locator) != null)
+            if (getWebElement(By.xpath(xpath)) != null)
                 exists = true;
-            System.out.println("The Element exists and its Value is :"+getText(locatorBy,locator));
+            System.out.println("The Element exists and its Value is :" + getText(By.xpath(xpath)));
         }
         catch(Exception e)
         {
@@ -419,16 +407,17 @@ public class WebNavPage {
         getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         return exists;
     }
+
 
     //verify if element with given locator exists using By class
-    public static boolean elementExistsUsingBy(By locator) {
+    public static boolean elementExists(By locator) {
         boolean exists = false;
         getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         try
         {
-            if (getWebElementUsingBy(locator) != null)
+            if (getWebElement(locator) != null)
                 exists = true;
-            System.out.println("The Element exists and its Value is :"+getTextUsingBy(locator));
+            System.out.println("The Element exists and its Value is :"+getText(locator));
         }
         catch(Exception e)
         {
@@ -439,7 +428,7 @@ public class WebNavPage {
     }
 
 
-
+    // Assertion for page title
     public static boolean assertPageTitle(String expPageTitle){
         boolean key = true;
         try {
@@ -451,22 +440,32 @@ public class WebNavPage {
 
         return key;
     }
+
+    //checks if WebElement is visible using xpath-- old method
     public static boolean elementIsVisible(String xPath) {
         boolean displayed = false;
         displayed = getDriver().findElement(By.xpath(xPath)).isDisplayed() ;
         return displayed;
     }
 
-    public static boolean elementIsVisibleUsingBy(By locator) {
+    //checks if WebElement is visible
+    public static boolean elementIsVisible(By locator) {
         boolean displayed = false;
-        displayed = getDriver().findElement(locator).isDisplayed() ;
+        displayed = getWebElement(locator).isDisplayed() ;
         return displayed;
     }
 
-
+    //checks if WebElement is enabled -- old method
     public static boolean elementWithXPathIsEnabled(String xPath) {
         boolean enabled;
         enabled= getDriver().findElement(By.xpath(xPath)).isEnabled() ;
+        return enabled;
+    }
+
+    //checks if WebElement is enabled
+    public static boolean elementWithXPathIsEnabled(By locator) {
+        boolean enabled;
+        enabled= getWebElement(locator).isEnabled() ;
         return enabled;
     }
 
@@ -524,19 +523,21 @@ public class WebNavPage {
 
 
 
-
+    //Assertion for WebElement with CSS
     public static void elementWithCssShouldBePresent(String css) {
 
         assertTrue(String.format("Element with %s should be present", css), getDriver().findElement(By.cssSelector(css)) != null);
     }
 
-    public static Boolean assertContentExists(String locatorBy,String locator, String textToBePresent){
+    //Assertion to check if passed text is equal to text retrieved from locator
+    public static Boolean assertContentExists(By locator, String textToBePresent){
 
-        String textToVerify = getText(locatorBy,locator).toUpperCase();
+        String textToVerify = getText(locator).toUpperCase();
         assertTrue("Expected Text Found"+"The text present was: "+textToVerify, textToVerify.contains(textToBePresent.toUpperCase()));
         return Boolean.TRUE;
     }
 
+    //Need to see
     public static boolean assertContentDoesNotExist(String xpath){
 
         try {
@@ -550,9 +551,10 @@ public class WebNavPage {
 
     }
 
+    //Right Click and select option, need to understand
     public static void doRightClickAndSelectOption(String xpath){
 
-        WebElement element = getDriver().findElement(By.xpath(xpath));
+        WebElement element = getWebElement(By.xpath(xpath));
         Actions splUserAction = new Actions(getDriver());
 
         try {
@@ -562,6 +564,7 @@ public class WebNavPage {
         }
     }
 
+    //Need to understand
     public static void assertContentDoesNotExistInTable(String Expected){
 
         WebElement element = getDriver().findElement(By.xpath("//div[@id='ctl00_body_gvList_custwindow_Scroller']/table"));
@@ -581,7 +584,7 @@ public class WebNavPage {
                 //Assert.assertFalse("The Value of the row does match with the expected",(ActualRowName.equalsIgnoreCase(Expected)== true));
                 if (Expected.equalsIgnoreCase(ActualRowName)== true){
                     fail("The string "+Expected+"is present in the table ");
-                    WebNavPage.clickALink("xpath","//div[@id='ctl00_body_gvList_custwindow_Scroller']/table/tbody/tr/td[contains(text(), 'OSI')]");
+                    WebNavPage.clickALink(By.xpath("//div[@id='ctl00_body_gvList_custwindow_Scroller']/table/tbody/tr/td[contains(text(), 'OSI')]"));
                 }else{
                     //System.out.println("The Expected String is :"+Expected+"But the actuals string in the table is :"+ActualRowName);
                 }
@@ -593,7 +596,7 @@ public class WebNavPage {
 
     public static Boolean assertContentExists(String xpath){
 
-        int CreRefNum = Integer.parseInt(WebNavPage.getText("xpath",xpath));
+        int CreRefNum = Integer.parseInt(WebNavPage.getText(By.xpath(xpath)));
         System.out.print("the Value is " + CreRefNum);
 
         if (CreRefNum!=0){
@@ -644,6 +647,7 @@ public class WebNavPage {
         }
     }
 
+    //Need to understand
     public static String[] getElementsInList  (String element)
     {
         WebElement elmnt = getDriver().findElement(By.tagName("search-results list"));
@@ -692,7 +696,7 @@ public class WebNavPage {
                 if (second >= 10) Assert.fail("timeout");
                 try
                 {
-                    if (elementWithXPathExists("xpath",elementlocator)) break;
+                    if (elementWithXPathExists(elementlocator)) break;
                 }catch (Exception e){
                     e. printStackTrace();
                 }
@@ -732,7 +736,7 @@ public class WebNavPage {
                 if (second >= 10) Assert.fail("timeout");
                 try
                 {
-                    if (elementWithXPathExists("xpath",elementLocator))
+                    if (elementWithXPathExists(elementLocator))
                     {
                         if (elementIsVisible(elementLocator))
                         {
@@ -832,9 +836,9 @@ public class WebNavPage {
             fail("Expected values "+expected+"are not present in the table "+ tableMap);
         }
     }
-    public static void rightClickOnTableElement(String xpath, String Linkxpath){
-        rightClickTableFirstRow(xpath);
-        clickALink("xpath",Linkxpath);
+    public static void rightClickOnTableElement(String Linkxpath){
+        rightClickTableFirstRow(Linkxpath);
+        clickALink(By.xpath("Linkxpath"));
     }
 
 
@@ -870,9 +874,9 @@ public class WebNavPage {
         return element;
     }
 
-    public static Boolean assertNoContentInTable(String locatorby,String locator){
+    public static Boolean assertNoContentInTable(By locator){
 
-        String textToVerify = getText(locatorby,locator).toUpperCase();
+        String textToVerify = getText(locator).toUpperCase();
         System.out.println("The Text from the Xpath is : "+textToVerify);
         assertTrue("Text Not Found", textToVerify.isEmpty());
 
