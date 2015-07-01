@@ -4,7 +4,6 @@ import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.FoodMeModule;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -17,7 +16,8 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Given("^I am on Food me module$")
     public void I_am_on_Food_me_module() throws Throwable {
-        openWebPage("http://www.test.bbc.co.uk" + "/food/my/favourites");
+        openWebPage(System.getProperty("baseUrl") + "/food/my/favourites");
+        //openWebPage("http://www.test.bbc.co.uk/food/my/favourites");
         sleepInSeconds(3);
     }
 
@@ -29,7 +29,7 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Then("^Food empty page should have desired image on it$")
     public void Food_empty_page_should_have_desired_image_on_it() throws Throwable {
-        elementIsVisibleUsingBy(foodMePage.emptyPageImage);
+        elementIsVisible(foodMePage.emptyPageImage);
     }
 
     @Then("^Food empty page should have first line \"([^\"]*)\"$")
@@ -44,7 +44,7 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Then("^Food empty page should have second line appended with favourite button image$")
     public void Food_empty_page_should_have_second_line_appended_with_favourite_button_image() throws Throwable {
-        elementIsVisibleUsingBy(foodMePage.favouriteImageInSecondLink);
+        elementIsVisible(foodMePage.favouriteImageInSecondLink);
     }
 
     @Then("^Food empty page should have third line \"([^\"]*)\"$")
@@ -54,7 +54,7 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Then("^Link Recipe index page should point to recipe page.$")
     public void Link_Recipe_index_page_should_point_to_recipe_page() throws Throwable {
-        assertIfTwoTextsEqual("http://www.test.bbc.co.uk"+"/food/recipes/",getPropertyOfElementUsingBy(foodMePage.recipeIndexLink, "href"));
+        assertIfTwoTextsEqual("http://www.test.bbc.co.uk"+"/food/recipes/",getPropertyOfElement(foodMePage.recipeIndexLink, "href"));
     }
 
     @Then("^Food benefits page should have \"([^\"]*)\"$")

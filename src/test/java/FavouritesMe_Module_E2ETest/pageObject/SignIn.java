@@ -28,15 +28,15 @@ public class SignIn extends WebNavPage{
     public void sign_In(String userID, String password) {
 
         clearAnyFieldUsingBy(usernameInputBox);
-        enterAnyTextInAFieldUsingBy(usernameInputBox, userID);
+        enterAnyTextInAField(usernameInputBox, userID);
         clearAnyFieldUsingBy(passwordInputBox);
-        enterAnyTextInAFieldUsingBy(passwordInputBox, password);
-        clickALinkUsingBy(signInButton);
+        enterAnyTextInAField(passwordInputBox, password);
+        clickALink(signInButton);
 
     }
 
     public boolean signInCTAContaints(String arg1) {
-        return assertIfTwoTextsEqual(arg1.replaceAll("\\n", ""),getTextUsingBy(idCTA).replaceAll("\\n", "")) && elementExistsUsingBy(signInButtonInCTA) && elementExistsUsingBy(registerButtonInCTA);
-       }
+        return assertIfTwoTextsEqual(arg1.replaceAll("\\n", ""),getTextUsingBy(idCTA).replaceAll("\\n", "")) && elementExists(signInButtonInCTA) && elementExists(registerButtonInCTA);
+    }
 
 }
