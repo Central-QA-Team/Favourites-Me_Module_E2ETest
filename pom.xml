@@ -12,6 +12,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <cucumber.options>--plugin pretty --tags @wip</cucumber.options>
         <commons.lang3.version>3.2.1</commons.lang3.version>
         <commons.lang.version>2.6</commons.lang.version>
         <cucumber-version>1.1.1</cucumber-version>
@@ -159,25 +160,6 @@
         </profile>
     </profiles>
 
-    <!--<build>-->
-    <!--<plugins>-->
-    <!--<plugin>-->
-    <!--<artifactId>maven-surefire-plugin</artifactId>-->
-    <!--<version>2.10</version>-->
-    <!--<configuration>-->
-    <!--<systemPropertyVariables>-->
-    <!--<baseUrl>${baseUrl}</baseUrl>-->
-    <!--<userWithFav>${userWithFav}</userWithFav>-->
-    <!--<passWithFav>${passWithFav}</passWithFav>-->
-    <!--<userWithNoFav>${userWithNoFav}</userWithNoFav>-->
-    <!--<passWithNoFav>${passWithNoFav}</passWithNoFav>-->
-    <!--<Env>${Env}</Env>-->
-    <!--</systemPropertyVariables>-->
-    <!--</configuration>-->
-    <!--</plugin>-->
-    <!--</plugins>-->
-    <!--</build>-->
-
     <build>
         <plugins>
             <plugin>
@@ -225,9 +207,13 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
-
         </plugins>
-
+        <testSourceDirectory>src/test</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
     </build>
 
 </project>
