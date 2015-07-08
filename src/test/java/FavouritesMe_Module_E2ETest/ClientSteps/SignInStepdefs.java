@@ -9,6 +9,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 
+import java.awt.*;
 import java.net.URI;
 import java.net.URLEncoder;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -67,15 +68,11 @@ public class SignInStepdefs extends WebNavPage{
         assertIfTwoTextsEqual("REGISTER", getText(signInPage.pageTitle));
     }
 
-    @Then("^Sign in from benifits page should take user to sign in page$")
-    public void Sign_in_from_benifits_page_should_take_user_to_sign_in_page() throws Throwable {
-        //String PTRT = currentURL();
-        //PTRT = getCurrentEncodedURL(PTRT);
-        //clickALink(signInPage.signInFromBenifitsPage);
-        //System.out.println(System.getProperty("baseUrl")+"/id/register?ptrt=" + PTRT);
-        //assertIfTwoTextsEqual(currentURL(), System.getProperty("baseUrl")+"/id/register?ptrt=" + PTRT);
+    @When("^I sign in from idCTA$")
+    public void I_sign_in_from_idCTA() throws Throwable {
+        System.out.println("asdada");
+        clickALink(signInPage.signInCTA);
+        signInPage.sign_In(System.getProperty("userWithFav"),System.getProperty("passWithFav"));
     }
-
-
 
 }

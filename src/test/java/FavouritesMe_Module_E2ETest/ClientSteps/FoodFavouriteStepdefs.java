@@ -95,4 +95,10 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         waitForShortSpan();
         assertContentExists(foodFavourite.favouriteButton, "Add "+"\"" + recipe + "\"" + " to Favourites");
     }
+
+    @Then("^particular item will not be added in favourite$")
+    public void particular_item_will_not_be_added_in_favourite() throws Throwable {
+
+    }
+
 }
