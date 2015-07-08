@@ -33,15 +33,24 @@ public class FoodFavouriteStepdefs extends WebNavPage{
 
     }
 
-    @When("^I click on Favourite button$")
-    public void I_click_on_Favourite_button() throws Throwable {
-//        if(getText(foodFavourite.favouriteButton).toLowerCase().contains("Added to Favourites".toLowerCase())) {
-//            clickALink(foodFavourite.favouriteButton);
-//            waitForShortSpan();
-//            clickALink(foodFavourite.favouriteButton);
-//        }
-//        else clickALink(foodFavourite.favouriteButton);
+    @When("^I remove recipe from Favourite$")
+    public void I_remove_recipe_from_Favourite() throws Throwable {
+        if(!getText(foodFavourite.favouriteButton).toLowerCase().contains("Added to Favourites".toLowerCase())) {
+            clickALink(foodFavourite.favouriteButton);
+            waitForShortSpan();
+            clickALink(foodFavourite.favouriteButton);
+        }
         clickALink(foodFavourite.favouriteButton);
+    }
+
+    @When("^I add recipe to Favourite")
+    public void I_add_recipe_to_Favourite() throws Throwable {
+        if(getText(foodFavourite.favouriteButton).toLowerCase().contains("Added to Favourites".toLowerCase())) {
+            clickALink(foodFavourite.favouriteButton);
+            waitForShortSpan();
+            clickALink(foodFavourite.favouriteButton);
+        }
+        else clickALink(foodFavourite.favouriteButton);
     }
 
     @Then("^the status of the button changes to Added to Favourites$")
