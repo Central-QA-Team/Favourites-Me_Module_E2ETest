@@ -2,12 +2,16 @@ package FavouritesMe_Module_E2ETest.Selenium;
 
 
 import junit.framework.Assert;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.seleniumemulation.JavascriptLibrary;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URLEncoder;
 import java.util.*;
 import org.openqa.selenium.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
@@ -53,6 +57,21 @@ public class WebNavPage {
 //        }
 //        return element;
 //    }
+
+    //To return current URL
+    public static String currentURL() {
+       return getDriver().getCurrentUrl();
+    }
+
+    //To return encoded URL
+    public static String getEncodedURL(String PTRT) {
+        try {
+            return URLEncoder.encode(PTRT, "UTF-8"); // http%3A%2F%2Fexample.com%2Ffoo%3Fkey%3Dval%7Cwith%5E%7Cbad%7Ccharacters
+        } catch (UnsupportedEncodingException e) {
+            e.getMessage();
+            return "abc";
+        }
+    }
 
     //To return a WebElement using By
     private static WebElement getWebElement(By locator){
@@ -308,10 +327,6 @@ public class WebNavPage {
         return getWebElement(locator).getText();
     }
 
-    //To get text from WebElement using By class
-    public static String getTextUsingBy(By locator) {
-        return getWebElement(locator).getText();
-    }
 
     //need to revisit
     public static String getxPathofVisibleText(String text) {

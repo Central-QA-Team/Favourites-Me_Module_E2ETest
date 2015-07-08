@@ -19,10 +19,11 @@ public class SignIn extends WebNavPage{
     public By passwordInputBox = By.cssSelector("#bbcid_password");
     public By signInButton = By.cssSelector("#bbcid_submit_button");
     public By cancelButton = By.cssSelector(".bbcid-button.cancel");
-    public By signInFromBenifitsPage = By.cssSelector(".id4-cta-signin.id4-cta-button");
+    //public By signInFromBenifitsPage = By.cssSelector(".id4-cta-signin.id4-cta-button");
     public By idCTA = By.xpath(".//*[@id='id4-cta-1']");
     public By signInButtonInCTA = By.xpath(".//*[@id='id4-cta-1']/span/a[@class='id4-cta-signin id4-cta-button']");
     public By registerButtonInCTA = By.xpath(".//*[@id='id4-cta-1']/span/a[@class='id4-cta-register']");
+    public By pageTitle = By.xpath(".//*[@class='bbcid-header']/h1");
 
 
     public void sign_In(String userID, String password) {
@@ -36,7 +37,7 @@ public class SignIn extends WebNavPage{
     }
 
     public boolean signInCTAContaints(String arg1) {
-        return assertIfTwoTextsEqual(arg1.replaceAll("\\n", ""),getTextUsingBy(idCTA).replaceAll("\\n", "")) && elementExists(signInButtonInCTA) && elementExists(registerButtonInCTA);
+        return assertIfTwoTextsEqual(arg1.replaceAll("\\n", ""),getText(idCTA).replaceAll("\\n", "")) && elementExists(signInButtonInCTA) && elementExists(registerButtonInCTA);
     }
 
 }

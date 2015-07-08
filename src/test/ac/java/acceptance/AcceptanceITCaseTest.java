@@ -18,6 +18,6 @@ import org.junit.runner.RunWith;
         glue = {"FavouritesMe_Module_E2ETest"},
         tags = {"@automated"},
         strict = true)
-public class AcceptanceITCase {
+public class AcceptanceITCaseTest {
 
 }

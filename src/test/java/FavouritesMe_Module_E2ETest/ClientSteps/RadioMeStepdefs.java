@@ -27,9 +27,9 @@ public class RadioMeStepdefs extends WebNavPage{
     @Then("^Title of the \"([^\"]*)\" should be \"([^\"]*)\"$")
     public void Title_of_the_should_be(String arg1, String arg2) throws Throwable {
         if(arg1.equals("first_tab")){
-            assertIfTwoTextsEqual(getTextUsingBy(radioMePage.programmeUpdate),arg2);
+            assertIfTwoTextsEqual(getText(radioMePage.programmeUpdate),arg2);
         }else if(arg1.equals("second_tab")){
-            assertIfTwoTextsEqual(getTextUsingBy(radioMePage.episodesClips),arg2);
+            assertIfTwoTextsEqual(getText(radioMePage.episodesClips),arg2);
         }
     }
 
@@ -58,13 +58,13 @@ public class RadioMeStepdefs extends WebNavPage{
 
     @Then("^description text \"([^\"]*)\" should be displayed at the top$")
     public void description_text_should_be_displayed_at_the_top(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1, getTextUsingBy(radioMePage.tabDescription));
+        assertIfTwoTextsEqual(arg1, getText(radioMePage.tabDescription));
     }
 
 
     @Given("^Page should have title \"([^\"]*)\"$")
     public void Page_should_have_title(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1,getTextUsingBy(radioMePage.pageTitle));
+        assertIfTwoTextsEqual(arg1,getText(radioMePage.pageTitle));
     }
 
 
@@ -77,13 +77,13 @@ public class RadioMeStepdefs extends WebNavPage{
 
     @Then("^Empty page should have first line \"([^\"]*)\"$")
     public void Empty_page_should_have_first_line(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1,getTextUsingBy(radioMePage.emptyPageFirstLine));
+        assertIfTwoTextsEqual(arg1,getText(radioMePage.emptyPageFirstLine));
     }
 
 
     @Then("^Empty page should have second line \"([^\"]*)\"$")
     public void Empty_page_should_have_second_line(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1,getTextUsingBy(radioMePage.emptyPageSecondLine));
+        assertIfTwoTextsEqual(arg1,getText(radioMePage.emptyPageSecondLine));
     }
 
 
@@ -91,6 +91,26 @@ public class RadioMeStepdefs extends WebNavPage{
     public void Empty_page_should_have_desired_image_on_it() throws Throwable {
         elementIsVisible(radioMePage.emptyPageImage);
     }
+
+
+    @Then("^clicking on tile should take user to respective programmes page$")
+    public void clicking_on_tile_should_take_user_to_respective_programmes_page() throws Throwable {
+
+        assertIfTwoTextsEqual(getPropertyOfElement(radioMePage.clickableTileInMeModule,"href"),"http://www.bbc.co.uk/programmes/"+getPropertyOfElement(radioMePage.firstItemInList,"data-id"));
+
+    }
+
+    @Then("^clicking on brand tile should take user to respective page$")
+    public void clicking_on_brand_tile_should_take_user_to_respective_page() throws Throwable {
+        //if episodes available for a brand (read 'total' from json response and )
+        if(false){ //if total is not equal to 0
+            //String latestEpisode = getLatestEpisodeForBrand(brandID);
+            //assertIfTwoTextsEqual(getPropertyOfElement(radioMePage.clickableTileInMeModule,"href"),"http://www.bbc.co.uk/programmes/"+latestEpisode);
+        }else{ //if episodes are not available for a brand (if total is equal to 0)
+            assertIfTwoTextsEqual(getPropertyOfElement(radioMePage.clickableBrandInMeModule,"href"),"http://www.bbc.co.uk/programmes/"+getPropertyOfElement(radioMePage.firstBrandInList,"data-id"));
+        }
+    }
+
 
 
 

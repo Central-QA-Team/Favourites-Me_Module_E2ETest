@@ -4,7 +4,12 @@ import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.FoodMeModule;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import junit.framework.Assert;
+import junit.framework.TestCase;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
 /**
@@ -23,7 +28,7 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Given("^Food page should have title \"([^\"]*)\"$")
     public void Food_page_should_have_title(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1,getTextUsingBy(foodMePage.pageTitle));
+        assertIfTwoTextsEqual(arg1,getText(foodMePage.pageTitle));
     }
 
 
@@ -34,12 +39,12 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Then("^Food empty page should have first line \"([^\"]*)\"$")
     public void Food_empty_page_should_have_first_line(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1,getTextUsingBy(foodMePage.emptyPageFirstLine));
+        assertIfTwoTextsEqual(arg1,getText(foodMePage.emptyPageFirstLine));
     }
 
     @Then("^Food empty page should have second line \"([^\"]*)\"$")
     public void Food_empty_page_should_have_second_line(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1,getTextUsingBy(foodMePage.emptyPageSecondLine));
+        assertIfTwoTextsEqual(arg1,getText(foodMePage.emptyPageSecondLine));
     }
 
     @Then("^Food empty page should have second line appended with favourite button image$")
@@ -49,7 +54,7 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Then("^Food empty page should have third line \"([^\"]*)\"$")
     public void Food_empty_page_should_have_third_line(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1,getTextUsingBy(foodMePage.emptyPageThirdLine));
+        assertIfTwoTextsEqual(arg1,getText(foodMePage.emptyPageThirdLine));
     }
 
     @Then("^Link Recipe index page should point to recipe page.$")
@@ -62,5 +67,33 @@ public class FoodMeStepdefs extends WebNavPage{
         assertEquals(true, foodMePage.verifyBenefitsPageContents(arg1));
 
     }
+
+    @Then("^clicking on tile should take user to respective recipe page$")
+    public void clicking_on_tile_should_take_user_to_respective_recipe_page() throws Throwable {
+        assertIfTwoTextsEqual(getPropertyOfElement(foodMePage.clickableTileInMeModule,"href"),"http://www.bbc.co.uk/food/recipes/"+getPropertyOfElement(foodMePage.firstItemInList,"data-id"));
+    }
+
+    @Given("^user should have at max (\\d+) recipes per page$")
+    public void user_should_have_at_max_recipes_per_page(int recipesPerPage) throws Throwable {
+       assertTrue(foodMePage.getFavouriteListPerPage()<=recipesPerPage);
+    }
+
+    @Then("^PTRT should be set to food me module$")
+    public void PTRT_should_be_set_to_food_me_module() throws Throwable {
+
+
+        //String REGEX = "ptrt=.*"+ getEncodedURL("food/my/favourites");
+        //String INPUT = currentURL();
+        //Pattern pattern;
+        //Matcher matcher;
+        //pattern = Pattern.compile(REGEX);
+        //matcher = pattern.matcher(INPUT);
+        //assertTrue(matcher.lookingAt());
+
+        //assertIfTwoTextsEqual(currentURL(),"https://ssl.test.bbc.co.uk/id/signin?ptrt=.*" + getEncodedURL("food/my/favourites"));
+        assertTrue(currentURL().contains("ptrt=") && currentURL().endsWith(getEncodedURL("food/my/favourites")));
+
+    }
+
 
 }
