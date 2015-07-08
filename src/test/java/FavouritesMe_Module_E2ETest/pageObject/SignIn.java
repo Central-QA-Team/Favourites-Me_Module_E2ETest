@@ -23,6 +23,7 @@ public class SignIn extends WebNavPage{
     public By idCTA = By.xpath(".//*[@id='id4-cta-1']");
     public By signInButtonInCTA = By.xpath(".//*[@id='id4-cta-1']/span/a[@class='id4-cta-signin id4-cta-button']");
     public By registerButtonInCTA = By.xpath(".//*[@id='id4-cta-1']/span/a[@class='id4-cta-register']");
+    public By signInBarlesqueMenu = By.id("idcta-username");
 
 
     public void sign_In(String userID, String password) {
