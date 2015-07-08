@@ -159,25 +159,6 @@
         </profile>
     </profiles>
 
-    <!--<build>-->
-    <!--<plugins>-->
-    <!--<plugin>-->
-    <!--<artifactId>maven-surefire-plugin</artifactId>-->
-    <!--<version>2.10</version>-->
-    <!--<configuration>-->
-    <!--<systemPropertyVariables>-->
-    <!--<baseUrl>${baseUrl}</baseUrl>-->
-    <!--<userWithFav>${userWithFav}</userWithFav>-->
-    <!--<passWithFav>${passWithFav}</passWithFav>-->
-    <!--<userWithNoFav>${userWithNoFav}</userWithNoFav>-->
-    <!--<passWithNoFav>${passWithNoFav}</passWithNoFav>-->
-    <!--<Env>${Env}</Env>-->
-    <!--</systemPropertyVariables>-->
-    <!--</configuration>-->
-    <!--</plugin>-->
-    <!--</plugins>-->
-    <!--</build>-->
-
     <build>
         <plugins>
             <plugin>
@@ -227,7 +208,12 @@
             </plugin>
 
         </plugins>
-
+        <testSourceDirectory>src/test</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
     </build>
 
 </project>
