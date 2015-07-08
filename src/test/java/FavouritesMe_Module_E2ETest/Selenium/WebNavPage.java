@@ -4,6 +4,8 @@ package FavouritesMe_Module_E2ETest.Selenium;
 import junit.framework.Assert;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.seleniumemulation.JavascriptLibrary;
@@ -432,7 +434,7 @@ public class WebNavPage {
         {
             if (getWebElement(locator) != null)
                 exists = true;
-            System.out.println("The Element exists and its Value is :"+getText(locator));
+            System.out.println("The Element exists and its Value is :" + getText(locator));
         }
         catch(Exception e)
         {
@@ -546,9 +548,9 @@ public class WebNavPage {
 
     //Assertion to check if passed text is equal to text retrieved from locator
     public static Boolean assertContentExists(By locator, String textToBePresent){
-
         String textToVerify = getText(locator).toUpperCase();
-        assertTrue("Expected Text Found"+"The text present was: "+textToVerify, textToVerify.contains(textToBePresent.toUpperCase()));
+        System.out.println(textToVerify);
+        assertTrue("Expected Text Found" + "The text present was: " + textToVerify, textToVerify.contains(textToBePresent.toUpperCase()));
         return Boolean.TRUE;
     }
 
@@ -641,7 +643,7 @@ public class WebNavPage {
 
         WebElement sliderControl = getDriver().findElement(By.xpath(sliderXpath));
         Actions slider = new Actions(getDriver());
-        Action moveSlider = slider.dragAndDropBy(sliderControl, slidingUnits, 0 ).build();
+        Action moveSlider = slider.dragAndDropBy(sliderControl, slidingUnits, 0).build();
         moveSlider.perform();
 
     }
@@ -784,7 +786,7 @@ public class WebNavPage {
         System.out.println("the number of Rows in that table is :"+rowCollection.size());
         Iterator<WebElement>ICounter = rowCollection.iterator();
         WebElement row = ICounter.next();
-        assertContentsExistInTableRow(row,expected);
+        assertContentsExistInTableRow(row, expected);
     }
 
     public static void assertContentsExistInTableEachRow(String xpath, Map<Integer,String> expected){
@@ -805,7 +807,7 @@ public class WebNavPage {
         Iterator<WebElement>ICounter = rowCollection.iterator();
         while(ICounter.hasNext()){
             WebElement row = ICounter.next();
-            assertTextExistsInTableRow(row,expected);
+            assertTextExistsInTableRow(row, expected);
         }
     }
     public static Boolean assertTextExistsInTableRow(WebElement row, String textToBePresent){
@@ -822,7 +824,7 @@ public class WebNavPage {
         String rowxPath=xPath + "/tbody/tr[" + rowNumber + "]";
         System.out.println("The Value of the xPath -"+ rowxPath);
         WebElement row =element.findElement(By.xpath(rowxPath));
-        assertContentsExistInTableRow(row,expected);
+        assertContentsExistInTableRow(row, expected);
     }
     public static void assertContentsExistInTableRow(WebElement row,Map<Integer,String> expected){
         Map <Integer ,String> tableMap= new HashMap<Integer,String>();
@@ -860,7 +862,7 @@ public class WebNavPage {
     public static void rightClickTableFirstRow(String xpath){
         WebElement column=selectFirstRowOnTable(xpath);
         JavascriptLibrary js=new JavascriptLibrary();
-        js.callEmbeddedSelenium(getDriver(), "triggerMouseEventAt", column,"contextmenu");
+        js.callEmbeddedSelenium(getDriver(), "triggerMouseEventAt", column, "contextmenu");
         waitForShortSpan();
     }
     public static WebElement selectFirstRowOnTable(String xpath){
@@ -877,7 +879,7 @@ public class WebNavPage {
         return column;
     }
     public static void rightClickTableRow(String xpath,int rowNumber){
-        WebElement column=selectRowOnTable(xpath,rowNumber);
+        WebElement column=selectRowOnTable(xpath, rowNumber);
         JavascriptLibrary js=new JavascriptLibrary();
         js.callEmbeddedSelenium(getDriver(), "triggerMouseEventAt", column,"contextmenu");
         waitForShortSpan();
@@ -1001,9 +1003,18 @@ public class WebNavPage {
         }
         return Itemarr;
     }
-    public static void MouseHover(String fieldLocator){
+    //Hover over a WebElement
+    public static void mouseHover(String fieldLocator){
 
         WebElement element =  getDriver().findElement(By.xpath(fieldLocator));
+        Actions builder=new Actions(getDriver());
+        builder.moveToElement(element).build().perform();
+
+    }
+    //Hover over a WebElement
+    public static void mouseHover(By fieldLocator){
+
+        WebElement element =  getDriver().findElement(fieldLocator);
         Actions builder=new Actions(getDriver());
         builder.moveToElement(element).build().perform();
 
@@ -1049,6 +1060,12 @@ public class WebNavPage {
             System.out.println(ColumnName + "Column is not marked as edited");
         }
 
+    }
+
+    //Explicit wait util element is visible--- need to test
+    public void waitUntilElementIsVisible(By webElement){
+        WebDriverWait wait= new WebDriverWait(getDriver(), 10);
+       wait.until(ExpectedConditions.visibilityOfElementLocated(webElement));
     }
 
 }

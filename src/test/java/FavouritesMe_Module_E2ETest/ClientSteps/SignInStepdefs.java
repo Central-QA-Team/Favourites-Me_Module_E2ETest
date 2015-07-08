@@ -37,7 +37,13 @@ public class SignInStepdefs extends WebNavPage{
     @Then("^Benefits page should have ID CTA with text \"([^\"]*)\"$")
     public void Benefits_page_should_have_ID_CTA_with_text(String cta_text) throws Throwable {
         elementIsVisible(signInPage.idCTA);
-        assertEquals(true,signInPage.signInCTAContaints(cta_text));
+        assertEquals(true, signInPage.signInCTAContaints(cta_text));
+    }
+
+    @Given("^I sign in from barlesque menu$")
+    public void I_am_sign_in() throws Throwable {
+        clickALink(signInPage.signInBarlesqueMenu);
+        signInPage.sign_In(System.getProperty("userWithFav"), System.getProperty("passWithFav"));
     }
 
     @When("^I click on Sign In button on benefits page$")
