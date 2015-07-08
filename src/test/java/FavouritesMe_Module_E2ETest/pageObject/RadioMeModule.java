@@ -24,6 +24,8 @@ public class RadioMeModule extends MeModuleCommonControls {
     public By emptyPageFirstLine = By.xpath(".//*[@class='my-text-1']");
     public By emptyPageSecondLine = By.xpath(".//*[@class='my-text-2']");
     public By emptyPageImage = By.xpath(".//*[@class='my-icon-signed-in-no-favourites']");
+    public By firstBrandInList = By.xpath(".//ol[@class='my-item-list 1']/li[1]");
+    public By clickableBrandInMeModule = By.xpath(".//ol[@class='my-item-list 1']/li[1]/span/span/a");
 
 }
 
