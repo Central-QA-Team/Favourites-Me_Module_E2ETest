@@ -1,5 +1,6 @@
 package FavouritesMe_Module_E2ETest.ClientSteps;
 
+import FavouritesMe_Module_E2ETest.HelperMethods.PTRT;
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.FoodMeModule;
 import cucumber.api.java.en.Given;
@@ -17,6 +18,7 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class FoodMeStepdefs extends WebNavPage{
 
+    private PTRT ptrt= new PTRT();
     private FoodMeModule foodMePage = new FoodMeModule();
 
     @Given("^I am on Food me module$")
@@ -78,21 +80,9 @@ public class FoodMeStepdefs extends WebNavPage{
        assertTrue(foodMePage.getFavouriteListPerPage()<=recipesPerPage);
     }
 
-    @Then("^PTRT should be set to food me module$")
-    public void PTRT_should_be_set_to_food_me_module() throws Throwable {
-
-
-        //String REGEX = "ptrt=.*"+ getEncodedURL("food/my/favourites");
-        //String INPUT = currentURL();
-        //Pattern pattern;
-        //Matcher matcher;
-        //pattern = Pattern.compile(REGEX);
-        //matcher = pattern.matcher(INPUT);
-        //assertTrue(matcher.lookingAt());
-
-        //assertIfTwoTextsEqual(currentURL(),"https://ssl.test.bbc.co.uk/id/signin?ptrt=.*" + getEncodedURL("food/my/favourites"));
-        assertTrue(currentURL().contains("ptrt=") && currentURL().endsWith(getEncodedURL("food/my/favourites")));
-
+    @Then("^PTRT should be set to \"([^\"]*)\"$")
+    public void PTRT_should_be_set_to(String arg1) throws Throwable {
+        assertTrue(ptrt.ptrtSetTo(arg1));
     }
 
 

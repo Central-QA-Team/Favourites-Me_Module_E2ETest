@@ -65,16 +65,6 @@ public class WebNavPage {
        return getDriver().getCurrentUrl();
     }
 
-    //To return encoded URL
-    public static String getEncodedURL(String PTRT) {
-        try {
-            return URLEncoder.encode(PTRT, "UTF-8"); // http%3A%2F%2Fexample.com%2Ffoo%3Fkey%3Dval%7Cwith%5E%7Cbad%7Ccharacters
-        } catch (UnsupportedEncodingException e) {
-            e.getMessage();
-            return "abc";
-        }
-    }
-
     //To return a WebElement using By
     private static WebElement getWebElement(By locator){
         WebElement element= getDriver().findElement(locator);
