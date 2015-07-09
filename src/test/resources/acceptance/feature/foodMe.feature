@@ -17,14 +17,14 @@ Scenario: Benefits page
     Given I am on Food me module
     When I click on Sign In button on benefits page
     Then User should be taken to sign in page
-    And PTRT should be set to food me module
+    And PTRT should be set to "food/my/favourites"
 
   @automated
   Scenario: Benefits page ID controls
     Given I am on Food me module
     When I click on Register button on benefits page
     Then User should be taken to register page
-    And PTRT should be set to food me module
+    And PTRT should be set to "food/my/favourites"
 
   @automated
 Scenario: Empty page
