@@ -18,6 +18,12 @@ public class MeModuleCommonControls extends WebNavPage{
     public By firstItemInList = By.xpath(".//ol[@class='my-item-list ']/li[1]");
     public By clickableTileInMeModule = By.xpath(".//ol[@class='my-item-list ']/li[1]/span/span/a");
     public By favouritesPerPage = By.xpath(".//*[@class='my-item-list ']/li");
+    public By actionPanel =By.xpath(".//li[1]/div/a");
+    public By removeButton =By.xpath(".//li[1]/div/span/span[1]/a");
+    public By actionPanelLabel = By.xpath(".//li[1]/div/span/span[2]/span");
+    public By confirm = By.xpath(".//li[1]/div/span/span[2]/a[1]");
+    public By cancle =By.xpath(".//li[1]/div/span/span[2]/a[2]");
+
 
     public boolean verifyBenefitsPageContents(String arg1) {
 
@@ -28,6 +34,13 @@ public class MeModuleCommonControls extends WebNavPage{
     public int getFavouriteListPerPage() {
         int totalItems = getWebElements(favouritesPerPage).size();
         return totalItems;
+    }
+
+    public boolean verifyActionPanelContents(String arg1) {
+        clickALink(actionPanel);
+        clickALink(removeButton);
+        String[] array = arg1.split(",");
+        return assertIfTwoTextsEqual(array[0],getText(actionPanelLabel)) && assertIfTwoTextsEqual(array[1],getText(confirm)) && assertIfTwoTextsEqual(array[2], getText(cancle));
     }
 
 

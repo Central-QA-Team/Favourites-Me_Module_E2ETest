@@ -96,7 +96,7 @@ public class SharedDriver extends WebDriverException {
     @Before("~@noWebDriver")
     public static void setUp() throws Exception {
         String browser = System.getProperty("browser");
-        String key = "firefox";    //browser;
+        String key = "phantomJs";    //browser;
         System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
         System.out.println("The Browser used is: " + key);
         if (key.equalsIgnoreCase("chrome")) {

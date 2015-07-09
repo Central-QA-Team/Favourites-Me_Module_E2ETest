@@ -49,14 +49,29 @@ Scenario: Number of recipe per page
   And I signed in from benefits page as a normal user
   And user should have at max 10 recipes per page
 
-@wip
-Scenario:Deletion of recipe
-  Given Given I am on Food homepage
-  And I sign in from barlesque menu
-  And I find a recipe
+@automated
+Scenario:C431546 Deletion of recipe
+  Given I am a signed in user
+  And I am on Food homepage
   And I add recipe to Favourite
   And I am on Food me module
-  When I click on action panel of any item
-  And I confirm a deletion
+  When I delete item from action panel
   Then item should be removed from me module
-  And change should also reflect on 'add' button for that item"
+  When I go to recipe page
+  And item should be removed from favorite
+
+  @automated
+Scenario:C172185 Action panel contains 3 dots
+  Given I am a signed in user
+    And I am on Food homepage
+    And I add recipe to Favourite
+    And I am on Food me module
+  Then action panel will be displayed as 3 vertical dots
+
+    @automated
+Scenario: C172186
+  Given I am a signed in user
+  And I am on Food homepage
+  And I add recipe to Favourite
+  When I am on Food me module
+  Then action panel should contain "Remove?,Yes,No"
