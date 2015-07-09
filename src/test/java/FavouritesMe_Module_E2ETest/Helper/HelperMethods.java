@@ -1,4 +1,4 @@
-package FavouritesMe_Module_E2ETest.HelperMethods;
+package FavouritesMe_Module_E2ETest.Helper;
 
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 
@@ -10,7 +10,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by patilk01 on 09/07/2015.
  */
-public class PTRT extends WebNavPage{
+public class HelperMethods extends WebNavPage{
 
     //To return encoded URL
     public static String getEncodedURL(String PTRT) {

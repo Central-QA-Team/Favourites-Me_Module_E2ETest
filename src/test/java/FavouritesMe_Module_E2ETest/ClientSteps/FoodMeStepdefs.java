@@ -1,14 +1,10 @@
 package FavouritesMe_Module_E2ETest.ClientSteps;
 
-import FavouritesMe_Module_E2ETest.HelperMethods.PTRT;
+import FavouritesMe_Module_E2ETest.Helper.HelperMethods;
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.FoodMeModule;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import junit.framework.Assert;
-import junit.framework.TestCase;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
@@ -18,7 +14,7 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class FoodMeStepdefs extends WebNavPage{
 
-    private PTRT ptrt= new PTRT();
+    private HelperMethods helperMethods = new HelperMethods();
     private FoodMeModule foodMePage = new FoodMeModule();
 
     @Given("^I am on Food me module$")
@@ -82,7 +78,7 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Then("^PTRT should be set to \"([^\"]*)\"$")
     public void PTRT_should_be_set_to(String arg1) throws Throwable {
-        assertTrue(ptrt.ptrtSetTo(arg1));
+        assertTrue(helperMethods.ptrtSetTo(arg1));
     }
 
 
