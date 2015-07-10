@@ -26,6 +26,7 @@ public class SignIn extends WebNavPage{
     public By signInBarlesqueMenu = By.id("idcta-username");
     public By pageTitle = By.xpath(".//*[@class='bbcid-header']/h1");
     public By signInCTA = By.xpath("//div/div/div/div/div/div/span[2]/p/span/a");
+    public By registerCTA = By.xpath("//div/span[2]/p/span/span[2]/a");
 
 
     public void sign_In(String userID, String password) {

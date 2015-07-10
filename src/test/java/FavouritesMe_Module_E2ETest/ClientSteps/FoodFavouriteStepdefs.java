@@ -16,6 +16,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     FoodFavourite foodFavourite = new FoodFavourite();
     FoodMeModule foodMe= new FoodMeModule();
     String recipe=null;
+    public String ptrt=null;
 
     @Given("^I am on Food homepage$")
     public void I_am_on_Food_homepage() throws Throwable {
@@ -26,7 +27,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
 
     @Given("^I find a recipe$")
     public void I_find_a_recipe() throws Throwable {
-        enterAnyTextInAField(foodFavourite.quickRecipeFinderSearch,"salt");
+        enterAnyTextInAField(foodFavourite.quickRecipeFinderSearch, "salt");
         clickALink(foodFavourite.quickRecipeFinderSearchButton);
         recipe=getText(foodFavourite.firstRecipeFromList);
         clickALink(foodFavourite.firstRecipeFromList);
@@ -55,6 +56,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
 
     @Then("^the status of the button changes to Added to Favourites$")
     public void the_status_of_the_button_changes_to_Added_to_Favourites() throws Throwable {
+        waitForShortSpan();
         waitForShortSpan();
         assertContentExists(foodFavourite.favouriteButton, "\"" + recipe + "\"" + " Added to Favourites");
 
@@ -90,15 +92,16 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         assertContentExists(foodFavourite.favouriteButtonStatus, "");
 
     }
+
     @Then("^button should change to Add state$")
     public void button_should_change_to_Add_state() throws Throwable {
         waitForShortSpan();
         assertContentExists(foodFavourite.favouriteButton, "Add "+"\"" + recipe + "\"" + " to Favourites");
     }
 
-    @Then("^particular item will not be added in favourite$")
-    public void particular_item_will_not_be_added_in_favourite() throws Throwable {
-
+    @Then("^I click on register from idICTA$")
+    public void I_click_on_register_from_idICTA() throws  Throwable {
+        clickALink(signIn.registerCTA);
     }
 
 }

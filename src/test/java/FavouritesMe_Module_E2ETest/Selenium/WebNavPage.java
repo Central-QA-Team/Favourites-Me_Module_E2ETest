@@ -121,6 +121,13 @@ public class WebNavPage {
 
     }
 
+    //To resize window
+    public static void resize(int width,int height) {
+        Dimension dimention=new Dimension(width,height);
+        getDriver().manage().window().setSize(dimention);
+    }
+
+
     //TO refresh the page
     public static void refreshPage(){
 

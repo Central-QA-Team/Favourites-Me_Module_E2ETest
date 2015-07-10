@@ -14,7 +14,6 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class FoodMeStepdefs extends WebNavPage{
 
-    private HelperMethods helperMethods = new HelperMethods();
     private FoodMeModule foodMePage = new FoodMeModule();
 
     @Given("^I am on Food me module$")
@@ -28,7 +27,6 @@ public class FoodMeStepdefs extends WebNavPage{
     public void Food_page_should_have_title(String arg1) throws Throwable {
         assertIfTwoTextsEqual(arg1,getText(foodMePage.pageTitle));
     }
-
 
     @Then("^Food empty page should have desired image on it$")
     public void Food_empty_page_should_have_desired_image_on_it() throws Throwable {
@@ -74,11 +72,6 @@ public class FoodMeStepdefs extends WebNavPage{
     @Given("^user should have at max (\\d+) recipes per page$")
     public void user_should_have_at_max_recipes_per_page(int recipesPerPage) throws Throwable {
        assertTrue(foodMePage.getFavouriteListPerPage()<=recipesPerPage);
-    }
-
-    @Then("^PTRT should be set to \"([^\"]*)\"$")
-    public void PTRT_should_be_set_to(String arg1) throws Throwable {
-        assertTrue(helperMethods.ptrtSetTo(arg1));
     }
 
 

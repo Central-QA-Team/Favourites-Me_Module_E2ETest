@@ -12,19 +12,19 @@ Scenario: Benefits page
   Then Food benefits page should have "Save stuff for later.,Get the latest updates.,All on any device."
   And Benefits page should have ID CTA with text "Sign inwith your BBC iD,or Register to Add to Your Favourites"
 
-@automated
+ @automated
   Scenario: Benefits page ID controls
     Given I am on Food me module
     When I click on Sign In button on benefits page
-    Then User should be taken to sign in page
-    And PTRT should be set to "food/my/favourites"
+    Then I should be taken to "BBC - Sign in" page
+    And PTRT should be set to "/food/my/favourites"
 
   @automated
   Scenario: Benefits page ID controls
     Given I am on Food me module
     When I click on Register button on benefits page
-    Then User should be taken to register page
-    And PTRT should be set to "food/my/favourites"
+    Then I should be taken to "BBC - Register" page
+    And PTRT should be set to "/food/my/favourites"
 
   @automated
 Scenario: Empty page
@@ -49,14 +49,14 @@ Scenario: Number of recipe per page
   And I signed in from benefits page as a normal user
   And user should have at max 10 recipes per page
 
-@wip
-Scenario:Deletion of recipe
-  Given Given I am on Food homepage
-  And I sign in from barlesque menu
-  And I find a recipe
-  And I add recipe to Favourite
-  And I am on Food me module
-  When I click on action panel of any item
-  And I confirm a deletion
-  Then item should be removed from me module
-  And change should also reflect on 'add' button for that item"
+#@wip
+#Scenario:Deletion of recipe
+#  Given Given I am on Food homepage
+#  And I sign in from barlesque menu
+#  And I find a recipe
+#  And I add recipe to Favourite
+#  And I am on Food me module
+#  When I click on action panel of any item
+#  And I confirm a deletion
+#  Then item should be removed from me module
+#  And change should also reflect on 'add' button for that item"
