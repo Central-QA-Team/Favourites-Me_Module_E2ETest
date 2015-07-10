@@ -41,12 +41,6 @@ public class SignInStepdefs extends WebNavPage{
         assertEquals(true, signInPage.signInCTAContaints(cta_text));
     }
 
-    @Given("^I sign in from barlesque menu$")
-    public void I_am_sign_in() throws Throwable {
-        clickALink(signInPage.signInBarlesqueMenu);
-        signInPage.sign_In(System.getProperty("userWithFav"), System.getProperty("passWithFav"));
-    }
-
     @When("^I click on Sign In button on benefits page$")
     public void I_click_on_Sign_In_button_on_benefits_page() throws Throwable {
         clickALink(signInPage.signInButtonInCTA);
@@ -61,6 +55,13 @@ public class SignInStepdefs extends WebNavPage{
     public void I_sign_in_from_idCTA() throws Throwable {
         clickALink(signInPage.signInCTA);
         signInPage.sign_In(System.getProperty("userWithFav"),System.getProperty("passWithFav"));
+    }
+
+    @Given("^I am a signed in user$")
+    public void I_am_a_signed_in_user() throws Throwable {
+        openWebPage(System.getProperty("baseUrl"));
+        clickALink(signInPage.signInBarlesqueMenu);
+        signInPage.sign_In(System.getProperty("userWithFav"), System.getProperty("passWithFav"));
     }
 
 }
