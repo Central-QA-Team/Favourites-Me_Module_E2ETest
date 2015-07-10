@@ -17,7 +17,6 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class FoodMeStepdefs extends WebNavPage{
 
-    private HelperMethods helperMethods = new HelperMethods();
     private FoodMeModule foodMePage = new FoodMeModule();
      public String deletedRecipe = null;
 
@@ -32,7 +31,6 @@ public class FoodMeStepdefs extends WebNavPage{
     public void Food_page_should_have_title(String arg1) throws Throwable {
         assertIfTwoTextsEqual(arg1,getText(foodMePage.pageTitle));
     }
-
 
     @Then("^Food empty page should have desired image on it$")
     public void Food_empty_page_should_have_desired_image_on_it() throws Throwable {
@@ -80,10 +78,6 @@ public class FoodMeStepdefs extends WebNavPage{
        assertTrue(foodMePage.getFavouriteListPerPage()<=recipesPerPage);
     }
 
-    @Then("^PTRT should be set to \"([^\"]*)\"$")
-    public void PTRT_should_be_set_to(String arg1) throws Throwable {
-        assertTrue(helperMethods.ptrtSetTo(arg1));
-    }
 
     @When("^I delete item from action panel$")
     public void I_delete_item_from_action_panel() throws Throwable {
@@ -92,11 +86,12 @@ public class FoodMeStepdefs extends WebNavPage{
         waitForShortSpan();
     }
 
+
     @Then("^item should be removed from me module$")
     public void item_should_be_removed_from_me_module() throws Throwable {
-
         assertFalse(deletedRecipe.equals(getPropertyOfElement(foodMePage.firstItemInList, "data-id")));
     }
+
 
     @When("^I go to recipe page$")
     public void I_go_to_recipe_page() throws Throwable {

@@ -23,7 +23,6 @@ public class RadioMeStepdefs extends WebNavPage{
     }
 
 
-
     @Then("^Title of the \"([^\"]*)\" should be \"([^\"]*)\"$")
     public void Title_of_the_should_be(String arg1, String arg2) throws Throwable {
         if(arg1.equals("first_tab")){
@@ -44,7 +43,6 @@ public class RadioMeStepdefs extends WebNavPage{
             clickALink(radioMePage.gdLanguage);
         }
     }
-
 
     @Given("^I click on the \"([^\"]*)\" tab$")
     public void I_click_on_the_tab(String arg1) throws Throwable {

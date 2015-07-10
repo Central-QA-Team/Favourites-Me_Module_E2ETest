@@ -15,7 +15,8 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     SignIn signIn= new SignIn();
     FoodFavourite foodFavourite = new FoodFavourite();
     FoodMeModule foodMe= new FoodMeModule();
-
+    String recipe=null;
+    public String ptrt=null;
 
     @Given("^I am on Food homepage$")
     public void I_am_on_Food_homepage() throws Throwable {
@@ -23,6 +24,13 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         openWebPage(url);
 
     }
+
+    
+    @Given("^I find a recipe$")
+    public void I_find_a_recipe() throws Throwable {
+        foodFavourite.I_find_a_recipe();
+    }
+
 
     @When("^I remove recipe from Favourite$")
     public void I_remove_recipe_from_Favourite() throws Throwable {
@@ -46,12 +54,13 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         else clickALink(foodFavourite.favouriteButton);
     }
 
+
     @Then("^the status of the button changes to Added to Favourites$")
     public void the_status_of_the_button_changes_to_Added_to_Favourites() throws Throwable {
         waitForShortSpan();
         assertContentExists(foodFavourite.favouriteButton, "\"" + foodFavourite.recipe + "\"" + " Added to Favourites");
-
     }
+
 
     @Then("^I can find  the recipe on food me module$")
     public void I_can_find_the_recipe_on_food_me_module() throws Throwable {
@@ -59,6 +68,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         assertContentExists(foodMe.firstElementTitle,foodFavourite.recipe);
 
     }
+
 
     @When("^I hover the mouse pointer on favorite button$")
     public void user_hover_the_mouse_pointer_on_favorite_button() throws Throwable {
@@ -72,6 +82,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
 
     }
 
+
     @Given("^I have already added a item to favorite$")
     public void I_have_already_added_any_item_to_favorite() throws Throwable {
         clickALink(foodFavourite.yourFavourites);
@@ -83,15 +94,16 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         assertContentExists(foodFavourite.favouriteButtonStatus, "");
 
     }
+
     @Then("^button should change to Add state$")
     public void button_should_change_to_Add_state() throws Throwable {
         waitForShortSpan();
         assertContentExists(foodFavourite.favouriteButton, "Add "+"\"" + foodFavourite.recipe + "\"" + " to Favourites");
     }
 
-    @Then("^particular item will not be added in favourite$")
-    public void particular_item_will_not_be_added_in_favourite() throws Throwable {
-
+    @Then("^I click on register from idICTA$")
+    public void I_click_on_register_from_idICTA() throws  Throwable {
+        clickALink(signIn.registerCTA);
     }
 
 }

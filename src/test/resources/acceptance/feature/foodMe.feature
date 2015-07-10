@@ -12,19 +12,19 @@ Scenario: Benefits page
   Then Food benefits page should have "Save stuff for later.,Get the latest updates.,All on any device."
   And Benefits page should have ID CTA with text "Sign inwith your BBC iD,or Register to Add to Your Favourites"
 
-@automated
+ @automated
   Scenario: Benefits page ID controls
     Given I am on Food me module
     When I click on Sign In button on benefits page
-    Then User should be taken to sign in page
-    And PTRT should be set to "food/my/favourites"
+    Then I should be taken to "BBC - Sign in" page
+    And PTRT should be set to "/food/my/favourites"
 
   @automated
   Scenario: Benefits page ID controls
     Given I am on Food me module
     When I click on Register button on benefits page
-    Then User should be taken to register page
-    And PTRT should be set to "food/my/favourites"
+    Then I should be taken to "BBC - Register" page
+    And PTRT should be set to "/food/my/favourites"
 
   @automated
 Scenario: Empty page
@@ -75,3 +75,4 @@ Scenario: C172186
   And I add recipe to Favourite
   When I am on Food me module
   Then action panel should contain "Remove?,Yes,No"
+

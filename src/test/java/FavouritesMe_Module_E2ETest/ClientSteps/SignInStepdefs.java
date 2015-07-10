@@ -51,17 +51,6 @@ public class SignInStepdefs extends WebNavPage{
         clickALink(signInPage.registerButtonInCTA);
     }
 
-    @Then("^User should be taken to sign in page$")
-    public void User_should_be_taken_to_sign_in_page() throws Throwable {
-        assertIfTwoTextsEqual("SIGN IN", getText(signInPage.pageTitle));
-        //WebNavPage.assertPageTitle("Sign in");
-    }
-
-    @Then("^User should be taken to register page$")
-    public void User_should_be_taken_to_register_page() throws Throwable {
-        assertIfTwoTextsEqual("REGISTER", getText(signInPage.pageTitle));
-    }
-
     @When("^I sign in from idCTA$")
     public void I_sign_in_from_idCTA() throws Throwable {
         clickALink(signInPage.signInCTA);
