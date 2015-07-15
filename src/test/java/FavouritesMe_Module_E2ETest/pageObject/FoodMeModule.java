@@ -19,11 +19,4 @@ public class FoodMeModule extends MeModuleCommonControls{
     public By recipeIndexLink = By.xpath(".//*[@class='my-text-3']/a");
     public By firstElementTitle = By.xpath("//li[1]/span/span/a/span/span[1]");
 
-
-    public void confirmDelete() {
-        clickALink(actionPanel);
-        clickALink(removeButton);
-        clickALink(confirm);
-    }
-
 }

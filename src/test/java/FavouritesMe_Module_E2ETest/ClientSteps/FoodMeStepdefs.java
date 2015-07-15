@@ -73,24 +73,24 @@ public class FoodMeStepdefs extends WebNavPage{
         assertIfTwoTextsEqual(getPropertyOfElement(foodMePage.clickableTileInMeModule,"href"),"http://www.bbc.co.uk/food/recipes/"+getPropertyOfElement(foodMePage.firstItemInList,"data-id"));
     }
 
-    @Given("^user should have at max (\\d+) recipes per page$")
-    public void user_should_have_at_max_recipes_per_page(int recipesPerPage) throws Throwable {
-       assertTrue(foodMePage.getFavouriteListPerPage()<=recipesPerPage);
-    }
+//    @Given("^user should have at max (\\d+) recipes per page$")
+//    public void user_should_have_at_max_recipes_per_page(int recipesPerPage) throws Throwable {
+//       assertTrue(foodMePage.getFavouriteListPerPage()<=recipesPerPage);
+//    }
 
 
-    @When("^I delete item from action panel$")
-    public void I_delete_item_from_action_panel() throws Throwable {
-        deletedRecipe=getPropertyOfElement(foodMePage.firstItemInList, "data-id");
-        foodMePage.confirmDelete();
-        waitForShortSpan();
-    }
-
-
-    @Then("^item should be removed from me module$")
-    public void item_should_be_removed_from_me_module() throws Throwable {
-        assertFalse(deletedRecipe.equals(getPropertyOfElement(foodMePage.firstItemInList, "data-id")));
-    }
+//    @When("^I delete item from action panel$")
+//    public void I_delete_item_from_action_panel() throws Throwable {
+//        deletedRecipe=getPropertyOfElement(foodMePage.firstItemInList, "data-id");
+//        foodMePage.confirmDelete();
+//        waitForShortSpan();
+//    }
+//
+//
+//    @Then("^item should be removed from me module$")
+//    public void item_should_be_removed_from_me_module() throws Throwable {
+//        assertFalse(deletedRecipe.equals(getPropertyOfElement(foodMePage.firstItemInList, "data-id")));
+//    }
 
 
     @When("^I go to recipe page$")
@@ -98,13 +98,13 @@ public class FoodMeStepdefs extends WebNavPage{
         openWebPage(System.getProperty("baseUrl") + "/food/recipes/" + deletedRecipe);
     }
 
-    @Then("^action panel will be displayed as (\\d+) vertical dots$")
-    public void action_panel_will_be_displayed_as_vertical_dots(int arg1) throws Throwable {
-        assertIfTwoTextsEqual("•\n•\n•",getText(foodMePage.actionPanel));
-    }
+//    @Then("^action panel will be displayed as (\\d+) vertical dots$")
+//    public void action_panel_will_be_displayed_as_vertical_dots(int arg1) throws Throwable {
+//        assertIfTwoTextsEqual("•\n•\n•",getText(foodMePage.actionPanel));
+//    }
 
-    @Given("^action panel should contain \"([^\"]*)\"$")
-    public void action_panel_should_contain(String arg1) throws Throwable {
-        assertTrue(foodMePage.verifyActionPanelContents(arg1));
-    }
+//    @Given("^action panel should contain \"([^\"]*)\"$")
+//    public void action_panel_should_contain(String arg1) throws Throwable {
+//        assertTrue(foodMePage.verifyActionPanelContents(arg1));
+//    }
 }

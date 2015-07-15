@@ -8,6 +8,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.fail;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import junit.framework.Assert;
 
 /**
  * Created by patilk01 on 18/06/2015.
@@ -108,6 +109,8 @@ public class RadioMeStepdefs extends WebNavPage{
             assertIfTwoTextsEqual(getPropertyOfElement(radioMePage.clickableBrandInMeModule,"href"),"http://www.bbc.co.uk/programmes/"+getPropertyOfElement(radioMePage.firstBrandInList,"data-id"));
         }
     }
+
+
 
 
 

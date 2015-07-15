@@ -22,7 +22,7 @@ public class MeModuleCommonControls extends WebNavPage{
     public By removeButton =By.xpath(".//li[1]/div/span/span[1]/a");
     public By actionPanelLabel = By.xpath(".//li[1]/div/span/span[2]/span");
     public By confirm = By.xpath(".//li[1]/div/span/span[2]/a[1]");
-    public By cancle =By.xpath(".//li[1]/div/span/span[2]/a[2]");
+    public By cancel =By.xpath(".//li[1]/div/span/span[2]/a[2]");
 
 
     public boolean verifyBenefitsPageContents(String arg1) {
@@ -40,8 +40,15 @@ public class MeModuleCommonControls extends WebNavPage{
         clickALink(actionPanel);
         clickALink(removeButton);
         String[] array = arg1.split(",");
-        return assertIfTwoTextsEqual(array[0],getText(actionPanelLabel)) && assertIfTwoTextsEqual(array[1],getText(confirm)) && assertIfTwoTextsEqual(array[2], getText(cancle));
+        return assertIfTwoTextsEqual(array[0],getText(actionPanelLabel)) && assertIfTwoTextsEqual(array[1],getText(confirm)) && assertIfTwoTextsEqual(array[2], getText(cancel));
     }
+
+    public void confirmDelete() {
+        clickALink(actionPanel);
+        clickALink(removeButton);
+        clickALink(confirm);
+    }
+
 
 
 }

@@ -47,7 +47,7 @@ Scenario: Tile navigation for recipe
 Scenario: Number of recipe per page
   Given I am on Food me module
   And I signed in from benefits page as a normal user
-  And user should have at max 10 recipes per page
+  And user should have at max 10 per page
 
 @automated
 Scenario:C431546 Deletion of recipe
@@ -75,4 +75,5 @@ Scenario: C172186
   And I add recipe to Favourite
   When I am on Food me module
   Then action panel should contain "Remove?,Yes,No"
+
 

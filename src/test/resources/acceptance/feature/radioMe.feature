@@ -137,10 +137,53 @@ Scenario Outline: Tab description
     And I click on the "Episodes & Clips" tab
     Then clicking on tile should take user to respective programmes page
 
-  @automatable
+  @wip
   Scenario: Tile navigation for programmes Update
     Given I am on Radio me module
     And I signed in from benefits page as a normal user
     And I click on the "Programme Updates" tab
     Then clicking on brand tile should take user to respective page
+
+
+  @automated
+  Scenario Outline: Number of favourites per page
+    Given I am on Radio me module
+    And I signed in from benefits page as a normal user
+    And I click on the "<tab>" tab
+    And user should have at max <no_of_items> per page
+  Examples:
+    |tab|no_of_items|
+    |Programme Updates|5|
+    |Episodes & Clips |20|
+
+
+  @wip
+  Scenario:C431546 Deletion of programme
+    Given I am a signed in user
+    And I am on Radio homepage
+    And I add episode to Favourite
+    And I am on Radio me module
+    And I click on the "Episodes & Clips" tab
+    When I delete item from action panel
+    Then item should be removed from me module
+    When I go to recipe page
+    And item should be removed from favorite
+
+
+  @wip
+  Scenario:C172185 Action panel contains 3 dots
+    Given I am a signed in user
+    And I am on Food homepage
+    And I add recipe to Favourite
+    And I am on Radio me module
+    Then action panel will be displayed as 3 vertical dots
+
+
+  @wip
+  Scenario: C172186
+    Given I am a signed in user
+    And I am on Food homepage
+    And I add recipe to Favourite
+    When I am on Food me module
+    Then action panel should contain "Remove?,Yes,No"
 

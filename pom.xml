@@ -110,7 +110,16 @@
             <artifactId>selenium-chrome-driver</artifactId>
             <version>${seleniumVersion}</version>
         </dependency>
+
+
         <!--End-->
+
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>2.4.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
