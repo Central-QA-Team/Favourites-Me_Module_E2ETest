@@ -1,16 +1,14 @@
 
-Feature: Adding a Food recipe as a favourite
+Feature: Adding a Food recipe as a favourite and removing from Me module
 
-  @automated @favourite @food
-  Scenario: C172579,C431534,-Verify a a recipe can be added as favourite
-    C171569-Verify Mouse hover on added state, it's assumed JS is ON
+  @automated @favourite @radio
+  Scenario: Verify a Brand can be added as a Favourite
     Given I am a signed in user
-    And I navigate to BBC food home page
-    When I add recipe to Favourite
-    And I hover the mouse pointer on favorite button
-    Then button label should change from added state to remove state
-    And the status of the button changes to Added to Favourites
-    And I can find  the recipe on food me module
+      And I navigate to BBC radio home page
+    When I add brand to Favourite
+    Then Add button should change to remove state
+      And I can find  the brand on radio me module
+      And I can remove the brand from Favourites on Radio Me Module
 
   @automated @favourite @food
   Scenario: C171570-Removing item from favourites
@@ -24,31 +22,31 @@ Feature: Adding a Food recipe as a favourite
 
   @automated @favourite @food
   Scenario: C171285-Verify sign in from page
-    when browser window is not at full screen
+  when browser window is not at full screen
     Given I navigate to BBC food home page
-      And I add recipe to Favourite
-      And I resize browser window to width "800" and height "600"
+    And I add recipe to Favourite
+    And I resize browser window to width "800" and height "600"
     When I sign in from idCTA
     Then the status of the button changes to Added to Favourites
-      And I remove recipe from Favourite
+    And I remove recipe from Favourite
     #Last step is just a cleanup step
 
 
   @automated @favourite @food
   Scenario: C171286-Verify sign in from overlay
     Given I navigate to BBC food home page
-      And I add recipe to Favourite
+    And I add recipe to Favourite
     When I sign in from idCTA
     Then the status of the button changes to Added to Favourites
-      And I remove recipe from Favourite
+    And I remove recipe from Favourite
     #Last step is just a cleanup step
 
   @automated @favourite @food
   Scenario: C171288-Verify register from page
     Given I navigate to BBC food home page
-      And I find a recipe
-      And I add recipe to Favourite
+    And I find a recipe
+    And I add recipe to Favourite
     When I click on register from idICTA
     Then I should be taken to "BBC - Register" page
-      And PTRT should be set to "/food/recipes/"
+    And PTRT should be set to "/food/recipes/"
 
