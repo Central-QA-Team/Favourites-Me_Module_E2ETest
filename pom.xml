@@ -148,8 +148,8 @@
             <id>live</id>
             <properties>
                 <baseUrl>http://www.bbc.co.uk</baseUrl>
-                <userWithFav>richard.mass123@gmail.com</userWithFav> <!--User having some items added to his favourite-->
-                <passWithFav>BBCpsptest5</passWithFav>
+                <userWithFav>dhanesh_test@gmail.com</userWithFav> <!--User having some items added to his favourite-->
+                <passWithFav>National1234</passWithFav>
                 <userWithNoFav>NEWUSER@gmail.com</userWithNoFav> <!--User having NO items added to his favourite-->
                 <passWithNoFav>NEWUSER</passWithNoFav>
                 <Env>live</Env>

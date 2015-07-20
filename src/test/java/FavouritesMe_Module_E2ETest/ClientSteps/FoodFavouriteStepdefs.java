@@ -43,6 +43,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         clickALink(foodFavourite.favouriteButton);
     }
 
+
     @When("^I add recipe to Favourite")
     public void I_add_recipe_to_Favourite() throws Throwable {
         foodFavourite.I_find_a_recipe();
@@ -89,17 +90,20 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         clickALink(By.xpath("//contains(text()," + foodFavourite.recipe + ")"));
     }
 
+
     @Then("^item should be removed from favorite$")
     public void item_should_be_removed_from_favorite() throws Throwable {
         assertContentExists(foodFavourite.favouriteButtonStatus, "");
 
     }
 
+
     @Then("^button should change to Add state$")
     public void button_should_change_to_Add_state() throws Throwable {
         waitForShortSpan();
         assertContentExists(foodFavourite.favouriteButton, "Add "+"\"" + foodFavourite.recipe + "\"" + " to Favourites");
     }
+
 
     @Then("^I click on register from idICTA$")
     public void I_click_on_register_from_idICTA() throws  Throwable {

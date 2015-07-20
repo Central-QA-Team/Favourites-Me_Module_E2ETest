@@ -10,18 +10,22 @@ import org.openqa.selenium.WebElement;
  */
 public class RadioFavourite extends WebNavPage{
 
-    public String episode=null;
+    //public String episode=null;
 
-    //public By quickRecipeFinderSearch = By.id("search-keywords");
-    //public By quickRecipeFinderSearchButton = By.id("search-submit");
-    public By mostPopularProgramme = By.xpath(".//ul[@class='popular-list typical-list cf']/li[1][@class='episode']/div[1]/a");
-    public By favouriteButton = By.xpath("//*[@id='pf1']/span[@id='pfl1']");
-    public By yourFavourites = By.xpath("//a[@title='See Favourite items']");
-    public By favouriteButtonStatus = By.xpath("//*[@id='pf1']/span/span[2]");
+    //public By mostPopularProgramme = By.xpath(".//ul[@class='popular-list typical-list cf']/li[1][@class='episode']/div[1]/a");
+    public By favouriteButton = By.id("pf1");
+    public By yourFavourites = By.xpath("//*[@id='rsn-wrap']//li/a[text()='Favourites']");
+    public By addFavouriteButtonStatus = By.xpath("//*[@id='pf1']/span[@class='p-f-label-display p-f-show']/span[2]");
+    public By categories = By.xpath("//a/span[text()='Categories']");
+    public By secondCategory = By.xpath("//ul/li[2]/a/div/h3");
+    public By firstBrand = By.xpath("//div[2]/div/ol/li[1]//h4/a/span/span");
+    public By brandName = By.xpath("//*[@id='br-masthead']/div/div[1]/div[2]/a/div");
 
-//    public void I_find_a_recipe() throws Throwable {
-//        episode=getText(mostPopularProgramme);
-//        clickALink(mostPopularProgramme);
-//    }
+    public void I_find_a_brand() throws Throwable {
+        clickALink(categories);
+        clickALink(secondCategory);
+        clickALink(firstBrand);
+    }
+
 
 }
