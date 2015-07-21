@@ -4,9 +4,11 @@ import FavouritesMe_Module_E2ETest.Helper.HelperMethods;
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.FoodFavourite;
 import FavouritesMe_Module_E2ETest.pageObject.FoodMeModule;
+import FavouritesMe_Module_E2ETest.restassured.RestAssured;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.By;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -18,7 +20,9 @@ import static junit.framework.TestCase.assertEquals;
 public class FoodMeStepdefs extends WebNavPage{
 
     private FoodMeModule foodMePage = new FoodMeModule();
-     public String deletedRecipe = null;
+    private RestAssured api = new RestAssured();
+    public String deletedRecipe = null;
+
 
     @Given("^I am on Food me module$")
     public void I_am_on_Food_me_module() throws Throwable {
@@ -73,38 +77,21 @@ public class FoodMeStepdefs extends WebNavPage{
         assertIfTwoTextsEqual(getPropertyOfElement(foodMePage.clickableTileInMeModule,"href"),"http://www.bbc.co.uk/food/recipes/"+getPropertyOfElement(foodMePage.firstItemInList,"data-id"));
     }
 
-//    @Given("^user should have at max (\\d+) recipes per page$")
-//    public void user_should_have_at_max_recipes_per_page(int recipesPerPage) throws Throwable {
-//       assertTrue(foodMePage.getFavouriteListPerPage()<=recipesPerPage);
-//    }
-
-
-//    @When("^I delete item from action panel$")
-//    public void I_delete_item_from_action_panel() throws Throwable {
-//        deletedRecipe=getPropertyOfElement(foodMePage.firstItemInList, "data-id");
-//        foodMePage.confirmDelete();
-//        waitForShortSpan();
-//    }
-//
-//
-//    @Then("^item should be removed from me module$")
-//    public void item_should_be_removed_from_me_module() throws Throwable {
-//        assertFalse(deletedRecipe.equals(getPropertyOfElement(foodMePage.firstItemInList, "data-id")));
-//    }
-
-
     @When("^I go to recipe page$")
     public void I_go_to_recipe_page() throws Throwable {
         openWebPage(System.getProperty("baseUrl") + "/food/recipes/" + deletedRecipe);
     }
 
-//    @Then("^action panel will be displayed as (\\d+) vertical dots$")
-//    public void action_panel_will_be_displayed_as_vertical_dots(int arg1) throws Throwable {
-//        assertIfTwoTextsEqual("•\n•\n•",getText(foodMePage.actionPanel));
-//    }
-
-//    @Given("^action panel should contain \"([^\"]*)\"$")
-//    public void action_panel_should_contain(String arg1) throws Throwable {
-//        assertTrue(foodMePage.verifyActionPanelContents(arg1));
+//    @When("^I verify recipe \"([^\"]*)\"$")
+//    public void I_verify_recipe(String arg1) throws Throwable {
+//
+//        String stringLocator = ".//ol[@class='my-item-list ']/li[1]";
+//        if(arg1.equals("title")){
+//           stringLocator= stringLocator + "//*[@class='my-title-one']";
+//            //getText(By.xpath(stringLocator))
+//            api.
+//        }else if(arg1.equals("creator")){
+//            stringLocator= stringLocator + "//*[@itemprop='creator']";
+//        }
 //    }
 }
