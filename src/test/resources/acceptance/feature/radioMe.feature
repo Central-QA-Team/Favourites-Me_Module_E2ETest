@@ -137,7 +137,7 @@ Scenario Outline: Tab description
     And I click on the "Episodes & Clips" tab
     Then clicking on tile should take user to respective programmes page
 
-  @wip
+  @automatable
   Scenario: Tile navigation for programmes Update
     Given I am on Radio me module
     And I signed in from benefits page as a normal user
@@ -157,33 +157,4 @@ Scenario Outline: Tab description
     |Episodes & Clips |20|
 
 
-#  @wip
-#  Scenario:C431546 Deletion of programme
-#    Given I am a signed in user
-#    And I navigate to BBC radio home page
-#    And I add brand to Favourite
-#    And I am on Radio me module
-#    And I click on the "Programme Updates" tab
-#    When I delete item from action panel
-#    Then item should be removed from me module
-#    When I go to recipe page
-#    And item should be removed from favorite
-#
-#
-#  @wip1
-#  Scenario:C172185 Action panel contains 3 dots
-#    Given I am a signed in user
-#    And I am on Food homepage
-#    And I add recipe to Favourite
-#    And I am on Radio me module
-#    Then action panel will be displayed as 3 vertical dots
-#
-#
-#  @wip1
-#  Scenario: C172186
-#    Given I am a signed in user
-#    And I am on Food homepage
-#    And I add recipe to Favourite
-#    When I am on Food me module
-#    Then action panel should contain "Remove?,Yes,No"
 

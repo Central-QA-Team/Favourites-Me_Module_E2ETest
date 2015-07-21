@@ -11,12 +11,13 @@ import org.openqa.selenium.WebElement;
  */
 public class RadioFavourite extends WebNavPage{
 
-    //public String episode=null;
+    public String brand=null;
 
     //public By mostPopularProgramme = By.xpath(".//ul[@class='popular-list typical-list cf']/li[1][@class='episode']/div[1]/a");
     public By favouriteButton = By.id("pf1");
+    public By getFavouriteButtonLabel = By.xpath("//*[@id='pf1']/span[@id='pfl1']");
     public By yourFavourites = By.xpath("//*[@id='rsn-wrap']//li/a[text()='Favourites']");
-    public By addFavouriteButtonStatus = By.xpath("//*[@id='pf1']/span[@class='p-f-label-display p-f-show']/span[2]");
+    public By addFavouriteButtonStatus = By.xpath("//*[@id='pf1']/span[@class='p-f-label-display p-f-show']/span[1]");
     public By categories = By.xpath("//a/span[text()='Categories']");
     public By secondCategory = By.xpath("//ul/li[2]/a/div/h3");
     public By firstBrand = By.xpath("//div[2]/div/ol/li[1]//h4/a/span/span");
@@ -29,6 +30,7 @@ public class RadioFavourite extends WebNavPage{
         clickALink(categories);
         clickALink(secondCategory);
         int randomNo = HelperMethods.randomNumber(1,getWebElements(brandsFromCategoryFirstPage).size());
+        brand=getText(By.xpath("//ol/li["+randomNo+"]/div/div[2]/h4/a/span/span"));
         clickALink(By.xpath("//ol/li["+randomNo+"]/div/div[2]/h4/a/span/span"));
     }
 

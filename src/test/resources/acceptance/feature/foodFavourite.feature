@@ -22,6 +22,7 @@ Feature: Adding a Food recipe as a favourite
     And button should change to Add state
 
 
+
   @automated @favourite @food
   Scenario: C171285-Verify sign in from page
     when browser window is not at full screen

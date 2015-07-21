@@ -50,9 +50,8 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         if(getText(foodFavourite.favouriteButton).toLowerCase().contains("Added to Favourites".toLowerCase())) {
             clickALink(foodFavourite.favouriteButton);
             waitForShortSpan();
-            clickALink(foodFavourite.favouriteButton);
         }
-        else clickALink(foodFavourite.favouriteButton);
+        clickALink(foodFavourite.favouriteButton);
     }
 
 
