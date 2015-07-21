@@ -7,6 +7,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.By;
+import static junit.framework.Assert.assertFalse;
 
 /**
  * Created by khotd01 on 06/07/2015.
@@ -28,13 +29,12 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     
     @Given("^I find a recipe$")
     public void I_find_a_recipe() throws Throwable {
-        foodFavourite.I_find_a_recipe();
+        recipe = foodFavourite.I_find_a_recipe();
     }
 
 
     @When("^I remove recipe from Favourite$")
     public void I_remove_recipe_from_Favourite() throws Throwable {
-        foodFavourite.I_find_a_recipe();
         if(!getText(foodFavourite.favouriteButton).toLowerCase().contains("Added to Favourites".toLowerCase())) {
             clickALink(foodFavourite.favouriteButton);
             waitForShortSpan();
@@ -46,7 +46,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
 
     @When("^I add recipe to Favourite")
     public void I_add_recipe_to_Favourite() throws Throwable {
-        foodFavourite.I_find_a_recipe();
+        recipe = foodFavourite.I_find_a_recipe();
         if(getText(foodFavourite.favouriteButton).toLowerCase().contains("Added to Favourites".toLowerCase())) {
             clickALink(foodFavourite.favouriteButton);
             waitForShortSpan();
@@ -108,5 +108,12 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     public void I_click_on_register_from_idICTA() throws  Throwable {
         clickALink(signIn.registerCTA);
     }
+
+    @Then("^the recipe should not be found food me module$")
+    public void the_recipe_should_not_be_found_food_me_module() throws Throwable {
+        clickALink(foodFavourite.yourFavourites);
+        assertFalse(elementExists(By.xpath("//ol[@class='my-item-list ']/li[@data-id='"+recipe+"']")));
+        }
+
 
 }
