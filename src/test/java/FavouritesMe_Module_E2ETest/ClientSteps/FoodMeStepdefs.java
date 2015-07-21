@@ -82,14 +82,19 @@ public class FoodMeStepdefs extends WebNavPage{
         openWebPage(System.getProperty("baseUrl") + "/food/recipes/" + deletedRecipe);
     }
 
-//    @When("^I verify recipe \"([^\"]*)\"$")
+//    @When("^I verify recipe ([^\"]*)$")
 //    public void I_verify_recipe(String arg1) throws Throwable {
+//        RestAssured.appendURL("/my/content/meta/global/urn:bbc:food:recipe:halloween_cake_10801?key=3irk89d66");
+//        //RestAssured.setRequestHeader("X-API-Key", "3irk89d66");
+//        RestAssured.performGetRequest();
+//        RestAssured.setAcceptJSON();
+//        System.out.println(RestAssured.getResponse());
+//
 //
 //        String stringLocator = ".//ol[@class='my-item-list ']/li[1]";
 //        if(arg1.equals("title")){
 //           stringLocator= stringLocator + "//*[@class='my-title-one']";
 //            //getText(By.xpath(stringLocator))
-//            api.
 //        }else if(arg1.equals("creator")){
 //            stringLocator= stringLocator + "//*[@itemprop='creator']";
 //        }

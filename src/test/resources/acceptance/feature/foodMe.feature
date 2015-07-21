@@ -49,8 +49,8 @@ Scenario: Number of recipe per page
   And I signed in from benefits page as a normal user
   And user should have at max 10 per page
 
-@automated
-Scenario:C431546 Deletion of recipe
+@automated @food
+Scenario:C431546 Deletion of recipe from action panel and verify removal reflects on favourite button on recipe page
   Given I am a signed in user
   And I am on Food homepage
   And I add recipe to Favourite
@@ -82,6 +82,6 @@ Scenario: C172186
 #  And I am on Food homepage
 #  And I add recipe to Favourite
 #  And I am on Food me module
-#  When I verify recipe "title"
+#  When I verify recipe title
 
 
