@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 
 import java.util.WeakHashMap;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by patilk01 on 14/07/2015.
  */
@@ -17,23 +19,23 @@ public class RadioFavouriteStepdefs extends WebNavPage {
 
     RadioFavourite radioFav=new RadioFavourite();
     RadioMeModule radioMeModule = new RadioMeModule();
-    public String brandName = null;
+    public String brandId = null;
+    boolean ifNext = false;
 
     private RadioFavourite radioFavourite = new RadioFavourite();
     @When("^I add brand to Favourite$")
     public void I_add_brand_to_Favourite() throws Throwable {
         radioFav.I_find_a_brand();
-        brandName = getText(radioFav.brandName);
+        brandId = currentURL().split("/")[4];
+        System.out.println(getText(radioFav.addFavouriteButtonStatus));
+//        if(getText(radioFav.addFavouriteButtonStatus).toLowerCase().contains("Remove".toLowerCase())) {
+//            By temp = radioFav.favouriteButton;
+//            clickALink(radioFav.favouriteButton);
+//            clickALink(temp);
+//        }
+//        else clickALink(radioFav.favouriteButton);
+        clickALink(radioFav.favouriteButton);
 
-        if(getText(radioFav.addFavouriteButtonStatus).equalsIgnoreCase("Remove")) {
-            clickALink(radioFav.favouriteButton);
-            waitForShortSpan();
-            clickALink(radioFav.favouriteButton);
-        }
-        else clickALink(radioFav.favouriteButton);;
-        // clickALink(radioFav.favouriteButton);
-        waitForShortSpan();
-        waitForShortSpan();
     }
 
 
@@ -46,8 +48,24 @@ public class RadioFavouriteStepdefs extends WebNavPage {
 
     @Then("^I can find  the brand on radio me module$")
     public void I_can_find_the_recipe_on_radio_me_module() throws Throwable {
+        boolean flag = false;
+        //boolean ifNext = false;
         clickALink(radioFav.yourFavourites);
-        textBelongsToWebElementList(radioMeModule.favouriteBrandList, brandName);
+        do {
+            //if (textBelongsToWebElementList(radioMeModule.favouriteBrandList, brandName)) {
+            if (elementExists(By.xpath("//li[@data-id='"+brandId+"']"))) {
+                flag = true;
+                break;
+            }
+            else {
+                ifNext = elementExists(radioMeModule.next);
+                if(ifNext)
+                    clickALink(radioMeModule.next);
+            }
+        }while (ifNext);
+        waitForShortSpan();
+        waitForShortSpan();
+        assertTrue("True if Brand Present", flag);
 
     }
 
@@ -55,10 +73,21 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     @Then("^I can remove the brand from Favourites on Radio Me Module$")
     public void I_can_remove_the_brand_from_Favourites_on_Radio_Me_Module() throws Throwable {
         waitForShortSpan();
-        clickALink(By.xpath("//li/span//span[1]/span[text()='" + brandName + "']/ancestor::li[@class='my-item']/div[@class='my-a-p my-a-p-default']"));
-        clickALink(By.xpath("//li/span/span/a/span[2]/span[1]/span[1]/span[text()='"+brandName+"']/ancestor::li[@class='my-item']/div[@class='my-a-p my-a-p-expanded']//span[@class='my-a-p-actions']"));
-        clickALink(By.xpath("//li/span/span/a/span[2]/span[1]/span[1]/span[text()='"+brandName+"']/ancestor::li[@class='my-item']/div[@class='my-a-p my-a-p-expanded']//span[@class='my-a-p-actions']/span[2]/a/span[text()='Yes']"));
-        ///span/a[@class='my-a-p-button-remove']
+//        boolean ifNext = false;
+//        do {
+//            if (elementExists(By.xpath("//li[@data-id='" + brandId + "']"))) {
+                clickALink(By.xpath("//li[@data-id='" + brandId + "']/div[@class='my-a-p my-a-p-default']/a"));
+                clickALink(By.xpath("//li[@data-id='" + brandId + "']/div/span/a"));
+                clickALink(By.xpath("//li[@data-id='" + brandId + "']/div/span/span[2]/a[1]"));
+//                break;
+//            }
+//            else {
+//                ifNext = elementExists(radioMeModule.next);
+//                if(ifNext)
+//                    clickALink(radioMeModule.next);
+//            }
+//        }while(ifNext);
+
     }
 
 }

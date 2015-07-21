@@ -1,7 +1,7 @@
 
 Feature: Adding a Food recipe as a favourite and removing from Me module
 
-  @automated @favourite @radio
+  @automated @favourite @radio1
   Scenario: Verify a Brand can be added as a Favourite
     Given I am a signed in user
       And I navigate to BBC radio home page

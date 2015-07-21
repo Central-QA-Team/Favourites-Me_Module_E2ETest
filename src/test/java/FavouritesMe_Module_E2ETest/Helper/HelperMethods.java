@@ -4,7 +4,7 @@ import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
+import java.util.Random;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -21,6 +21,14 @@ public class HelperMethods extends WebNavPage {
             uee.getMessage();
             return false;
         }
+    }
+
+
+    //to generate random number between a range
+    public static int randomNumber(int min, int max){
+            Random random = new Random();
+            int randomNumber = random.nextInt(max - min) + min;
+                return randomNumber;
     }
 
 }

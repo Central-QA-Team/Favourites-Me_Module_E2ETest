@@ -98,7 +98,6 @@ public class WebNavPage {
         String textFromWebElement=null;
 
         while (iterator.hasNext()) {
-            //iterator.next().
             textFromWebElement = iterator.next().getText();
             if(textFromWebElement.equalsIgnoreCase(text)) {
                 flag=true;
@@ -106,7 +105,7 @@ public class WebNavPage {
             }
 
         }
-        assertIfTwoTextsEqual(textFromWebElement, text);
+       // assertIfTwoTextsEqual(textFromWebElement, text);
         return flag;
     }
 
@@ -547,7 +546,7 @@ public class WebNavPage {
     public static Boolean assertContentExists(By locator, String textToBePresent){
         String textToVerify = getText(locator).toUpperCase();
         System.out.println(textToVerify);
-        assertTrue("Expected Text Found" + "The text present was: " + textToVerify, textToVerify.contains(textToBePresent.toUpperCase()));
+        assertTrue("Expected Text Found" + " The text present was: " + textToVerify, textToVerify.contains(textToBePresent.toUpperCase()));
         return Boolean.TRUE;
     }
 
