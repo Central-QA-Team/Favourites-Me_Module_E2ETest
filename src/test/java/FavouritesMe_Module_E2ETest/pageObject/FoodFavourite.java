@@ -18,12 +18,13 @@ public class FoodFavourite extends WebNavPage{
     public By yourFavourites = By.xpath("//a[@title='See Favourite items']");
     public By favouriteButtonStatus = By.xpath("//*[@id='pf1']/span/span[2]");
 
-    public void I_find_a_recipe() throws Throwable {
+    public String I_find_a_recipe() throws Throwable {
         enterAnyTextInAField(quickRecipeFinderSearch,"salt");
         waitForShortSpan();
         clickALink(quickRecipeFinderSearchButton);
         recipe=getText(firstRecipeFromList);
         clickALink(firstRecipeFromList);
+        return currentURL().split("/")[3];
     }
 
 

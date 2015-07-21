@@ -20,6 +20,7 @@ Feature: Adding a Food recipe as a favourite
     When I remove recipe from Favourite
     Then item should be removed from favorite
     And button should change to Add state
+    And the recipe should not be found food me module
 
 
 
