@@ -59,8 +59,8 @@ public class CommonStepdefs extends WebNavPage{
         assertFalse(deletedRecipe.equals(getPropertyOfElement(mePage.firstItemInList, "data-id")));
     }
 
-    @Then("^action panel will be displayed as (\\d+) vertical dots$")
-    public void action_panel_will_be_displayed_as_vertical_dots(int arg1) throws Throwable {
+    @Then("^action panel will be displayed as 3 vertical dots$")
+    public void action_panel_will_be_displayed_as_vertical_dots() throws Throwable {
         assertIfTwoTextsEqual("•\n•\n•",getText(mePage.actionPanel));
     }
 

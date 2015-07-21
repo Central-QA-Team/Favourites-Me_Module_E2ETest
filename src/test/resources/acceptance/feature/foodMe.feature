@@ -76,4 +76,12 @@ Scenario: C172186
   When I am on Food me module
   Then action panel should contain "Remove?,Yes,No"
 
+#@progress
+#Scenario: Recipe metadata
+#  Given I am a signed in user
+#  And I am on Food homepage
+#  And I add recipe to Favourite
+#  And I am on Food me module
+#  When I verify recipe "title"
+
 
