@@ -24,6 +24,38 @@ Feature: Adding a Food recipe as a favourite and removing from Me module
       And brand button should change to Add state
       And I should not find the brand on radio me module
 
+  @automated @favourite @radio @current
+  Scenario: Verify a Episode can be added as a Favourite and removed from me module
+  Add an episode as a favourite, verify on me module, remove favourite from action panel and Verify on me module,
+  verify removal of episode reflects on the status of a button on episode page
+
+    Given I am a signed in user
+      And I navigate to BBC radio home page
+    When I add episode to Favourite
+    Then favourite button for episode should change to added state
+      And I can find the episode on radio me module
+      And I can remove the episode from Favourites on Radio Me Module
+      And Navigate back to episode page
+      And favourite button for episode should change to Add state
+
+
+  @automated @favourite @radio
+  Scenario: Removing episode from favourite button and verify removal should not affect for brand
+
+    Given I am a signed in user
+      And I navigate to BBC radio home page
+      And I add episode to Favourite
+      And I navigate to brand page
+      And Add button should change to added state
+      And I can find the brand on radio me module
+      And I navigate back to episode page
+    When I remove episode from Favourite
+    Then favourite button for episode should change to Add state
+    And I should not find episode on me module
+    And I navigate to brand page
+    Then favourite button for brand should not change to Add state
+    And I can find the brand on radio me module
+
 #
 #  @automated @favourite @food
 #  Scenario: C171285-Verify sign in from page
