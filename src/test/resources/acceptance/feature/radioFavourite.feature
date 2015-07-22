@@ -1,7 +1,7 @@
 
 Feature: Adding a Food recipe as a favourite and removing from Me module
 
-  @automated @favourite @radio
+  @automated @favourite @radio @meModule
   Scenario: Verify a Brand can be added as a Favourite and removed from me module
     Add a brand as a favourite, verify on me module, remove favourite from action panel and Verify on me module,
     verify removal of brand reflects on the status of a button on brand page
@@ -15,13 +15,12 @@ Feature: Adding a Food recipe as a favourite and removing from Me module
       And brand button should change to Add state
 
 
-  @automated @favourite @radio
+  @automated @favourite @radio @meModule
   Scenario: C171570-Removing item from favourite button and verify removal reflects on me module
     Given I am a signed in user
       And I navigate to BBC radio home page
     When I remove brand from Favourite
-    Then item should be removed from favorite
-      And brand button should change to Add state
+     Then brand button should change to Add state
       And I should not find the brand on radio me module
 
   @automated @favourite @radio @current

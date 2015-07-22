@@ -1,7 +1,7 @@
 
 Feature: Adding a Food recipe as a favourite
 
-  @automated @favourite @food
+  @automated @favourite @food @meModule
   Scenario: C172579,C431534,-Verify a a recipe can be added as favourite
     C171569-Verify Mouse hover on added state, it's assumed JS is ON
     Given I am a signed in user
@@ -12,14 +12,13 @@ Feature: Adding a Food recipe as a favourite
     And the status of the button changes to Added to Favourites
     And I can find  the recipe on food me module
 
-  @automated @favourite @food
+  @automated @favourite @food @meModule
   Scenario: C171570-Removing item from favourites
     Given I am a signed in user
     And I navigate to BBC food home page
     And I find a recipe
     When I remove recipe from Favourite
-    Then item should be removed from favorite
-    And button should change to Add state
+    Then button should change to Add state
     And the recipe should not be found food me module
 
 

@@ -1,32 +1,32 @@
 
 Feature: Food Me Module
 
- @automated
+ @automated @food @meModule
 Scenario: Favourite page title
   Given I am on Food me module
   And Food page should have title "BBC Food"
 
- @automated
+ @automated @food @meModule
 Scenario: Benefits page
   Given I am on Food me module
   Then Food benefits page should have "Save stuff for later.,Get the latest updates.,All on any device."
   And Benefits page should have ID CTA with text "Sign inwith your BBC iD,or Register to Add to Your Favourites"
 
- @automated
+ @automated @food @meModule
   Scenario: Benefits page ID controls
     Given I am on Food me module
     When I click on Sign In button on benefits page
     Then I should be taken to "BBC - Sign in" page
     And PTRT should be set to "/food/my/favourites"
 
-  @automated
+  @automated @food @meModule
   Scenario: Benefits page ID controls
     Given I am on Food me module
     When I click on Register button on benefits page
     Then I should be taken to "BBC - Register" page
     And PTRT should be set to "/food/my/favourites"
 
-  @automated
+  @automated @food @meModule
 Scenario: Empty page
   Given I am on Food me module
   And I signed in from benefits page as a new user
@@ -37,19 +37,19 @@ Scenario: Empty page
   And Food empty page should have third line "Get started on Recipes Index."
   And Link Recipe index page should point to recipe page.
 
-  @automated
+  @automated @food @meModule
 Scenario: Tile navigation for recipe
    Given I am on Food me module
    And I signed in from benefits page as a normal user
    Then clicking on tile should take user to respective recipe page
 
-  @automated
+  @automated @food @meModule
 Scenario: Number of recipe per page
   Given I am on Food me module
   And I signed in from benefits page as a normal user
   And user should have at max 10 per page
 
-@automated @food
+@automated @food @meModule
 Scenario:C431546 Deletion of recipe from action panel and verify removal reflects on favourite button on recipe page
   Given I am a signed in user
   And I am on Food homepage
@@ -60,7 +60,7 @@ Scenario:C431546 Deletion of recipe from action panel and verify removal reflect
   When I go to recipe page
   And item should be removed from favorite
 
-  @automated
+  @automated @food @meModule
 Scenario:C172185 Action panel contains 3 dots
   Given I am a signed in user
     And I am on Food homepage
@@ -68,7 +68,7 @@ Scenario:C172185 Action panel contains 3 dots
     And I am on Food me module
   Then action panel will be displayed as 3 vertical dots
 
-    @automated
+    @automated @food @meModule
 Scenario: C172186
   Given I am a signed in user
   And I am on Food homepage
