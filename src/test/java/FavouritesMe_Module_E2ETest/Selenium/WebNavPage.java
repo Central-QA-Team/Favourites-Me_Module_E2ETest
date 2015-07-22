@@ -76,17 +76,6 @@ public class WebNavPage {
     protected static List<WebElement> getWebElements(By locator){
         List<WebElement> elements = new ArrayList<WebElement>();
         elements= getDriver().findElements(locator);
-//        switch (locatorBy.toLowerCase()){
-//            case "xpath":
-//                elements= getDriver().findElements(By.xpath(locator));
-//                break;
-//            case "id":
-//                elements= getDriver().findElements(By.id(locator));
-//                break;
-//            case "css":
-//                elements = getDriver().findElements(By.cssSelector(locator));
-//                break;
-//        }
         return elements;
     }
 
