@@ -27,13 +27,15 @@ public class RadioFavourite extends WebNavPage{
     public By secondCategory = By.xpath("//ul/li[2]/a/div/h3");
     public By firstBrand = By.xpath("//div[2]/div/ol/li[1]//h4/a/span/span");
     public By brandName = By.xpath("//*[@id='br-masthead']/div/div[1]/div[2]/a/div");
-    public By brandsFromCategoryFirstPage = By.xpath("//ol/li/div/div[2]/h4/a/span/span");
+    public By brandsWithEpisodes = By.xpath("//li/div/div[2]/div/a/span/ancestor::div[@class='programme__body']/following-sibling::a");
     public By mostPopular = By.xpath("//a/span[text()='Most Popular']");
     public By mostPopularList = By.xpath("//li/div/a/h3");
     public By episodes = By.xpath("//*[@id='br-nav-programme']/ul[1]/li[2]/a");
     public By episodesAvailableNow = By.xpath("//*[@id='programmes-main-content']/div[2]/ul/li[3]/a");
     public By episodeList = By.xpath("//li/div/div[2]/h4/a/span[1]/span");
     public By episodesNClips = By.xpath("//ul[@class='my-tabs']/li[2]/a");
+    public By favouriteAddedButton = By.xpath("//.[@id='pfl1'][contains(text(),'Added to Favourites')]");
+
 
 
 
@@ -41,11 +43,15 @@ public class RadioFavourite extends WebNavPage{
         clickALink(categories);
         clickALink(secondCategory);
         int randomNo;
-            List<WebElement> webElements = getWebElements(By.xpath("//li/div/div[2]/div/a/span/ancestor::div[@class='programme__body']/following-sibling::a"));
-            randomNo = HelperMethods.randomNumber(0, webElements.size()-1);
-            webElements.get(randomNo).click();
-            brand = getText(brandName);
-            brandPID = currentURL().split("/")[2];
+            List<WebElement> webElements = getWebElements(brandsWithEpisodes);
+            if(webElements.size()==1)
+                randomNo = 1;
+        else {
+                randomNo = HelperMethods.randomNumber(webElements.size());
+                webElements.get(randomNo).click();
+                brand = getText(brandName);
+                brandPID = currentURL().split("/")[4];
+            }
     }
 
     public void I_find_an_episode() throws Throwable {
@@ -54,9 +60,9 @@ public class RadioFavourite extends WebNavPage{
         clickALink(episodes);
         waitForShortSpan();
         clickALink(episodesAvailableNow);
-        randomNo = HelperMethods.randomNumber(1, getWebElements(episodeList).size()-1);
+        randomNo = HelperMethods.randomNumber(getWebElements(episodeList).size());
         clickALink(By.xpath("//li["+randomNo+"]/div/div[2]/h4/a/span[1]/span"));
-        episodePID = currentURL().split("/")[2];
+        episodePID = currentURL().split("/")[4];
         episodeTitle = getPropertyOfElement(favouriteButton,"title");
     }
 

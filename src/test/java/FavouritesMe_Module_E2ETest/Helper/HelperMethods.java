@@ -25,9 +25,9 @@ public class HelperMethods extends WebNavPage {
 
 
     //to generate random number between a range
-    public static int randomNumber(int min, int max){
+    public static int randomNumber(int max){
             Random random = new Random();
-            int randomNumber = random.nextInt(max - min) + min;
+            int randomNumber = random.nextInt(max)+1;
                 return randomNumber;
     }
 
