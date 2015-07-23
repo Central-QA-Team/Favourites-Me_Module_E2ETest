@@ -17,6 +17,10 @@ public class RadioFavourite extends WebNavPage{
     public String brandPID = null;
     public String episodePID = null;
     public String episodeTitle = null;
+    public String clipPID = null;
+
+
+
 
     //public By mostPopularProgramme = By.xpath(".//ul[@class='popular-list typical-list cf']/li[1][@class='episode']/div[1]/a");
     public By favouriteButton = By.id("pf1");
@@ -35,6 +39,8 @@ public class RadioFavourite extends WebNavPage{
     public By episodeList = By.xpath("//li/div/div[2]/h4/a/span[1]/span");
     public By episodesNClips = By.xpath("//ul[@class='my-tabs']/li[2]/a");
     public By favouriteAddedButton = By.xpath("//.[@id='pfl1'][contains(text(),'Added to Favourites')]");
+    public By clipOnRadioHomePage = By.xpath("//li[@class='clip']//a");
+    public By brandHome = By.xpath(".//*[@data-linktrack='nav_home']");
 
 
 
@@ -65,6 +71,16 @@ public class RadioFavourite extends WebNavPage{
         episodePID = currentURL().split("/")[4];
         episodeTitle = getPropertyOfElement(favouriteButton,"title");
     }
+
+
+    public void I_find_an_clip() throws Throwable {
+
+        clickALink(clipOnRadioHomePage);
+        waitForShortSpan();
+        clipPID = currentURL().split("/")[4].split("#")[0];
+        brandPID = getPropertyOfElement(brandHome,"href").substring(getPropertyOfElement(brandHome,"href").lastIndexOf('/') + 1);
+    }
+
 
 
 }

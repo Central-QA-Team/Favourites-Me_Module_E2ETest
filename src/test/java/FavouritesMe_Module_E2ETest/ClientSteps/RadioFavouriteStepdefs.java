@@ -17,14 +17,14 @@ public class RadioFavouriteStepdefs extends WebNavPage {
 
     RadioFavourite radioFav=new RadioFavourite();
     RadioMeModule radioMeModule = new RadioMeModule();
-    public String brandPID = null;
+    //public String brandPID = null;
+    public String clipTitle = null;
     boolean ifNext = false;
 
     private RadioFavourite radioFavourite = new RadioFavourite();
     @When("^I add brand to Favourite$")
     public void I_add_brand_to_Favourite() throws Throwable {
         radioFav.I_find_a_brand();
-        brandPID = currentURL().split("/")[4];
         if(getText(radioFav.getFavouriteButtonLabel).toLowerCase().contains("Added to Favourites".toLowerCase())) {
             clickALink(radioFav.favouriteButton);
             waitForShortSpan();
@@ -104,7 +104,7 @@ public class RadioFavouriteStepdefs extends WebNavPage {
         boolean flag = false;
         clickALink(radioFav.yourFavourites);
         do {
-            if (elementExists(By.xpath("//li[@data-id='"+ brandPID +"']"))) {
+            if (elementExists(By.xpath("//li[@data-id='"+ radioFav.brandPID +"']"))) {
                 flag = true;
                 break;
             }
@@ -147,11 +147,11 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     @Then("^I can remove the brand from Favourites on Radio Me Module$")
     public void I_can_remove_the_brand_from_Favourites_on_Radio_Me_Module() throws Throwable {
         waitForShortSpan();
-        clickALink(By.xpath("//li[@data-id='" + brandPID + "']/div/a"));
-        clickALink(By.xpath("//li[@data-id='" + brandPID + "']/div/span/span[1]/a"));
-        clickALink(By.xpath("//li[@data-id='" + brandPID + "']/div/span/span[2]/a[1]"));
+        clickALink(By.xpath("//li[@data-id='" + radioFav.brandPID + "']/div/a"));
+        clickALink(By.xpath("//li[@data-id='" + radioFav.brandPID + "']/div/span/span[1]/a"));
+        clickALink(By.xpath("//li[@data-id='" + radioFav.brandPID + "']/div/span/span[2]/a[1]"));
         waitForShortSpan();
-        assertFalse("True if brand is not present", elementExists(By.xpath("//li[@data-id='" + brandPID + "']")));
+        assertFalse("True if brand is not present", elementExists(By.xpath("//li[@data-id='" + radioFav.brandPID + "']")));
     }
 
 
@@ -220,11 +220,103 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     @Then("^favourite button for episode should change to Add state$")
     public void favourite_button_for_episode_should_change_to_Add_state() throws Throwable {
         waitForShortSpan();
-        waitUntilElementIsVisible(By.xpath("Add " + "\"" + radioFav.episodeTitle + "\"" + " to Favourites"));
+        waitUntilElementIsVisible(By.xpath("//.[contains(text(),'"+radioFav.episodeTitle+"')]"));
         waitForShortSpan();
         assertContentExists(radioFav.getFavouriteButtonLabel, radioFav.episodeTitle);
 
     }
 
+    @When("^I add clip to Favourite$")
+    public void I_add_clip_to_Favourite() throws Throwable {
+        radioFav.I_find_an_clip();
+        if(getText(radioFav.getFavouriteButtonLabel).toLowerCase().contains("Added to Favourites".toLowerCase())) {
+            clickALink(radioFav.favouriteButton);
+            waitForShortSpan();
+        }
+        clipTitle = getPropertyOfElement(radioFav.favouriteButton,"title");
+        clickALink(radioFav.favouriteButton);
+
+    }
+
+    @Then("^favourite button for clip should change to added state$")
+    public void favourite_button_for_clip_should_change_to_added_state() throws Throwable {
+        waitUntilElementIsVisible(radioFav.favouriteAddedButton);
+        waitForShortSpan();
+        assertContentExists(radioFav.getFavouriteButtonLabel, "Added to Favourites");
+    }
+
+    @Then("^I can find the clip on radio me module$")
+    public void I_can_find_the_clip_on_radio_me_module() throws Throwable {
+        clickALink(radioFav.yourFavourites);
+        clickALink(radioFav.episodesNClips);
+        boolean flag = false;
+        do {
+            if (elementExists(By.xpath("//li[@data-id='"+radioFav.clipPID+"']"))) {
+                flag = true;
+                break;
+            }
+            else {
+                ifNext = elementExists(radioMeModule.next);
+                if(ifNext)
+                    clickALink(radioMeModule.next);
+            }
+        }while (ifNext);
+        waitForShortSpan();
+        waitForShortSpan();
+        assertTrue("True if Episode Present", flag);
+    }
+
+    @Then("^I can remove the clip from Favourites on Radio Me Module$")
+    public void I_can_remove_the_clip_from_Favourites_on_Radio_Me_Module() throws Throwable {
+        waitForShortSpan();
+        clickALink(By.xpath("//li[@data-id='" + radioFav.clipPID + "']/div/a"));
+        clickALink(By.xpath("//li[@data-id='" + radioFav.clipPID + "']/div/span/span[1]/a"));
+        clickALink(By.xpath("//li[@data-id='" + radioFav.clipPID + "']/div/span/span[2]/a[1]"));
+        waitForShortSpan();
+        assertFalse("True if brand is not present", elementExists(By.xpath("//li[@data-id='" + radioFav.clipPID + "']")));
+    }
+
+    @When("^Navigate back to clip page$")
+    public void Navigate_back_to_clip_page() throws Throwable {
+        openWebPage(System.getProperty("baseUrl") + "/programmes/" + radioFav.clipPID);
+    }
+
+    @When("^favourite button for clip should change to Add state$")
+    public void favourite_button_for_clip_should_change_to_Add_state() throws Throwable {
+        waitForShortSpan();
+        waitUntilElementIsVisible(By.xpath("//.[contains(text(),'"+clipTitle+"')]"));
+        waitForShortSpan();
+        assertContentExists(radioFav.getFavouriteButtonLabel, clipTitle);
+    }
+
+    @When("^I remove clip from Favourite$")
+    public void I_remove_clip_from_Favourite() throws Throwable {
+        if(!getText(radioFav.favouriteButton).toLowerCase().contains("Added to Favourites".toLowerCase())) {
+            clickALink(radioFav.favouriteButton);
+            waitForShortSpan();
+        }
+        clickALink(radioFav.favouriteButton);
+    }
+
+    @Then("^I should not find clip on radio me module$")
+    public void I_should_not_find_clip_on_radio_me_module() throws Throwable {
+        boolean flag = false;
+        clickALink(radioFav.yourFavourites);
+        do {
+            if (elementExists(By.xpath("//li[@data-id='"+ radioFav.clipPID +"']"))) {
+                flag = true;
+                break;
+            }
+            else {
+                ifNext = elementExists(radioMeModule.next);
+                if(ifNext)
+                    clickALink(radioMeModule.next);
+            }
+        }while (ifNext);
+        waitForShortSpan();
+        waitForShortSpan();
+        assertFalse("True if Brand not Present", flag);
+
+    }
 
 }

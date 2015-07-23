@@ -1,5 +1,5 @@
 
-Feature: Adding a Food recipe as a favourite and removing from Me module
+Feature: Adding a brand/episode/clip as a favourite and removing from Me module
 
   @automated @favourite @radio @meModule
   Scenario: Verify a Brand can be added as a Favourite and removed from me module
@@ -56,34 +56,31 @@ Feature: Adding a Food recipe as a favourite and removing from Me module
     Then status of brand favourite button should be added
     And I can find the brand on radio me module
 
-#
-#  @automated @favourite @food
-#  Scenario: C171285-Verify sign in from page
-#  when browser window is not at full screen
-#    Given I navigate to BBC food home page
-#      And I add recipe to Favourite
-#      And I resize browser window to width "800" and height "600"
-#    When I sign in from idCTA
-#    Then the status of the button changes to Added to Favourites
-#      And I remove recipe from Favourite
-#    #Last step is just a cleanup step
-#
-#
-#  @automated @favourite @food
-#  Scenario: C171286-Verify sign in from overlay
-#    Given I navigate to BBC food home page
-#      And I add recipe to Favourite
-#    When I sign in from idCTA
-#    Then the status of the button changes to Added to Favourites
-#      And I remove recipe from Favourite
-#    #Last step is just a cleanup step
-#
-#  @automated @favourite @food
-#  Scenario: C171288-Verify register from page
-#    Given I navigate to BBC food home page
-#      And I find a recipe
-#      And I add recipe to Favourite
-#    When I click on register from idICTA
-#    Then I should be taken to "BBC - Register" page
-#      And PTRT should be set to "/food/recipes/"
+  @automated @favourite @radio
+  Scenario: Verify a clip can be added as a Favourite and removed from me module
+  Add a clip as a favourite, verify on me module, remove favourite from action panel and Verify on me module,
+  verify removal of clip reflects on the status of a button on clip page
 
+    Given I am a signed in user
+    And I navigate to BBC radio home page
+    When I add clip to Favourite
+    Then favourite button for clip should change to added state
+    And I can find the clip on radio me module
+    And I can remove the clip from Favourites on Radio Me Module
+    When Navigate back to clip page
+    And favourite button for clip should change to Add state
+
+
+  @automated @favourite @radio
+  Scenario: Removing clip from favourite button and verify removal should not affect for brand
+
+    Given I am a signed in user
+    And I navigate to BBC radio home page
+    When I add clip to Favourite
+#    And I navigate to brand page
+#    Then favourite button for brand should not change to added state
+    And I should not find the brand on radio me module
+    And Navigate back to clip page
+    When I remove clip from Favourite
+    Then favourite button for clip should change to Add state
+    And I should not find clip on radio me module
