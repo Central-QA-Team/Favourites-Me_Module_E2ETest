@@ -423,7 +423,7 @@ public class WebNavPage {
         }
         catch(Exception e)
         {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
         getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         return exists;

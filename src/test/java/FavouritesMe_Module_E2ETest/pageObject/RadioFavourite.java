@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class RadioFavourite extends WebNavPage{
 
-    public String brand=null;
-    public String brandPID = null;
-    public String episodePID = null;
-    public String episodeTitle = null;
-    public String clipPID = null;
+    public static String brand=null;
+    public static String brandPID = null;
+    public static String episodePID = null;
+    public static String episodeTitle = null;
+    public static String clipPID = null;
 
 
     //public By mostPopularProgramme = By.xpath(".//ul[@class='popular-list typical-list cf']/li[1][@class='episode']/div[1]/a");
@@ -66,6 +66,8 @@ public class RadioFavourite extends WebNavPage{
         clickALink(episodesAll);
         waitForShortSpan();
         randomNo = HelperMethods.randomNumber(getWebElements(episodeList).size());
+        if(randomNo==getWebElements(episodeList).size())
+            randomNo--;
         clickALink(By.xpath("//li["+randomNo+"]/div/div/div/div/div/div[2]//a/span/span"));
         episodePID = currentURL().split("/")[4];
         episodeTitle = getPropertyOfElement(favouriteButton,"title");
@@ -77,7 +79,7 @@ public class RadioFavourite extends WebNavPage{
         clickALink(clipOnRadioHomePage);
         waitForShortSpan();
         clipPID = currentURL().split("/")[4].split("#")[0];
-        brandPID = getPropertyOfElement(brandHome,"href").substring(getPropertyOfElement(brandHome,"href").lastIndexOf('/') + 1);
+        brandPID = getPropertyOfElement(brandHome, "href").substring(getPropertyOfElement(brandHome,"href").lastIndexOf('/') + 1);
     }
 
 

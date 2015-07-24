@@ -36,7 +36,6 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
       And I can remove the episode from Favourites on Radio Me Module
       And I navigate back to episode page
       And favourite button for episode should change to Add state
-    #Last line failing even though strings are equal
 
 
   @automated @favourite @radio @MYPROFILE-472
