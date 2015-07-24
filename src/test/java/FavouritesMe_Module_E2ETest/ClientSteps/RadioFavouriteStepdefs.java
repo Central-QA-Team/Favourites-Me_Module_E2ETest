@@ -147,11 +147,11 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     @Then("^I can remove the brand from Favourites on Radio Me Module$")
     public void I_can_remove_the_brand_from_Favourites_on_Radio_Me_Module() throws Throwable {
         waitForShortSpan();
-        clickALink(By.xpath("//li[@data-id='" + brandPID + "']/div/a"));
-        clickALink(By.xpath("//li[@data-id='" + brandPID + "']/div/span/span[1]/a"));
-        clickALink(By.xpath("//li[@data-id='" + brandPID + "']/div/span/span[2]/a[1]"));
+        clickALink(By.xpath("//li[@data-id='" + radioFav.brandPID + "']/div/a"));
+        clickALink(By.xpath("//li[@data-id='" + radioFav.brandPID + "']/div/span/span[1]/a"));
+        clickALink(By.xpath("//li[@data-id='" + radioFav.brandPID + "']/div/span/span[2]/a[1]"));
         waitForShortSpan();
-        assertFalse("True if brand is not present", elementExists(By.xpath("//li[@data-id='" + brandPID + "']")));
+        assertFalse("True if brand is not present", elementExists(By.xpath("//li[@data-id='" + radioFav.brandPID + "']")));
     }
 
 
@@ -172,6 +172,7 @@ public class RadioFavouriteStepdefs extends WebNavPage {
         clickALink(radioFav.favouriteButton);
     }
 
+
     @Then("^favourite button for episode should change to added state$")
     public void favourite_button_for_episode_should_change_to_added_state() throws Throwable {
         waitUntilElementIsVisible(radioFav.favouriteAddedButton);
@@ -179,12 +180,13 @@ public class RadioFavouriteStepdefs extends WebNavPage {
         assertContentExists(radioFav.getFavouriteButtonLabel, "Added to Favourites");
     }
 
+
     @Then("^I can find the episode on radio me module$")
     public void I_can_find_the_episode_on_radio_me_module() throws Throwable {
         clickALink(radioFav.yourFavourites);
         clickALink(radioFav.episodesNClips);
         boolean flag = false;
-        System.out.println(radioFav.episodePID);
+
         do {
             if (elementExists(By.xpath("//li[@data-id='"+radioFav.episodePID+"']"))) {
                 flag = true;
@@ -211,6 +213,7 @@ public class RadioFavouriteStepdefs extends WebNavPage {
         assertFalse("True if brand is not present", elementExists(By.xpath("//li[@data-id='" + radioFav.episodePID + "']")));
     }
 
+
     @Then("^I navigate back to episode page$")
     public void I_navigate_back_to_episode_page() throws Throwable {
         openWebPage(System.getProperty("baseUrl") + "/programmes/" + radioFav.episodePID);
@@ -220,7 +223,7 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     @Then("^favourite button for episode should change to Add state$")
     public void favourite_button_for_episode_should_change_to_Add_state() throws Throwable {
         waitForShortSpan();
-        waitUntilElementIsVisible(By.xpath("Add " + "\"" + radioFav.episodeTitle + "\"" + " to Favourites"));
+        waitUntilElementIsVisible(By.xpath("//.[contains(text(),'"+radioFav.episodeTitle+"')]"));
         waitForShortSpan();
         assertContentExists(radioFav.getFavouriteButtonLabel, radioFav.episodeTitle);
 
