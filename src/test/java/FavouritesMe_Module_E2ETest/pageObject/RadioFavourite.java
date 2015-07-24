@@ -20,8 +20,6 @@ public class RadioFavourite extends WebNavPage{
     public String clipPID = null;
 
 
-
-
     //public By mostPopularProgramme = By.xpath(".//ul[@class='popular-list typical-list cf']/li[1][@class='episode']/div[1]/a");
     public By favouriteButton = By.id("pf1");
     public By getFavouriteButtonLabel = By.xpath("//*[@id='pf1']/span[@id='pfl1']");
@@ -35,8 +33,8 @@ public class RadioFavourite extends WebNavPage{
     public By mostPopular = By.xpath("//a/span[text()='Most Popular']");
     public By mostPopularList = By.xpath("//li/div/a/h3");
     public By episodes = By.xpath("//*[@id='br-nav-programme']/ul[1]/li[2]/a");
-    public By episodesAvailableNow = By.xpath("//*[@id='programmes-main-content']/div[2]/ul/li[3]/a");
-    public By episodeList = By.xpath("//li/div/div[2]/h4/a/span[1]/span");
+    public By episodesAll = By.xpath("//*[@id='programmes-main-content']/div[2]/ul/li[1]/a");
+    public By episodeList = By.xpath("//li/div/div/div/div/div/div[2]//a/span/span");
     public By episodesNClips = By.xpath("//ul[@class='my-tabs']/li[2]/a");
     public By favouriteAddedButton = By.xpath("//.[@id='pfl1'][contains(text(),'Added to Favourites')]");
     public By clipOnRadioHomePage = By.xpath("//li[@class='clip']//a");
@@ -65,9 +63,10 @@ public class RadioFavourite extends WebNavPage{
         I_find_a_brand();
         clickALink(episodes);
         waitForShortSpan();
-        clickALink(episodesAvailableNow);
+        clickALink(episodesAll);
+        waitForShortSpan();
         randomNo = HelperMethods.randomNumber(getWebElements(episodeList).size());
-        clickALink(By.xpath("//li["+randomNo+"]/div/div[2]/h4/a/span[1]/span"));
+        clickALink(By.xpath("//li["+randomNo+"]/div/div/div/div/div/div[2]//a/span/span"));
         episodePID = currentURL().split("/")[4];
         episodeTitle = getPropertyOfElement(favouriteButton,"title");
     }

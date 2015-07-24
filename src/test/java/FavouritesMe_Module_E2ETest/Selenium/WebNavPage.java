@@ -419,11 +419,11 @@ public class WebNavPage {
         {
             if (getWebElement(locator) != null)
                 exists = true;
-            System.out.println("The Element exists and its Value is :" + getText(locator));
+            //System.out.println("The Element exists and its Value is :" + getText(locator));
         }
         catch(Exception e)
         {
-
+            System.out.println(e.getMessage());
         }
         getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         return exists;
