@@ -34,7 +34,7 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
     Given I am a signed in user
       And I navigate to BBC radio home page
     When I add episode to Favourite
-    Then favourite button for episode should change to added state
+    Then Favourite button should be in added state
       And I can find the episode on radio me module
       And I can remove the episode from Favourites on Radio Me Module
       And I navigate back to episode page
@@ -48,7 +48,7 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
       And I navigate to BBC radio home page
     When I add episode to Favourite
       And I navigate to brand page
-    Then status of brand favourite button should be added
+    Then Favourite button should be in added state
       And I can find the brand on radio me module
 
   @automated @favourite @radio @MYPROFILE-472
@@ -61,7 +61,7 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
     Then favourite button for episode should change to Add state
       And I should not find episode on radio me module
       And I navigate to brand page
-      And status of brand favourite button should be added
+      And Favourite button should be in added state
       And I can find the brand on radio me module
 
   @automated @favourite @radio
@@ -72,7 +72,7 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
     Given I am a signed in user
     And I navigate to BBC radio home page
     When I add clip to Favourite
-    Then favourite button for clip should change to added state
+    Then Favourite button should be in added state
     And I can find the clip on radio me module
     And I can remove the clip from Favourites on Radio Me Module
     When Navigate back to clip page
