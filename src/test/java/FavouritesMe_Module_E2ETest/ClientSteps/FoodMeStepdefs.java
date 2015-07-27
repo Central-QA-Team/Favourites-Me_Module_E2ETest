@@ -5,6 +5,7 @@ import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.FoodFavourite;
 import FavouritesMe_Module_E2ETest.pageObject.FoodMeModule;
 import FavouritesMe_Module_E2ETest.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,8 +21,10 @@ import static junit.framework.TestCase.assertEquals;
 public class FoodMeStepdefs extends WebNavPage{
 
     private FoodMeModule foodMePage = new FoodMeModule();
+    private FoodFavouriteStepdefs foodFavSteps = new FoodFavouriteStepdefs();
     private RestAssured api = new RestAssured();
     public String deletedRecipe = null;
+
 
 
     @Given("^I am on Food me module$")
@@ -82,21 +85,5 @@ public class FoodMeStepdefs extends WebNavPage{
         openWebPage(System.getProperty("baseUrl") + "/food/recipes/" + deletedRecipe);
     }
 
-//    @When("^I verify recipe ([^\"]*)$")
-//    public void I_verify_recipe(String arg1) throws Throwable {
-//        RestAssured.appendURL("/my/content/meta/global/urn:bbc:food:recipe:halloween_cake_10801?key=3irk89d66");
-//        //RestAssured.setRequestHeader("X-API-Key", "3irk89d66");
-//        RestAssured.performGetRequest();
-//        RestAssured.setAcceptJSON();
-//        System.out.println(RestAssured.getResponse());
-//
-//
-//        String stringLocator = ".//ol[@class='my-item-list ']/li[1]";
-//        if(arg1.equals("title")){
-//           stringLocator= stringLocator + "//*[@class='my-title-one']";
-//            //getText(By.xpath(stringLocator))
-//        }else if(arg1.equals("creator")){
-//            stringLocator= stringLocator + "//*[@itemprop='creator']";
-//        }
-//    }
+
 }

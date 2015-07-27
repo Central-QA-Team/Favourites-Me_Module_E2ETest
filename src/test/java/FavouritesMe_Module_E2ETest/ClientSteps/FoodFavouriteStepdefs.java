@@ -3,9 +3,15 @@ package FavouritesMe_Module_E2ETest.ClientSteps;
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.*;
 
+import FavouritesMe_Module_E2ETest.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
+import gherkin.JSONParser;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import static junit.framework.Assert.assertFalse;
 
@@ -18,6 +24,8 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     FoodMeModule foodMe= new FoodMeModule();
     String recipe=null;
     public String ptrt=null;
+    public Response metadata= null;
+
 
     @Given("^I am on Food homepage$")
     public void I_am_on_Food_homepage() throws Throwable {
@@ -29,7 +37,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     
     @Given("^I find a recipe$")
     public void I_find_a_recipe() throws Throwable {
-        recipe = foodFavourite.I_find_a_recipe();
+        foodFavourite.I_find_a_recipe();
     }
 
 
@@ -46,7 +54,7 @@ public class FoodFavouriteStepdefs extends WebNavPage{
 
     @When("^I add recipe to Favourite")
     public void I_add_recipe_to_Favourite() throws Throwable {
-        recipe = foodFavourite.I_find_a_recipe();
+        foodFavourite.I_find_a_recipe();
         if(getText(foodFavourite.favouriteButton).toLowerCase().contains("Added to Favourites".toLowerCase())) {
             clickALink(foodFavourite.favouriteButton);
             waitForShortSpan();
@@ -112,8 +120,27 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     @Then("^the recipe should not be found food me module$")
     public void the_recipe_should_not_be_found_food_me_module() throws Throwable {
         clickALink(foodFavourite.yourFavourites);
-        assertFalse(elementExists(By.xpath("//ol[@class='my-item-list ']/li[@data-id='"+recipe+"']")));
+        assertFalse(elementExists(By.xpath("//ol[@class='my-item-list ']/li[@data-id='"+foodFavourite.recipeDataID+"']")));
         }
 
+
+    @When("^Recipe should have ([^\"]*)$")
+    public void Recipe_should_have(String arg1) throws Throwable {
+        RestAssured.appendURL("/my/content/meta/global/urn:bbc:food:recipe:" + foodFavourite.recipeDataID + "?key=3irk89d66");
+        RestAssured.performGetRequest();
+        metadata = RestAssured.getResponse();
+
+        JSONObject jsonObj = new JSONObject(metadata.asString());
+
+        String stringLocator = ".//ol[@class='my-item-list ']/li[1]";
+        if(arg1.equals("name")){
+            stringLocator= stringLocator + "//*[@class='my-title-one']";
+            assertIfTwoTextsEqual(jsonObj.getString("name"),getText(By.xpath(stringLocator)));
+        }else if(arg1.equals("creator")){
+            stringLocator= stringLocator + "//*[@itemprop='creator']";
+            assertIfTwoTextsEqual("by " + jsonObj.getJSONObject("creator").getString("name"),getText(By.xpath(stringLocator)));
+
+        }
+    }
 
 }
