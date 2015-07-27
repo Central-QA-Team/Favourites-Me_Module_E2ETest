@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 public class FoodFavourite extends WebNavPage{
 
     public String recipe=null;
+    public String recipeDataID = null;
 
     public By quickRecipeFinderSearch = By.id("search-keywords");
     public By quickRecipeFinderSearchButton = By.id("search-submit");
@@ -18,13 +19,15 @@ public class FoodFavourite extends WebNavPage{
     public By yourFavourites = By.xpath("//a[@title='See Favourite items']");
     public By favouriteButtonStatus = By.xpath("//*[@id='pf1']/span/span[2]");
 
-    public String I_find_a_recipe() throws Throwable {
+    public void I_find_a_recipe() throws Throwable {
+        clearAnyField(quickRecipeFinderSearch);
         enterAnyTextInAField(quickRecipeFinderSearch,"salt");
         waitForShortSpan();
         clickALink(quickRecipeFinderSearchButton);
         recipe=getText(firstRecipeFromList);
         clickALink(firstRecipeFromList);
-        return currentURL().split("/")[3];
+        recipeDataID =currentURL().split("/")[5];
+        //return currentURL().split("/")[3];
     }
 
 
