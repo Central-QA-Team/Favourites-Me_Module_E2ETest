@@ -5,6 +5,7 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
   Scenario: Verify a Brand can be added as a Favourite and removed from me module
     Add a brand as a favourite, verify on me module, remove favourite from action panel and Verify on me module,
     verify removal of brand reflects on the status of a button on brand page
+
     Given I am a signed in user
       And I navigate to BBC radio home page
     When I add brand to Favourite
@@ -17,11 +18,13 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
 
   @automated @favourite @radio @meModule
   Scenario: C171570-Removing item from favourite button and verify removal reflects on me module
+
     Given I am a signed in user
       And I navigate to BBC radio home page
     When I remove brand from Favourite
      Then brand button should change to Add state
       And I should not find the brand on radio me module
+
 
   @automated @favourite @radio @MYPROFILE-472
   Scenario: Verify a Episode can be added as a Favourite and removed from me module
@@ -51,6 +54,7 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
   @automated @favourite @radio @MYPROFILE-472
     Scenario: verify I can remove an episode from favourite from episode page but brand remains in favourite
       This scenario is in continuation with above scenario and is dependent on the same.
+
     Given I am a signed in user
       And I navigate back to episode page
     When I remove episode from Favourite

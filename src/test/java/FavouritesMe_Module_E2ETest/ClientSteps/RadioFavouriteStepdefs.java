@@ -164,6 +164,7 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     @When("^I add episode to Favourite$")
     public void I_add_episode_to_Favourite() throws Throwable {
         radioFav.I_find_an_episode();
+        waitForShortSpan();
         if(getText(radioFav.getFavouriteButtonLabel).toLowerCase().contains("Added to Favourites".toLowerCase())) {
             clickALink(radioFav.favouriteButton);
             waitForShortSpan();
