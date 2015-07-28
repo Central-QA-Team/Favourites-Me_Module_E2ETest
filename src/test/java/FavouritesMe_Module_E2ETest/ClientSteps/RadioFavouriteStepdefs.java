@@ -3,8 +3,10 @@ package FavouritesMe_Module_E2ETest.ClientSteps;
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.RadioFavourite;
 import FavouritesMe_Module_E2ETest.pageObject.RadioMeModule;
+import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 
 import static org.junit.Assert.assertTrue;
@@ -17,9 +19,10 @@ public class RadioFavouriteStepdefs extends WebNavPage {
 
     RadioFavourite radioFav=new RadioFavourite();
     RadioMeModule radioMeModule = new RadioMeModule();
-    //public String brandPID = null;
     public String clipTitle = null;
     boolean ifNext = false;
+    Response metadata= null;
+    public JSONObject jsonObj = new JSONObject();
 
     private RadioFavourite radioFavourite = new RadioFavourite();
     @When("^I add brand to Favourite$")
@@ -114,7 +117,7 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     @When("^favourite button for clip should change to Add state$")
     public void favourite_button_for_clip_should_change_to_Add_state() throws Throwable {
         waitForShortSpan();
-        waitUntilElementIsVisible(By.xpath("//.[contains(text(),'"+clipTitle+"')]"));
+        waitUntilElementIsVisible(By.xpath("//.[contains(text(),'" + clipTitle + "')]"));
         waitForShortSpan();
         assertContentExists(radioFav.getFavouriteButtonLabel, clipTitle);
     }
