@@ -82,15 +82,11 @@ Scenario: Recipe metadata - title
   And I am on Food homepage
   And I add recipe to Favourite
   When I am on Food me module
-  Then Recipe should have name
-
-  @automated @food @meModule
-  Scenario: Recipe metadata - creator
-    Given I am a signed in user
-    And I am on Food homepage
-    And I add recipe to Favourite
-    When I am on Food me module
-    Then Recipe should have creator
-
-
+  And I request feeds from MeService API
+  Then image should be displayed if available in feeds
+  And name should be displayed if available in feeds
+  And creator should be displayed if available in feeds
+  And publication should be displayed if available in feeds
+  And quickAndEasy should be displayed if available in feeds
+  And vegetarian should be displayed if available in feeds
 
