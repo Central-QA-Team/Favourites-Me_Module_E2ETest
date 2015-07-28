@@ -1,5 +1,6 @@
 package FavouritesMe_Module_E2ETest.ClientSteps;
 
+import FavouritesMe_Module_E2ETest.Helper.HelperMethods;
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.*;
 
@@ -14,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by khotd01 on 06/07/2015.
@@ -24,7 +26,10 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     FoodMeModule foodMe= new FoodMeModule();
     String recipe=null;
     public String ptrt=null;
-    public Response metadata= null;
+    Response metadata= null;
+    public JSONObject jsonObj = new JSONObject();
+
+
 
 
     @Given("^I am on Food homepage$")
@@ -123,23 +128,48 @@ public class FoodFavouriteStepdefs extends WebNavPage{
         assertFalse(elementExists(By.xpath("//ol[@class='my-item-list ']/li[@data-id='"+foodFavourite.recipeDataID+"']")));
         }
 
-
-    @When("^Recipe should have ([^\"]*)$")
-    public void Recipe_should_have(String arg1) throws Throwable {
+    @When("^I request feeds from MeService API$")
+    public void I_request_feeds_from_MeService_API() throws Throwable {
         RestAssured.appendURL("/my/content/meta/global/urn:bbc:food:recipe:" + foodFavourite.recipeDataID + "?key=3irk89d66");
         RestAssured.performGetRequest();
         metadata = RestAssured.getResponse();
+        jsonObj = new JSONObject(metadata.asString());
+    }
 
-        JSONObject jsonObj = new JSONObject(metadata.asString());
 
+    @When("^([^\"]*) should be displayed if available in feeds$")
+    public void Recipe_should_have(String arg1) throws Throwable {
         String stringLocator = ".//ol[@class='my-item-list ']/li[1]";
-        if(arg1.equals("name")){
+        if(arg1.equals("image")) {
+            stringLocator = stringLocator + "//img";
+            if (jsonObj.has("image")) {
+                assertIfTwoTextsEqual(jsonObj.getString("image"),getPropertyOfElement(By.xpath(stringLocator),"src"));
+            }
+        }else if(arg1.equals("name")){
             stringLocator= stringLocator + "//*[@class='my-title-one']";
             assertIfTwoTextsEqual(jsonObj.getString("name"),getText(By.xpath(stringLocator)));
         }else if(arg1.equals("creator")){
             stringLocator= stringLocator + "//*[@itemprop='creator']";
-            assertIfTwoTextsEqual("by " + jsonObj.getJSONObject("creator").getString("name"),getText(By.xpath(stringLocator)));
-
+            if(jsonObj.has("creator")) {
+                assertIfTwoTextsEqual("by " + jsonObj.getJSONObject("creator").getString("name"), getText(By.xpath(stringLocator)));
+            }
+        }else if(arg1.equals("publication")){
+            stringLocator= stringLocator + "//*[@itemprop='publication']";
+            if(jsonObj.has("publication")) {
+                assertIfTwoTextsEqual("From " + jsonObj.getJSONObject("publication").getString("name"), getText(By.xpath(stringLocator)));
+            }
+        }else if(arg1.equals("quickAndEasy")){
+            stringLocator= stringLocator + "//li[@class='my-food-icon my-food-icon-quickAndEasy']";
+            if(jsonObj.getBoolean("quickAndEasy")){
+                assertTrue(elementIsVisible(By.xpath(stringLocator)));
+            }
+        }else if(arg1.equals("vegetarian")){
+            stringLocator= stringLocator + "//li[@class='my-food-icon my-food-icon-vegetarian']";
+            if(jsonObj.has("recipeCuisine")){
+                if(jsonObj.getJSONArray("recipeCuisine").get(0).equals("vegetarian")){
+                    assertTrue(elementIsVisible(By.xpath(stringLocator)));
+                }
+            }
         }
     }
 
