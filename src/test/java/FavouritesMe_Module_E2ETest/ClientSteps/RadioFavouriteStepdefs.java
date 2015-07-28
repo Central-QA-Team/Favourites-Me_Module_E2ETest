@@ -1,11 +1,14 @@
 package FavouritesMe_Module_E2ETest.ClientSteps;
 
+import FavouritesMe_Module_E2ETest.Helper.HelperMethods;
 import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 import FavouritesMe_Module_E2ETest.pageObject.RadioFavourite;
 import FavouritesMe_Module_E2ETest.pageObject.RadioMeModule;
+import FavouritesMe_Module_E2ETest.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
+import junit.framework.Assert;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 
@@ -302,18 +305,38 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     }
 
 
+    @Then("^I can verify brand metadata as per available episodes")
+    public void I_can_verify_brand_metadata_as_per_available_episodes() throws Throwable {
+        RestAssured.appendURL("/my/content/meta/radio/tlec/" + radioFav.brandPID + "/newItems?key=3irk89d66");
+        RestAssured.performGetRequest();
+        String apiStartDate = null;
+        String uiStartDate = null;
+        String apiDuration = null;
+        String uiDuration = null;
+        metadata = RestAssured.getResponse();
+        jsonObj = new JSONObject(metadata.asString());
+
+        if(Integer.parseInt(jsonObj.get("total").toString())==0){
 
 
+        } else {
+            Assert.assertEquals("Brand PID ",jsonObj.get("@id"),radioFav.brandPID);
+            Assert.assertEquals("Brand Series Title ",jsonObj.getJSONArray("episodes").getJSONObject(0).getJSONObject("partOfSeries").get("name"),getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-episode-series']")));
+            Assert.assertEquals("Episode Title ",jsonObj.getJSONArray("episodes").getJSONObject(0).get("name"),getText(By.xpath("//li[@data-id='"+radioFav.brandPID+"']//span[@class='my-episode']")));
+            Assert.assertEquals("Description ",jsonObj.getJSONArray("episodes").getJSONObject(0).get("description"),getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-item-info']/p")));
+            Assert.assertEquals("Network ",jsonObj.getJSONArray("episodes").getJSONObject(0).getJSONObject("publication").getJSONObject("broadcast").getJSONObject("publishedOn").get("name"),getText(By.xpath("//li[@data-id='"+radioFav.brandPID+"']//span[@class='my-episode-broadcaster']")));
+
+            apiStartDate = jsonObj.getJSONArray("episodes").getJSONObject(0).getJSONObject("publication").getJSONObject("broadcast").getJSONObject("startDate").get("datetime").toString();
+            uiStartDate = getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-episode-date my-episode-date-stamp']"));
+            Assert.assertEquals("Date of Broadcast ", HelperMethods.getDate_d_M_y(apiStartDate.split("T")[0]), uiStartDate.substring(uiStartDate.indexOf(",") + 2));
+
+            apiDuration = jsonObj.getJSONArray("episodes").getJSONObject(0).get("duration").toString();
+            uiDuration = getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-episode-date']"));
+            Assert.assertEquals("Duration ", HelperMethods.getMinutes(apiDuration),uiDuration.split(" ")[1]);
 
 
+        }
 
-
-
-
-
-
-
-
-
+    }
 
 }

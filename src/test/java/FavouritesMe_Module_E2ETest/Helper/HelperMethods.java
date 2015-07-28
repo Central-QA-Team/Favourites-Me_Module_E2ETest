@@ -31,4 +31,67 @@ public class HelperMethods extends WebNavPage {
                 return randomNumber;
     }
 
+
+    // returns minutes
+    public static String getMinutes(String duration){
+        int mins=0;
+        String temp = duration.substring(2);
+        if(temp.length()>3){
+            mins+=Integer.parseInt(temp.substring(0, temp.indexOf('H')))*60;
+            mins+=Integer.parseInt(temp.substring(temp.indexOf('H')+1,temp.indexOf('M')));
+        } else {
+            mins+=Integer.parseInt(temp.substring(0, temp.indexOf('M')));
+        }
+        return  Integer.toString(mins);
+    }
+
+
+    //returns date in "dd M yyyy" format from "yyyy-mm-dd"
+    public static String getDate_d_M_y(String date){
+        String month= null;
+        String temp [] = date.split("-");
+        int i = Integer.parseInt(temp[1]);
+        switch (i){
+            case 1:
+                month = "Jan";
+                break;
+            case 2:
+                month = "Feb";
+                break;
+            case 3:
+                month = "Mar";
+                break;
+            case 4:
+                month = "Apr";
+                break;
+            case 5:
+                month = "May";
+                break;
+            case 6:
+                month = "Jun";
+                break;
+            case 7:
+                month = "Jul";
+                break;
+            case 8:
+                month = "Aug";
+                break;
+            case 9:
+                month = "Sep";
+                break;
+            case 10:
+                month = "Oct";
+                break;
+            case 11:
+                month = "Nov";
+                break;
+            case 12:
+                month = "Dec";
+                break;
+        }
+
+        return temp[2]+" "+month+" "+temp[0]+".";
+    }
+
+
 }
