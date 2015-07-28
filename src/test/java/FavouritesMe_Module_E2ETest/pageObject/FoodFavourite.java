@@ -27,8 +27,6 @@ public class FoodFavourite extends WebNavPage{
         recipe=getText(firstRecipeFromList);
         clickALink(firstRecipeFromList);
         recipeDataID =currentURL().split("/")[5];
-//        openWebPage("http://test.bbc.co.uk/food/recipes/mushroomfrittata_90708");
-//        recipeDataID ="mushroomfrittata_90708";
     }
 
 
