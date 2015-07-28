@@ -20,15 +20,15 @@ public class FoodFavourite extends WebNavPage{
     public By favouriteButtonStatus = By.xpath("//*[@id='pf1']/span/span[2]");
 
     public void I_find_a_recipe() throws Throwable {
-//        clearAnyField(quickRecipeFinderSearch);
-//        enterAnyTextInAField(quickRecipeFinderSearch,"salt");
-//        waitForShortSpan();
-//        clickALink(quickRecipeFinderSearchButton);
-//        recipe=getText(firstRecipeFromList);
-//        clickALink(firstRecipeFromList);
-//        recipeDataID =currentURL().split("/")[5];
-        openWebPage("http://test.bbc.co.uk/food/recipes/mushroomfrittata_90708");
-        recipeDataID ="mushroomfrittata_90708";
+        clearAnyField(quickRecipeFinderSearch);
+        enterAnyTextInAField(quickRecipeFinderSearch,"salt");
+        waitForShortSpan();
+        clickALink(quickRecipeFinderSearchButton);
+        recipe=getText(firstRecipeFromList);
+        clickALink(firstRecipeFromList);
+        recipeDataID =currentURL().split("/")[5];
+//        openWebPage("http://test.bbc.co.uk/food/recipes/mushroomfrittata_90708");
+//        recipeDataID ="mushroomfrittata_90708";
     }
 
 
