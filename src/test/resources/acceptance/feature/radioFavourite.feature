@@ -7,23 +7,24 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
     verify removal of brand reflects on the status of a button on brand page
 
     Given I am a signed in user
-      And I navigate to BBC radio home page
+    And I navigate to BBC radio home page
     When I add brand to Favourite
-    Then Add button should change to added state
-      And I can find the brand on radio me module
-      And I can remove the brand from Favourites on Radio Me Module
-   When I navigate to brand page
-      And brand button should change to Add state
+    Then Favourite button should be in added state
+    And I can find the brand on radio me module
+    And I can verify brand metadata as per available episodes
+    And I can remove the brand from Favourites on Radio Me Module
+    When I navigate to brand page
+    And brand button should change to Add state
 
 
   @automated @favourite @radio @meModule
   Scenario: C171570-Removing item from favourite button and verify removal reflects on me module
 
     Given I am a signed in user
-      And I navigate to BBC radio home page
+    And I navigate to BBC radio home page
     When I remove brand from Favourite
-     Then brand button should change to Add state
-      And I should not find the brand on radio me module
+    Then brand button should change to Add state
+    And I should not find the brand on radio me module
 
 
   @automated @favourite @radio @MYPROFILE-472
@@ -32,37 +33,37 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
   verify removal of episode reflects on the status of a button on episode page
 
     Given I am a signed in user
-      And I navigate to BBC radio home page
+    And I navigate to BBC radio home page
     When I add episode to Favourite
     Then Favourite button should be in added state
-      And I can find the episode on radio me module
-      And I can remove the episode from Favourites on Radio Me Module
-      And I navigate back to episode page
-      And favourite button for episode should change to Add state
+    And I can find the episode on radio me module
+    And I can remove the episode from Favourites on Radio Me Module
+    And I navigate back to episode page
+    And favourite button for episode should change to Add state
 
 
   @automated @favourite @radio @MYPROFILE-472
   Scenario: verify if adding episode to favourite adds associated brand favourite too
 
     Given I am a signed in user
-      And I navigate to BBC radio home page
+    And I navigate to BBC radio home page
     When I add episode to Favourite
-      And I navigate to brand page
+    And I navigate to brand page
     Then Favourite button should be in added state
-      And I can find the brand on radio me module
+    And I can find the brand on radio me module
 
   @automated @favourite @radio @MYPROFILE-472
     Scenario: verify I can remove an episode from favourite from episode page but brand remains in favourite
       This scenario is in continuation with above scenario and is dependent on the same.
 
     Given I am a signed in user
-      And I navigate back to episode page
+    And I navigate back to episode page
     When I remove episode from Favourite
     Then favourite button for episode should change to Add state
-      And I should not find episode on radio me module
-      And I navigate to brand page
-      And Favourite button should be in added state
-      And I can find the brand on radio me module
+    And I should not find episode on radio me module
+    And I navigate to brand page
+    And Favourite button should be in added state
+    And I can find the brand on radio me module
 
   @automated @favourite @radio
   Scenario: Verify a clip can be added as a Favourite and removed from me module

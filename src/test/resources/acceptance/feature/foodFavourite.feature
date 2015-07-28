@@ -27,29 +27,29 @@ Feature: Adding a Food recipe as a favourite
   Scenario: C171285-Verify sign in from page
     when browser window is not at full screen
     Given I navigate to BBC food home page
-      And I add recipe to Favourite
-      And I resize browser window to width "800" and height "600"
+    And I add recipe to Favourite
+    And I resize browser window to width "800" and height "600"
     When I sign in from idCTA
     Then the status of the button changes to Added to Favourites
-      And I remove recipe from Favourite
+    And I remove recipe from Favourite
     #Last step is just a cleanup step
 
 
   @automated @favourite @food
   Scenario: C171286-Verify sign in from overlay
     Given I navigate to BBC food home page
-      And I add recipe to Favourite
+    And I add recipe to Favourite
     When I sign in from idCTA
     Then the status of the button changes to Added to Favourites
-      And I remove recipe from Favourite
+    And I remove recipe from Favourite
     #Last step is just a cleanup step
 
   @automated @favourite @food
   Scenario: C171288-Verify register from page
     Given I navigate to BBC food home page
-      And I find a recipe
-      And I add recipe to Favourite
+    And I find a recipe
+    And I add recipe to Favourite
     When I click on register from idICTA
     Then I should be taken to "BBC - Register" page
-      And PTRT should be set to "/food/recipes/"
+    And PTRT should be set to "/food/recipes/"
 
