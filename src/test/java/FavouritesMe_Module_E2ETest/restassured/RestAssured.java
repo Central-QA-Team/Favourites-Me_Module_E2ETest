@@ -127,7 +127,7 @@ public class RestAssured {
                     .get(requestURL);
             responseString = response.asString();
 
-            System.out.println(baosRequest.toString() + "\nResponse:\n" + baosResponse.toString());
+            //System.out.println(baosRequest.toString() + "\nResponse:\n" + baosResponse.toString());
 
         } catch(AssertionError e) {
             fail(e.getMessage() + "\n\n" + baosRequest.toString() + "\nResponse:\n" + baosResponse.toString());

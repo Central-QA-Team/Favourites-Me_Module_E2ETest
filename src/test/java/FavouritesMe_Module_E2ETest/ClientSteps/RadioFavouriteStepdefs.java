@@ -9,6 +9,7 @@ import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 import junit.framework.Assert;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 
@@ -326,12 +327,12 @@ public class RadioFavouriteStepdefs extends WebNavPage {
             Assert.assertEquals("Brand PID ",jsonObj.get("@id"),radioFav.brandPID);
             //Assert.assertEquals(jsonObj.getJSONArray("episodes").getJSONObject(0).get("image").toString(),getPropertyOfElement(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-block-one']/img"), "src"));
             try{
-                Assert.assertEquals("Brand Series Title ",jsonObj.getJSONArray("episodes").getJSONObject(0).getJSONObject("partOfSeries").get("name"),getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-episode-brand']")));
+                Assert.assertEquals("Brand Brand Title ",jsonObj.getJSONArray("episodes").getJSONObject(0).getJSONObject("partOfBrand").get("name"),getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-episode-brand']")));
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
             try {
-                Assert.assertEquals("Brand Series Title ", jsonObj.getJSONArray("episodes").getJSONObject(0).getJSONObject("partOfBrand").get("name"), getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-episode-series']")));
+                Assert.assertEquals("Brand Series Title ", jsonObj.getJSONArray("episodes").getJSONObject(0).getJSONObject("partOfSeries").get("name"), getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-episode-series']")));
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
@@ -349,6 +350,50 @@ public class RadioFavouriteStepdefs extends WebNavPage {
 
 
         }
+
+    }
+
+
+    @Then("^I can verify episode metadata")
+    public void I_can_verify_espisode_metadata() throws Throwable {
+        RestAssured.appendURL("/my/content/meta/programme/" + radioFav.episodePID + "?key=3irk89d66");
+        RestAssured.performGetRequest();
+        String apiStartDate = null;
+        String uiStartDate = null;
+        String apiDuration = null;
+        String uiDuration = null;
+        metadata = RestAssured.getResponse();
+        jsonObj = new JSONObject(metadata.asString());
+
+            Assert.assertEquals("Episode PID ",jsonObj.get("@id"),radioFav.episodePID);
+            //Assert.assertEquals(jsonObj.get("image").toString(),getPropertyOfElement(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//span[@class='my-block-one']/img"), "src"));
+            try{
+                Assert.assertEquals("Brand Title ",jsonObj.getJSONObject("partOfBrand").get("name"),getText(By.xpath("//li[@data-id='" + radioFav.episodePID + "']//span[@class='my-episode-brand']")));
+            } catch (JSONException je){
+                System.out.println("partOfBrand element is no present for this episode "+je.getMessage());
+            }
+            try {
+                Assert.assertEquals("Brand Series Title ", jsonObj.getJSONObject("partOfSeries").get("name"), getText(By.xpath("//li[@data-id='" + radioFav.episodePID + "']//span[@class='my-episode-series']")));
+            } catch (JSONException je){
+                System.out.println("partOfSeries element is no present for this episode "+je.getMessage());
+            }
+            if(elementExists(By.xpath("//li[@data-id='"+radioFav.episodePID+"']//span[@class='my-episode']")))
+            Assert.assertEquals("Episode Title ",jsonObj.get("name"),getText(By.xpath("//li[@data-id='"+radioFav.episodePID+"']//span[@class='my-episode']")));
+            Assert.assertEquals("Description ",jsonObj.get("description"),getText(By.xpath("//li[@data-id='" + radioFav.episodePID + "']//span[@class='my-item-info']/p")));
+            Assert.assertEquals("Network ",jsonObj.getJSONObject("publication").getJSONObject("broadcast").getJSONObject("publishedOn").get("name")+".",getText(By.xpath("//li[@data-id='"+radioFav.episodePID+"']//span[@class='my-episode-broadcaster']")));
+
+            try {
+                apiStartDate = jsonObj.getJSONObject("publication").getJSONObject("broadcast").getJSONObject("startDate").get("datetime").toString();
+                uiStartDate = getText(By.xpath("//li[@data-id='" + radioFav.episodePID + "']//span[@class='my-episode-date my-episode-date-stamp']"));
+                Assert.assertEquals("Date of Broadcast ", HelperMethods.getDate_d_M_y(apiStartDate.split("T")[0]), uiStartDate.substring(uiStartDate.indexOf(",") + 2));
+            } catch (JSONException je){
+                System.out.println("Broadcast->startDate element is no present for this episode "+je.getMessage());
+            }
+
+            apiDuration = jsonObj.get("duration").toString();
+            uiDuration = getText(By.xpath("//li[@data-id='" + radioFav.episodePID + "']//span[@class='my-episode-date']"));
+            Assert.assertEquals("Duration ", HelperMethods.getMinutes(apiDuration),uiDuration.split(" ")[1]);
+
 
     }
 
