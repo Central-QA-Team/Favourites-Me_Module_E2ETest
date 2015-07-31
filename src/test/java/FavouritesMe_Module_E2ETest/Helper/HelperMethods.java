@@ -36,11 +36,15 @@ public class HelperMethods extends WebNavPage {
     public static String getMinutes(String duration){
         int mins=0;
         String temp = duration.substring(2);
-        if(temp.length()>3){
-            mins+=Integer.parseInt(temp.substring(0, temp.indexOf('H')))*60;
-            mins+=Integer.parseInt(temp.substring(temp.indexOf('H')+1,temp.indexOf('M')));
+        if (temp.charAt(temp.length()-1)=='M'){
+            if (temp.contains("H")) {
+                mins += Integer.parseInt(temp.substring(0, temp.indexOf('H'))) * 60;
+                mins += Integer.parseInt(temp.substring(temp.indexOf('H') + 1, temp.indexOf('M')));
+            } else {
+                mins += Integer.parseInt(temp.substring(0, temp.indexOf('M')));
+            }
         } else {
-            mins+=Integer.parseInt(temp.substring(0, temp.indexOf('M')));
+            mins += Integer.parseInt(temp.substring(0, temp.indexOf('H'))) * 60;
         }
         return  Integer.toString(mins);
     }

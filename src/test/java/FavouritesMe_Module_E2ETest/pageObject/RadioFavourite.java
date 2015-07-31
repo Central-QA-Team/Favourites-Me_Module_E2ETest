@@ -47,15 +47,15 @@ public class RadioFavourite extends WebNavPage{
         clickALink(categories);
         clickALink(secondCategory);
         int randomNo;
-            List<WebElement> webElements = getWebElements(brandsWithEpisodes);
-            if(webElements.size()==1)
-                randomNo = 1;
-        else {
-                randomNo = HelperMethods.randomNumber(webElements.size());
-                webElements.get(randomNo).click();
-                brand = getText(brandName);
-                brandPID = currentURL().split("/")[4];
-            }
+        List<WebElement> webElements = getWebElements(brandsWithEpisodes);
+
+        randomNo = HelperMethods.randomNumber(webElements.size());
+        if(randomNo==getWebElements(brandsWithEpisodes).size())
+            randomNo--;
+        webElements.get(randomNo).click();
+        brand = getText(brandName);
+        brandPID = currentURL().split("/")[4];
+
     }
 
     public void I_find_an_episode() throws Throwable {

@@ -38,6 +38,7 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
     When I add episode to Favourite
     Then Favourite button should be in added state
     And I can find the episode on radio me module
+    And I can verify episode metadata
     And I can remove the episode from Favourites on Radio Me Module
     And I navigate back to episode page
     And favourite button for episode should change to Add state
