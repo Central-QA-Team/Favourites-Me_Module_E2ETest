@@ -73,7 +73,6 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
   verify removal of clip reflects on the status of a button on clip page
 
     Given I am a signed in user
-    And I navigate to BBC radio home page
     When I add clip to Favourite
     Then Favourite button should be in added state
     And I can find the clip on radio me module
@@ -86,7 +85,6 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
   Scenario: Removing clip from favourite button and verify removal should not affect for brand
 
     Given I am a signed in user
-    And I navigate to BBC radio home page
     When I add clip to Favourite
 #    And I navigate to brand page
 #    Then favourite button for brand should not change to added state
@@ -95,3 +93,18 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
     When I remove clip from Favourite
     Then favourite button for clip should change to Add state
     And I should not find clip on radio me module
+
+  @meModule @radio @automated @wip
+  Scenario: Verify Clip metadata
+    Given I am a signed in user
+    When I add clip to Favourite
+    And I can find the clip on radio me module
+    And I request feeds from MeService API for clip
+#    Then image should match with feeds
+    And name should match with feeds
+    And description should match with feeds
+    And duration should match with feeds
+    And availability should match with feeds
+    And publication should match with feeds
+    And I can remove the clip from Favourites on Radio Me Module
+
