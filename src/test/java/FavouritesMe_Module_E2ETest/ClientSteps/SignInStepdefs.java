@@ -62,6 +62,7 @@ public class SignInStepdefs extends WebNavPage{
         openWebPage(System.getProperty("baseUrl"));
         clickALink(signInPage.signInBarlesqueMenu);
         signInPage.sign_In(System.getProperty("userWithFav"), System.getProperty("passWithFav"));
+        waitForShortSpan();
     }
 
 }

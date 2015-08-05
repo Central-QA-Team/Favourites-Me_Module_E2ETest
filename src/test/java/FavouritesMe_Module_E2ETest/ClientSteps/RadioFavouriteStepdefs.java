@@ -261,6 +261,16 @@ public class RadioFavouriteStepdefs extends WebNavPage {
     }
 
 
+    @When("^I request feeds from MeService API for clip$")
+    public void I_request_feeds_from_MeService_API_for_clip() throws Throwable {
+        RestAssured.appendURL("/my/content/meta/programme/" + radioFav.clipPID + "?key=3irk89d66");
+        RestAssured.performGetRequest();
+        metadata = RestAssured.getResponse();
+        jsonObj = new JSONObject(metadata.asString());
+    }
+
+
+
     @Then("^I can remove the brand from Favourites on Radio Me Module$")
     public void I_can_remove_the_brand_from_Favourites_on_Radio_Me_Module() throws Throwable {
         waitForShortSpan();
@@ -393,6 +403,68 @@ public class RadioFavouriteStepdefs extends WebNavPage {
             apiDuration = jsonObj.get("duration").toString();
             uiDuration = getText(By.xpath("//li[@data-id='" + radioFav.episodePID + "']//span[@class='my-episode-date']"));
             Assert.assertEquals("Duration ", HelperMethods.getMinutes(apiDuration),uiDuration.split(" ")[1]);
+
+
+    }
+
+    @Then("^([^\"]*) should match with feeds$")
+    public void should_match_with_feeds(String arg1) throws Throwable {
+
+        String stringLocator = ".//ol[@class='my-item-list ']/li[1]";
+        if(arg1.equals("image")) {
+            stringLocator = stringLocator + "//img";
+            if (jsonObj.has("image")) {
+                assertIfTwoTextsEqual(jsonObj.getString("image"),getPropertyOfElement(By.xpath(stringLocator),"src"));
+            }
+        }else if(arg1.equals("name")){
+            stringLocator= stringLocator + "//*[@class='my-title-one']";
+            assertIfTwoTextsEqual(jsonObj.getString("name"),getText(By.xpath(stringLocator)));
+        }else if(arg1.equals("description")){
+            stringLocator= stringLocator + "//*[@class='my-item-info']/p";
+            if(jsonObj.has("description")) {
+                assertIfTwoTextsEqual(jsonObj.getString("description"), getText(By.xpath(stringLocator)));
+            }
+        }else if(arg1.equals("duration")){
+            stringLocator= stringLocator + "//*[@class='my-item-info']//*[@itemprop='duration']";
+            if(jsonObj.has("duration")) {
+                String[] splitDuration =jsonObj.getString("duration").split("[a-zA-Z]+");
+                String duration= "Duration ";
+                String time = "";
+                for(int i=1; i<splitDuration.length; i++){
+                    if(Integer.parseInt(jsonObj.getString("duration").split("[a-zA-Z]+")[i])<10){
+                        time= "0"+ jsonObj.getString("duration").split("[a-zA-Z]+")[i];
+                    }else{
+                        time= jsonObj.getString("duration").split("[a-zA-Z]+")[i];
+                    }
+                    duration= duration+time;
+                    if(i+1<splitDuration.length){
+                        duration = duration + ":";
+
+                    }else if (jsonObj.getString("duration").charAt(jsonObj.getString("duration").length()-1)!='S'){
+                        duration = duration + ":00";
+
+                    }
+                }
+                assertIfTwoTextsEqual(duration, getText(By.xpath(stringLocator)));
+            }
+        }else if(arg1.equals("availability")){
+            String playIcon=stringLocator + "//*[@class='my-play-icon']";
+            stringLocator= stringLocator + "//*[@class='my-expire no-days-info']";
+            if(jsonObj.has("available")) {
+                if (jsonObj.getBoolean("available")) {
+                    assertTrue(elementIsVisible(By.xpath(playIcon)));
+                    assertIfTwoTextsEqual("Available".toUpperCase(), getText(By.xpath(stringLocator)));
+                } else {
+                    assertFalse(elementIsVisible(By.xpath(playIcon)));
+                    assertIfTwoTextsEqual("Expired".toUpperCase(), getText(By.xpath(stringLocator)));
+                }
+            }
+        }else if(arg1.equals("publication")){
+            stringLocator= stringLocator + "//*[@class='my-item-info']//*[@itemprop='publication']";
+            if(jsonObj.has("publication")) {
+                assertIfTwoTextsEqual(jsonObj.getString("publication"), getText(By.xpath(stringLocator)));
+            }
+        }
 
 
     }

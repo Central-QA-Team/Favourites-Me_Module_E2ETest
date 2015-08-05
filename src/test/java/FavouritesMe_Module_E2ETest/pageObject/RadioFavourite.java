@@ -5,6 +5,7 @@ import FavouritesMe_Module_E2ETest.Helper.HelperMethods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 
@@ -76,9 +77,13 @@ public class RadioFavourite extends WebNavPage{
 
     public void I_find_an_clip() throws Throwable {
 
-        clickALink(clipOnRadioHomePage);
+        String[] arrayOfClips = new String[]{"p01ckkph", "p01q0d77", "p01q0d32", "p01q011c", "p01s0yfd", "p01s0mpr", "p01s0xjn", "p01s0w23", "p01xw0kt", "p0165sw4", "p02b5qsx", "p02743fg", "p0274v0p", "p0224t82", "p01lwc8d", "p01xtbxr", "p0263qz7", "p029yq3b", "p02b2njw", "p02b3m7p", "p02b0qd4", "p02b5tb7", "p02bqflf", "p02bj9tn", "p02bcjs4", "p02t9p17", "p01zl1rz"};
+        //clickALink(clipOnRadioHomePage);
+        //waitForShortSpan();
+        //clipPID = currentURL().split("/")[4].split("#")[0];
+        clipPID=arrayOfClips[HelperMethods.randomNumber(arrayOfClips.length-1)];
+        openWebPage(System.getProperty("baseUrl")+ "/programmes/" + clipPID);
         waitForShortSpan();
-        clipPID = currentURL().split("/")[4].split("#")[0];
         brandPID = getPropertyOfElement(brandHome, "href").substring(getPropertyOfElement(brandHome,"href").lastIndexOf('/') + 1);
     }
 
