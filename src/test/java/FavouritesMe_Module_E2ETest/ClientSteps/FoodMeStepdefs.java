@@ -22,8 +22,9 @@ public class FoodMeStepdefs extends WebNavPage{
 
     private FoodMeModule foodMePage = new FoodMeModule();
     private FoodFavouriteStepdefs foodFavSteps = new FoodFavouriteStepdefs();
+    private CommonStepdefs common = new CommonStepdefs();
     private RestAssured api = new RestAssured();
-    public String deletedRecipe = null;
+    //public String deletedRecipe = null;
 
 
 
@@ -80,10 +81,10 @@ public class FoodMeStepdefs extends WebNavPage{
         assertIfTwoTextsEqual(getPropertyOfElement(foodMePage.clickableTileInMeModule,"href"),"http://www.bbc.co.uk/food/recipes/"+getPropertyOfElement(foodMePage.firstItemInList,"data-id"));
     }
 
-    @When("^I go to recipe page$")
-    public void I_go_to_recipe_page() throws Throwable {
-        openWebPage(System.getProperty("baseUrl") + "/food/recipes/" + deletedRecipe);
-    }
+//    @When("^I go to recipe page$")
+//    public void I_go_to_recipe_page() throws Throwable {
+//        openWebPage(System.getProperty("baseUrl") + "/food/recipes/" + common.deletedRecipe);
+//    }
 
 
 }

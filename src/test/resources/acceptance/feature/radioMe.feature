@@ -137,12 +137,14 @@ Scenario Outline: Tab description
     And I click on the "Episodes & Clips" tab
     Then clicking on tile should take user to respective programmes page
 
-  @automatable @meModule @radio
+  @automated @meModule @radio @wip
   Scenario: Tile navigation for programmes Update
     Given I am on Radio me module
     And I signed in from benefits page as a normal user
     And I click on the "Programme Updates" tab
-    Then clicking on brand tile should take user to respective page
+    When I get me service response from brand
+    Then view episode pane should be displayed as per available episode for brand
+    And clicking on brand tile should take user to respective page
 
 
   @automated @meModule @radio

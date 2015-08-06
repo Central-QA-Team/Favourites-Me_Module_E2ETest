@@ -94,7 +94,7 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
     Then favourite button for clip should change to Add state
     And I should not find clip on radio me module
 
-  @meModule @radio @automated @wip
+  @meModule @radio @automated
   Scenario: Verify Clip metadata
     Given I am a signed in user
     When I add clip to Favourite
