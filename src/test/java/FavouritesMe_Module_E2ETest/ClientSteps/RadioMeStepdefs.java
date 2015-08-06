@@ -125,13 +125,14 @@ public class RadioMeStepdefs extends WebNavPage{
         if(jObj.getInt("total")==0){
             assertTrue(elementIsVisible(radioMePage.moreItemsFromBrand));
             assertIfTwoTextsEqual(getText(radioMePage.moreItemsFromBrand),"No available episodes");
+            assertFalse(elementExists(radioMePage.moreLinkNavigation));
         }else if(jObj.getInt("total")==1){
             assertFalse(elementIsVisible(radioMePage.moreItemsFromBrand));
         }else if(jObj.getInt("total")>1 && jObj.getInt("total")<=25){
             assertTrue(elementIsVisible(radioMePage.moreItemsFromBrand));
            // String noOfAvailableEpisodes = jObj.getString("total");
             assertIfTwoTextsEqual(getText(radioMePage.moreItemsFromBrand),"View "+ jObj.getString("total") +" available episodes");
-            assertIfTwoTextsEqual(getPropertyOfElement(radioMePage.moreLinkNavigation,"href"),jObj.getString("url")+"/episodes/player");
+            assertIfTwoTextsEqual(getPropertyOfElement(radioMePage.moreLinkNavigation, "href"),jObj.getString("url")+"/episodes/player");
         }else if(jObj.getInt("total")>25){
             assertTrue(elementIsVisible(radioMePage.moreItemsFromBrand));
             assertIfTwoTextsEqual(getText(radioMePage.moreItemsFromBrand),"View all available episodes");
