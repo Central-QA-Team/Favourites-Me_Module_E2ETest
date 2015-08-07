@@ -137,14 +137,19 @@ Scenario Outline: Tab description
     And I click on the "Episodes & Clips" tab
     Then clicking on tile should take user to respective programmes page
 
-  @automated @meModule @radio @wip
+  @quarantine @meModule @radio
+#  covered in radioFavourite.feature in scenario (Verify a Brand can be added as a Favourite and removed from me module
+#  Add a brand as a favourite, verify on me module, remove favourite from action panel and Verify on me module,
+#  verify removal of brand reflects on the status of a button on brand page
+#  C385958-Metadata for brands having no update available
+#  and brand tile navigation and available episode pane text and navigation)
   Scenario: Tile navigation for programmes Update
     Given I am on Radio me module
     And I signed in from benefits page as a normal user
     And I click on the "Programme Updates" tab
     When I get me service response from brand
-    Then view episode pane should be displayed as per available episode for brand
-    And clicking on brand tile should take user to respective page
+    Then clicking on brand tile should take user to respective page
+    And I can remove the brand from Favourites on Radio Me Module
 
 
   @automated @meModule @radio
