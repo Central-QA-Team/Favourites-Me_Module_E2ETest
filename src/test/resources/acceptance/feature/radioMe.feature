@@ -137,12 +137,15 @@ Scenario Outline: Tab description
     And I click on the "Episodes & Clips" tab
     Then clicking on tile should take user to respective programmes page
 
-  @automatable @meModule @radio
+  @quarantine @meModule @radio
+
   Scenario: Tile navigation for programmes Update
     Given I am on Radio me module
     And I signed in from benefits page as a normal user
     And I click on the "Programme Updates" tab
+    When I get me service response from brand
     Then clicking on brand tile should take user to respective page
+    And I can remove the brand from Favourites on Radio Me Module
 
 
   @automated @meModule @radio
@@ -162,6 +165,7 @@ Scenario Outline: Tab description
     And I am on Radio me module
     Then brands will be ordered as brand with latest available episode first
     And brand with no available episode will be displayed at the last
+
 
 
 

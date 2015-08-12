@@ -9,6 +9,7 @@ import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -318,17 +319,23 @@ public class RadioFavouriteStepdefs extends WebNavPage {
         openWebPage(System.getProperty("baseUrl") + "/programmes/" + radioFav.clipPID);
     }
 
+    @When("^I get me service response from brand$")
+    public void I_get_me_service_response_from_brand() throws Throwable {
+        RestAssured.appendURL("/my/content/meta/radio/tlec/" + radioFav.brandPID + "/newItems?key=3irk89d66");
+        RestAssured.performGetRequest();
+        metadata = RestAssured.getResponse();
+        jsonObj = new JSONObject(metadata.asString());
+
+    }
 
     @Then("^I can verify brand metadata as per available episodes")
     public void I_can_verify_brand_metadata_as_per_available_episodes() throws Throwable {
-        RestAssured.appendURL("/my/content/meta/radio/tlec/" + radioFav.brandPID + "/newItems?key=3irk89d66");
-        RestAssured.performGetRequest();
+
         String apiStartDate = null;
         String uiStartDate = null;
         String apiDuration = null;
         String uiDuration = null;
-        metadata = RestAssured.getResponse();
-        jsonObj = new JSONObject(metadata.asString());
+
 
         if(Integer.parseInt(jsonObj.get("total").toString())==0){
             Assert.assertEquals("Brand PID ",jsonObj.get("@id"),radioFav.brandPID);
@@ -363,6 +370,36 @@ public class RadioFavouriteStepdefs extends WebNavPage {
 
     }
 
+    @Then("^available episode pane should be visible if applicable and point to available episode page$")
+    public void available_episode_pane_should_be_visible_if_applicable_and_point_to_available_episode_page() throws Throwable {
+
+        if(jsonObj.getInt("total")==0){
+            TestCase.assertTrue(elementIsVisible(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']")));
+            assertIfTwoTextsEqual(getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']")),"No available episodes");
+            assertFalse(elementExists(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']/a")));
+        }else if(jsonObj.getInt("total")==1){
+            assertFalse(elementIsVisible(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']")));
+        }else if(jsonObj.getInt("total")>1 && jsonObj.getInt("total")<=25){
+            TestCase.assertTrue(elementIsVisible(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']")));
+            // String noOfAvailableEpisodes = jObj.getString("total");
+            assertIfTwoTextsEqual(getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']")),"View "+ jsonObj.getString("total") +" available episodes");
+            assertIfTwoTextsEqual(getPropertyOfElement(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']/a"), "href"),jsonObj.getString("url")+"/episodes/player");
+        }else if(jsonObj.getInt("total")>25){
+            TestCase.assertTrue(elementIsVisible(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']")));
+            assertIfTwoTextsEqual(getText(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']")),"View all available episodes");
+            assertIfTwoTextsEqual(getPropertyOfElement(By.xpath("//li[@data-id='" + radioFav.brandPID + "']//*[@class='my-more-items']/a"),"href"),jsonObj.getString("url")+"/episodes/player");
+        }
+    }
+
+    @Then("^clicking on brand tile should take user to respective page$")
+    public void clicking_on_brand_tile_should_take_user_to_respective_page() throws Throwable {
+
+        if(jsonObj.getInt("total")!=0){ //if total is not equal to 0
+            assertIfTwoTextsEqual(getPropertyOfElement(By.xpath("//li[@data-id='" + radioFav.brandPID + "']/span/span/a"),"href"),jsonObj.getJSONArray("episodes").getJSONObject(0).getString("url"));
+        }else{ //if episodes are not available for a brand (if total is equal to 0)
+            assertIfTwoTextsEqual(getPropertyOfElement(By.xpath("//li[@data-id='" + radioFav.brandPID + "']/span/span/a"),"href"),jsonObj.getString("url"));
+        }
+    }
 
     @Then("^I can verify episode metadata")
     public void I_can_verify_espisode_metadata() throws Throwable {

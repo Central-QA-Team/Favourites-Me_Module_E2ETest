@@ -6,13 +6,18 @@ import FavouritesMe_Module_E2ETest.pageObject.*;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import FavouritesMe_Module_E2ETest.restassured.RestAssured;
+
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+
 import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.deps.com.google.gson.JsonArray;
 import junit.framework.Assert;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +28,10 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
+import org.eclipse.jetty.util.ajax.JSON;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Created by patilk01 on 18/06/2015.
  */
@@ -33,6 +42,8 @@ public class RadioMeStepdefs extends WebNavPage{
     public JSONObject jsonObj = new JSONObject();
 
     private RadioMeModule radioMePage = new RadioMeModule();
+    Response res = null;
+    public JSONObject jObj = new JSONObject();
 
 
     @Given("^I am on Radio me module$")
@@ -45,9 +56,9 @@ public class RadioMeStepdefs extends WebNavPage{
     @Then("^Title of the \"([^\"]*)\" should be \"([^\"]*)\"$")
     public void Title_of_the_should_be(String arg1, String arg2) throws Throwable {
         if(arg1.equals("first_tab")){
-            assertIfTwoTextsEqual(getText(radioMePage.programmeUpdate),arg2);
+            assertIfTwoTextsEqual(getText(radioMePage.programmeUpdate), arg2);
         }else if(arg1.equals("second_tab")){
-            assertIfTwoTextsEqual(getText(radioMePage.episodesClips),arg2);
+            assertIfTwoTextsEqual(getText(radioMePage.episodesClips), arg2);
         }
     }
 
@@ -81,7 +92,7 @@ public class RadioMeStepdefs extends WebNavPage{
 
     @Given("^Page should have title \"([^\"]*)\"$")
     public void Page_should_have_title(String arg1) throws Throwable {
-        assertIfTwoTextsEqual(arg1,getText(radioMePage.pageTitle));
+        assertIfTwoTextsEqual(arg1, getText(radioMePage.pageTitle));
     }
 
 
@@ -117,18 +128,6 @@ public class RadioMeStepdefs extends WebNavPage{
 
     }
 
-    @Then("^clicking on brand tile should take user to respective page$")
-    public void clicking_on_brand_tile_should_take_user_to_respective_page() throws Throwable {
-        //if episodes available for a brand (read 'total' from json response and )
-        if(false){ //if total is not equal to 0
-            //String latestEpisode = getLatestEpisodeForBrand(brandID);
-            //assertIfTwoTextsEqual(getPropertyOfElement(radioMePage.clickableTileInMeModule,"href"),"http://www.bbc.co.uk/programmes/"+latestEpisode);
-        }else{ //if episodes are not available for a brand (if total is equal to 0)
-            assertIfTwoTextsEqual(getPropertyOfElement(radioMePage.clickableBrandInMeModule,"href"),"http://www.bbc.co.uk/programmes/"+getPropertyOfElement(radioMePage.firstBrandInList,"data-id"));
-        }
-    }
-
-
 
     @Then("^brands will be ordered as brand with latest available episode first$")
     public void brands_will_be_ordered_as_brand_with_latest_available_episode_first() throws Throwable {
@@ -136,9 +135,6 @@ public class RadioMeStepdefs extends WebNavPage{
         List<String> pids = new ArrayList<String>();
         List<WebElement>  brandsWithEpisodeDatesOnAPage = getWebElements(radioMePage.brandsWithEpisodeDatesOnAPage);
         brandWithEpisodes = brandsWithEpisodeDatesOnAPage.size();
-//        for(int i=brandWithEpisodes; i>0;i--){
-//            dates.add(new Date(getText(By.xpath("//li["+i+"]/span/span/a/span[2]/span[2]/span[1]/span/span[2]")).substring(5,16)));
-//        }
         for(int i=1;i<=brandWithEpisodes;i++ ){
             pids.add(getPropertyOfElement(By.xpath("//div/div[2]/div/ol/li[" + i + "]"), "data-id"));
         }
@@ -164,7 +160,7 @@ public class RadioMeStepdefs extends WebNavPage{
             jsonObj = new JSONObject(metadata.asString());
             date = jsonObj.getJSONArray("episodes").getJSONObject(0).getJSONObject("publication").getJSONObject("ondemand").getJSONObject("startDate").get("datetime").toString();
 
-        }catch(JSONException je){
+        }catch(JSONException je) {
             System.out.println("Wrong Json"+ je.getMessage());
             System.exit(0);
         }
@@ -186,7 +182,6 @@ public class RadioMeStepdefs extends WebNavPage{
         }
 
     }
-
 
 
 }

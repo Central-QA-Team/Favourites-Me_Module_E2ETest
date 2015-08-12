@@ -56,7 +56,13 @@ public class CommonStepdefs extends WebNavPage{
 
     @Then("^item should be removed from me module$")
     public void item_should_be_removed_from_me_module() throws Throwable {
+
         assertFalse(deletedRecipe.equals(getPropertyOfElement(mePage.firstItemInList, "data-id")));
+    }
+
+    @When("^I go to recipe page$")
+    public void I_go_to_recipe_page() throws Throwable {
+        openWebPage(System.getProperty("baseUrl") + "/food/recipes/" + deletedRecipe);
     }
 
     @Then("^action panel will be displayed as 3 vertical dots$")
