@@ -156,5 +156,13 @@ Scenario Outline: Tab description
     |Programme Updates|5|
     |Episodes & Clips |20|
 
+  @automated @meModule @radio @test
+  Scenario: C373305-Verify ordering of brands
+    Given I am a signed in user username "dhaneshbbctest1@gmail.com" and password "BBCtestaccount"
+    And I am on Radio me module
+    Then brands will be ordered as brand with latest available episode first
+    And brand with no available episode will be displayed at the last
+
+
 
 

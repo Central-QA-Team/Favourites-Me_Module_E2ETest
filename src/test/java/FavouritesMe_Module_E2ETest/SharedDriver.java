@@ -96,7 +96,7 @@ public class SharedDriver extends WebDriverException {
     @Before("~@noWebDriver")
     public static void setUp() throws Exception {
         String browser = System.getProperty("browser");
-        String key = "firefox";    //browser;
+        String key = browser;    //browser;
         System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
         System.out.println("The Browser used is: " + key);
         if (key.equalsIgnoreCase("chrome")) {
@@ -130,10 +130,11 @@ public class SharedDriver extends WebDriverException {
     }
 
     public static void setFirefoxDriver() {
-
-
+       // String js = System.getProperty("js");
         //_capabilities = DesiredCapabilities.firefox();
         FirefoxProfile _profile = new FirefoxProfile();
+       // if(js.equalsIgnoreCase("false"))
+        //_profile.setPreference("javascript.enabled", false);
         File f = new File(FIREFOX_LOCATION);
         FirefoxBinary _ffbinary = new FirefoxBinary(f);
         //_profile.setPreference("network.proxy.type", 1);

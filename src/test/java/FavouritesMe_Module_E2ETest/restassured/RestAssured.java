@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.jayway.restassured.RestAssured.certificate;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.fail;
@@ -33,8 +34,8 @@ import static org.junit.Assert.fail;
  * To change this template use File | Settings | File Templates.
  */
 public class RestAssured {
-
-    private static String requestURL = "http://open.test.bbc.co.uk";
+    private static String requestURL;
+    private static String baseURL = "http://open.test.bbc.co.uk";
     private static Response response;
     private static String responseString = "";
     private static String contentType = "";
@@ -53,7 +54,7 @@ public class RestAssured {
 
 
     public static void clearDown() {
-        //requestURL = "";
+        requestURL = "";
 
         response = null;
         responseString = "";
@@ -83,7 +84,11 @@ public class RestAssured {
 
     public static void setRequestURL(String url) {
         requestURL = url;
-        System.out.println(requestURL);
+        //System.out.println(requestURL);
+    }
+
+    public static String getBaseURL() {
+        return baseURL;
     }
 
     public static String getRequestURL() {
@@ -95,8 +100,8 @@ public class RestAssured {
     }
 
     public static void appendURL(String append) {
-        requestURL = requestURL + append;
-        System.out.println(requestURL);
+        requestURL = baseURL + append;
+        //System.out.println(requestURL);
     }
 
     public static void setRequestBody(String body) {
@@ -118,6 +123,7 @@ public class RestAssured {
     public static void performGetRequest() {
 
         try {
+            System.out.println(requestURL);
             response = given().urlEncodingEnabled(urlEncoding).headers(requestHeaders)
                     .filter(new RequestLoggingFilter(psRequest))
                     .filter(new ResponseLoggingFilter(psResponse))
@@ -130,7 +136,9 @@ public class RestAssured {
             //System.out.println(baosRequest.toString() + "\nResponse:\n" + baosResponse.toString());
 
         } catch(AssertionError e) {
-            fail(e.getMessage() + "\n\n" + baosRequest.toString() + "\nResponse:\n" + baosResponse.toString());
+            fail(e.getMessage());
+            //fail(e.getMessage() + "\n\n" + baosRequest.toString() + "\nResponse:\n" + baosResponse.toString());
+
         } finally {
             psRequest.close();
         }
@@ -221,6 +229,11 @@ public class RestAssured {
     public static void setNewResponseHeader(){
 
         responseHeaders.clear();
+    }
+
+    //To add certificate for request
+    public static void setCertificate(){
+       // given().auth().certificate("keystore.jks", "my_password", certAuthSettings().allowAllHostNames());
     }
 
     public static void setAcceptXML() {
