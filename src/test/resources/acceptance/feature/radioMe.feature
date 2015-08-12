@@ -138,11 +138,7 @@ Scenario Outline: Tab description
     Then clicking on tile should take user to respective programmes page
 
   @quarantine @meModule @radio
-#  covered in radioFavourite.feature in scenario (Verify a Brand can be added as a Favourite and removed from me module
-#  Add a brand as a favourite, verify on me module, remove favourite from action panel and Verify on me module,
-#  verify removal of brand reflects on the status of a button on brand page
-#  C385958-Metadata for brands having no update available
-#  and brand tile navigation and available episode pane text and navigation)
+
   Scenario: Tile navigation for programmes Update
     Given I am on Radio me module
     And I signed in from benefits page as a normal user
@@ -162,6 +158,15 @@ Scenario Outline: Tab description
     |tab|no_of_items|
     |Programme Updates|5|
     |Episodes & Clips |20|
+
+  @automated @meModule @radio @test
+  Scenario: C373305-Verify ordering of brands
+    Given I am a signed in user username "dhaneshbbctest1@gmail.com" and password "BBCtestaccount"
+    And I am on Radio me module
+    Then brands will be ordered as brand with latest available episode first
+    And brand with no available episode will be displayed at the last
+
+
 
 
 

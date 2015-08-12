@@ -1,6 +1,7 @@
 package FavouritesMe_Module_E2ETest.Selenium;
 
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import junit.framework.Assert;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.openqa.selenium.*;
@@ -67,7 +68,13 @@ public class WebNavPage {
 
     //To return a WebElement using By
     private static WebElement getWebElement(By locator){
-        WebElement element= getDriver().findElement(locator);
+        WebElement element=null;
+        try {
+            element = getDriver().findElement(locator);
+        }catch(ElementNotFoundException elementNotFound){
+            System.out.println("Locator "+locator+" could not found");
+            System.exit(0);
+        }
         return element;
     }
 
@@ -75,7 +82,12 @@ public class WebNavPage {
     //To return list of WebElements based on locator strategy
     protected static List<WebElement> getWebElements(By locator){
         List<WebElement> elements = new ArrayList<WebElement>();
-        elements= getDriver().findElements(locator);
+        try {
+            elements = getDriver().findElements(locator);
+        }catch(ElementNotFoundException elementNotFound){
+            System.out.println("Locator "+locator+" could not found");
+            System.exit(0);
+        }
         return elements;
     }
 
@@ -223,15 +235,15 @@ public class WebNavPage {
 
 
     //To Enter Text in a field identified using By//
-    public static void enterAnyTextInAField(By locator, String Text){
+    public static void enterAnyTextInAField(By locator, String text){
 
-        getWebElement(locator).sendKeys(Text);
+        getWebElement(locator).sendKeys(text);
     }
 
-    public static void enterAnyNumberInAField(By fieldLocator, int anynumber){
+    public static void enterAnyNumberInAField(By fieldLocator, int anyNumber){
 
-        String Text =  Integer.toString(anynumber);
-        getWebElement(fieldLocator).sendKeys(Text);
+        String text =  Integer.toString(anyNumber);
+        getWebElement(fieldLocator).sendKeys(text);
     }
 
     //To clear field
