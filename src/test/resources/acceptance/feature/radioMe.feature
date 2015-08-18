@@ -138,12 +138,12 @@ Scenario Outline: Tab description
     Then clicking on tile should take user to respective programmes page
 
   @quarantine @meModule @radio
-#  covered in radioFavourite.feature in scenario (Verify a Brand can be added as a Favourite and removed from me module
-#  Add a brand as a favourite, verify on me module, remove favourite from action panel and Verify on me module,
-#  verify removal of brand reflects on the status of a button on brand page
-#  C385958-Metadata for brands having no update available
-#  and brand tile navigation and available episode pane text and navigation)
   Scenario: Tile navigation for programmes Update
+  covered in radioFavourite.feature in scenario (Verify a Brand can be added as a Favourite and removed from me module
+  Add a brand as a favourite, verify on me module, remove favourite from action panel and Verify on me module,
+  verify removal of brand reflects on the status of a button on brand page
+  C385958-Metadata for brands having no update available
+  and brand tile navigation and available episode pane text and navigation)
     Given I am on Radio me module
     And I signed in from benefits page as a normal user
     And I click on the "Programme Updates" tab
