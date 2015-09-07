@@ -67,7 +67,7 @@ public class FoodMeStepdefs extends WebNavPage{
 
     @Then("^Link Recipe index page should point to recipe page.$")
     public void Link_Recipe_index_page_should_point_to_recipe_page() throws Throwable {
-        assertIfTwoTextsEqual("http://www.test.bbc.co.uk"+"/food/recipes/",getPropertyOfElement(foodMePage.recipeIndexLink, "href"));
+        assertIfTwoTextsEqual(System.getProperty("baseUrl")+"/food/recipes/",getPropertyOfElement(foodMePage.recipeIndexLink, "href"));
     }
 
     @Then("^Food benefits page should have \"([^\"]*)\"$")

@@ -63,6 +63,8 @@ Feature: Adding a brand/episode/clip as a favourite and removing from Me module
       This scenario is in continuation with above scenario and is dependent on the same.
 
     Given I am a signed in user
+    And I navigate to BBC radio home page
+    When I add episode to Favourite
     And I navigate back to episode page
     When I remove episode from Favourite
     Then favourite button for episode should change to Add state

@@ -31,6 +31,7 @@ public class CommonStepdefs extends WebNavPage{
 
     @Given("^I navigate to BBC ([^\"]*) home page$")
     public void I_navigate_to_page(String endPoint) throws Throwable {
+        waitForShortSpan();
         String url=System.getProperty("baseUrl")+"/"+endPoint;
         openWebPage(url);
 

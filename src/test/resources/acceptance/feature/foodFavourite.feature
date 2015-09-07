@@ -4,7 +4,9 @@ Feature: Adding a Food recipe as a favourite
   @automated @favourite @food @meModule
   Scenario: C172579,C431534,-Verify a a recipe can be added as favourite
     C171569-Verify Mouse hover on added state, it's assumed JS is ON
-    Given I am a signed in user
+    #Given I am a signed in user
+    Given I am on Food me module
+    And I signed in from benefits page as a normal user
     And I navigate to BBC food home page
     When I add recipe to Favourite
     And I hover the mouse pointer on favorite button
@@ -14,7 +16,9 @@ Feature: Adding a Food recipe as a favourite
 
   @automated @favourite @food @meModule
   Scenario: C171570-Removing item from favourites
-    Given I am a signed in user
+    #Given I am a signed in user
+    Given I am on Food me module
+    And I signed in from benefits page as a normal user
     And I navigate to BBC food home page
     And I find a recipe
     When I remove recipe from Favourite

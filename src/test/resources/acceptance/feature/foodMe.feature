@@ -51,8 +51,10 @@ Scenario: Number of recipe per page
 
 @automated @food @meModule
 Scenario:C431546 Deletion of recipe from action panel and verify removal reflects on favourite button on recipe page
-  Given I am a signed in user
-  And I am on Food homepage
+   #Given I am a signed in user
+  Given I am on Food me module
+  And I signed in from benefits page as a normal user
+  And I navigate to BBC food home page
   And I add recipe to Favourite
   And I am on Food me module
   When I delete item from action panel
@@ -62,24 +64,30 @@ Scenario:C431546 Deletion of recipe from action panel and verify removal reflect
 
   @automated @food @meModule
 Scenario:C172185 Action panel contains 3 dots
-  Given I am a signed in user
-    And I am on Food homepage
+  #Given I am a signed in user
+    Given I am on Food me module
+    And I signed in from benefits page as a normal user
+    And I navigate to BBC food home page
     And I add recipe to Favourite
     And I am on Food me module
   Then action panel will be displayed as 3 vertical dots
 
     @automated @food @meModule
 Scenario: C172186
-  Given I am a signed in user
-  And I am on Food homepage
+  #Given I am a signed in user
+  Given I am on Food me module
+  And I signed in from benefits page as a normal user
+  And I navigate to BBC food home page
   And I add recipe to Favourite
   When I am on Food me module
   Then action panel should contain "Remove?,Yes,No"
 
 @automated @food @meModule
 Scenario: Recipe metadata - title
-  Given I am a signed in user
-  And I am on Food homepage
+  #Given I am a signed in user
+  Given I am on Food me module
+  And I signed in from benefits page as a normal user
+  And I navigate to BBC food home page
   And I add recipe to Favourite
   When I am on Food me module
   And I request feeds from MeService API

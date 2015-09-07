@@ -29,16 +29,6 @@ public class FoodFavouriteStepdefs extends WebNavPage{
     Response metadata= null;
     public JSONObject jsonObj = new JSONObject();
 
-
-
-
-    @Given("^I am on Food homepage$")
-    public void I_am_on_Food_homepage() throws Throwable {
-        String url=System.getProperty("baseUrl")+"/food";
-        openWebPage(url);
-
-    }
-
     
     @Given("^I find a recipe$")
     public void I_find_a_recipe() throws Throwable {
