@@ -209,9 +209,9 @@ public class SharedDriver extends WebDriverException {
         String OSIAmIn = System.getProperty("os.name").toLowerCase();
         if (OSIAmIn.contains("windows")) {
             System.setProperty("webdriver.chrome.driver", drivers + File.separator + "chromedriver" + File.separator  + "win" + File.separator  + "chromedriver.exe");
-        } else if(OSIAmIn.contains("mac os x")) {
+        } else //if(OSIAmIn.contains("mac os x")) {
             System.setProperty("webdriver.chrome.driver", drivers + File.separator + "chromedriver" + File.separator  + "mac" + File.separator  + "chromedriver");
-        }
+        //}
 
         //System.setProperty("webdriver.chrome.driver", drivers + File.separator + "chromedriver" + File.separator  + "win" + File.separator  + "chromedriver.exe");
         ChromeOptions browser_setup = new ChromeOptions();
@@ -233,9 +233,9 @@ public class SharedDriver extends WebDriverException {
 
         if (OSIAmIn.contains("windows")) {
             _capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, drivers + File.separator + "phantomJs" + File.separator + "phantomjs.exe");
-        } else if(OSIAmIn.contains("mac os x")) {
+        } else //if(OSIAmIn.contains("mac os x")) {
             _capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomJsDriver4macOSx + File.separator + "phantomjs");
-        }
+        //}
 
 
         try {
