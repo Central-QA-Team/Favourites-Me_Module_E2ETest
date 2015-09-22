@@ -56,24 +56,27 @@ public class SharedDriver extends WebDriverException {
     //private static final File FIREFOX_LOCATION = new File (getConfigFile().getProperty("firefox.path"));
     //private static final String CHROME_LOCATION= getConfigFile().getProperty("chrome.path");
 
-    private static String browserCapabilities = capabilities();
+
     String getSessionId;
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(SharedDriver.class);
 
     public static String capabilities(){
-        String capabilities = System.getProperty("capabilities");
-        String key = "safari";    //user agent;
-        if (key.equalsIgnoreCase("firefox")) {
+        String capabilities = "firefox";
+        if(System.getProperty("capabilities")!=null)
+            capabilities=System.getProperty("capabilities");
+
+        System.out.println("The user agent used for PhantomJs is :" +capabilities);
+        if (capabilities.equalsIgnoreCase("firefox")) {
             return "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0";
-        } else if (key.equalsIgnoreCase("chrome")) {
+        } else if (capabilities.equalsIgnoreCase("chrome")) {
             return "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
-        } else if (key.equalsIgnoreCase("opera")) {
+        } else if (capabilities.equalsIgnoreCase("opera")) {
             return "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16";
-        } else if (key.equalsIgnoreCase("safari")) {
+        } else if (capabilities.equalsIgnoreCase("safari")) {
             return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A";
-        } else if (key.equalsIgnoreCase("IE11")){
+        } else if (capabilities.equalsIgnoreCase("IE11")){
             return "Mozilla/5.0 (compatible, MSIE 11, Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko";
-        } else if (key.equalsIgnoreCase("IE9")){
+        } else if (capabilities.equalsIgnoreCase("IE9")){
             return "Mozilla/5.0 (Windows; U; MSIE 9.0; WIndows NT 9.0; en-US))";
         } else {
             return "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0";
@@ -95,8 +98,10 @@ public class SharedDriver extends WebDriverException {
 
     @Before("~@noWebDriver")
     public static void setUp() throws Exception {
-        String browser = System.getProperty("browser");
-        String key = browser;    //browser;
+        String key = "firefox";
+        if(System.getProperty("browser")!=null)
+            key=System.getProperty("browser");
+
         System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
         System.out.println("The Browser used is: " + key);
         if (key.equalsIgnoreCase("chrome")) {
@@ -224,7 +229,7 @@ public class SharedDriver extends WebDriverException {
         _capabilities = DesiredCapabilities.phantomjs();
         _capabilities.setJavascriptEnabled(true);
         _capabilities.setCapability("takesScreenshot", true);
-        _capabilities.setCapability("phantomjs.page.settings.userAgent", browserCapabilities);
+        _capabilities.setCapability("phantomjs.page.settings.userAgent", capabilities());
 
         if (OSIAmIn.contains("windows")) {
             _capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, drivers + File.separator + "phantomJs" + File.separator + "phantomjs.exe");
