@@ -54,7 +54,7 @@ public class SignInStepdefs extends WebNavPage{
     @When("^I sign in from idCTA$")
     public void I_sign_in_from_idCTA() throws Throwable {
         clickALink(signInPage.signInCTA);
-        signInPage.sign_In(System.getProperty("userWithFav"),System.getProperty("passWithFav"));
+        signInPage.sign_In(System.getProperty("userWithFav"), System.getProperty("passWithFav"));
     }
 
     @Given("^I am a signed in user$")
@@ -64,5 +64,14 @@ public class SignInStepdefs extends WebNavPage{
         signInPage.sign_In(System.getProperty("userWithFav"), System.getProperty("passWithFav"));
         waitForShortSpan();
     }
+
+    @Given("^I am a signed in user username \"([^\"]*)\" and password \"([^\"]*)\"$")
+    public void I_am_a_signed_in_user_username_and_password(String userName, String password) throws Throwable {
+        openWebPage(System.getProperty("baseUrl"));
+        clickALink(signInPage.signInBarlesqueMenu);
+        signInPage.sign_In(userName,password);
+        waitForShortSpan();
+    }
+
 
 }

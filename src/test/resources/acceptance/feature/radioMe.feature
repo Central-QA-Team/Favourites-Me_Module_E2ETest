@@ -137,6 +137,16 @@ Scenario Outline: Tab description
     And I click on the "Episodes & Clips" tab
     Then clicking on tile should take user to respective programmes page
 
+  @quarantine @meModule @radio
+
+  Scenario: Tile navigation for programmes Update
+    Given I am on Radio me module
+    And I signed in from benefits page as a normal user
+    And I click on the "Programme Updates" tab
+    When I get me service response from brand
+    Then clicking on brand tile should take user to respective page
+    And I can remove the brand from Favourites on Radio Me Module
+
 
   @automated @meModule @radio
   Scenario Outline: Number of favourites per page
@@ -148,6 +158,15 @@ Scenario Outline: Tab description
     |tab|no_of_items|
     |Programme Updates|5|
     |Episodes & Clips |20|
+
+  @automated @meModule @radio @test
+  Scenario: C373305-Verify ordering of brands
+    Given I am a signed in user username "dhaneshbbctest1@gmail.com" and password "BBCtestaccount"
+    And I am on Radio me module
+    Then brands will be ordered as brand with latest available episode first
+    And brand with no available episode will be displayed at the last
+
+
 
 
 

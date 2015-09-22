@@ -124,7 +124,6 @@ public class RestAssuredStepDefs {
 
     @Given("^the server is up and running$")
     public void the_server_is_up_and_running() throws Throwable {
-        // Express the Regexp above with the code you wish you had
         throw new PendingException();
     }
 }

@@ -4,6 +4,8 @@ import FavouritesMe_Module_E2ETest.Selenium.WebNavPage;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import static junit.framework.Assert.assertTrue;
@@ -97,6 +99,34 @@ public class HelperMethods extends WebNavPage {
         return temp[2]+" "+month+" "+temp[0]+".";
     }
 
+
+    //to return true or false depending on given String List is sorted or not
+    public static boolean ifStringListSorted(List<String> follows){
+        boolean isSorted = true;
+        for(int i = 0; i < follows.size()-1 ; i++) {
+            // current String is > than the next one (if there are equal list is still sorted)
+            if(follows.get(i).compareToIgnoreCase(follows.get(i + 1)) > 0) {
+                isSorted = false;
+                break;
+            }
+        }
+        return isSorted;
+
+    }
+
+    //to return true or false depending on given Date List is sorted or not
+    public static boolean ifDateListSorted(List<Date> dates){
+        boolean isSorted = true;
+        for(int i = 0; i < dates.size()-1 ; i++) {
+            // current String is > than the next one (if there are equal list is still sorted)
+            if (dates.get(i).compareTo(dates.get(i + 1)) > 0) {
+                isSorted = false;
+                break;
+            }
+        }
+        return isSorted;
+
+    }
 
 
 }
