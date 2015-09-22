@@ -3,10 +3,7 @@ package FavouritesMe_Module_E2ETest;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,13 +14,16 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.LoggerFactory;
 import util.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
 
 import static junit.framework.Assert.fail;
 
@@ -53,6 +53,13 @@ public class SharedDriver extends WebDriverException {
     private static final String FIREFOX_LOCATION="/Applications/Firefox.app/Contents/MacOS/firefox";
     private static final String CHROME_LOCATION="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
     private static final String CONFIG = "browser.config";
+
+
+    //final static Logger logger = Logger.getLogger(WebConnector.class.getName());
+    public static final String USERNAME = "kalyanipatil2";
+    public static final String AUTOMATE_KEY = "yRe1M5mzqUXP7oiBXpwz";
+    public static final String URL = "http://" + USERNAME + ":" + AUTOMATE_KEY + "@hub.browserstack.com/wd/hub";
+    private static boolean isDevice = false;
     //private static final File FIREFOX_LOCATION = new File (getConfigFile().getProperty("firefox.path"));
     //private static final String CHROME_LOCATION= getConfigFile().getProperty("chrome.path");
 
@@ -98,20 +105,151 @@ public class SharedDriver extends WebDriverException {
 
     @Before("~@noWebDriver")
     public static void setUp() throws Exception {
-        String key = "firefox";
+        String browserName = "firefox";
         if(System.getProperty("browser")!=null)
-            key=System.getProperty("browser");
+            browserName=System.getProperty("browser");
 
         System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
-        System.out.println("The Browser used is: " + key);
-        if (key.equalsIgnoreCase("chrome")) {
+        System.out.println("The Browser used is: " + browserName);
+        if (browserName.equalsIgnoreCase("chrome")) {
             setChromeDriver();
-        } else if (key.equalsIgnoreCase("firefox")) {
+        } else if (browserName.equalsIgnoreCase("firefox")) {
             setFirefoxDriver();
-        } else if (key.equalsIgnoreCase("phantomJs")) {
+        } else if (browserName.equalsIgnoreCase("phantomJs")) {
             setPhantomJs();
-        } else {
+        } else if (browserName.equalsIgnoreCase("IE")){
             setInternetExplorerDriver();
+        } else if (browserName.equalsIgnoreCase("MacChrome36.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.chrome();
+            capability.setPlatform(Platform.MAC);
+            capability.setVersion("36.0");
+            capability.setCapability("build", "myBBCFavourites-MacChrome");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "MacChrome36.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("MacFireFox31.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.firefox();
+            capability.setPlatform(Platform.MAC);
+            capability.setVersion("31.0");
+            capability.setCapability("build", "myBBCFavourites-MacFirefox31.0");
+            capability.setCapability("browserstack.debug", true);
+            isDevice = true;
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "MacFireFox31.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("MACSafari7.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.safari();
+            capability.setPlatform(Platform.MAC);
+            capability.setVersion("7.0");
+            capability.setCapability("build", "myBBCFavourites-MacSafari7.0");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "MACSafari7.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("WindowsIE11.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
+            capability.setPlatform(Platform.WIN8);
+            capability.setVersion("11.0");
+            capability.setCapability("build", "myBBCFavourites-WindowsIE");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "WindowsIE11.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("Windows7IE10.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
+            capability.setPlatform(Platform.WINDOWS);
+            capability.setVersion("10.0");
+            capability.setCapability("build", "myBBCFavourites-Windows7IE10.0");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "Windows7IE10.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("Windows7IE9.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
+            capability.setPlatform(Platform.WINDOWS);
+            capability.setVersion("9.0");
+            capability.setCapability("build", "myBBCFavourites-Windows7IE9.0");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "Windows7IE9.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("Windows7IE8.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
+            capability.setPlatform(Platform.WINDOWS);
+            capability.setVersion("8.0");
+            capability.setCapability("build", "myBBCFavourites-Windows7IE8.0");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "Windows7IE8.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("Windows8FF31.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.firefox();
+            capability.setPlatform(Platform.WIN8);
+            capability.setVersion("31.0");
+            capability.setCapability("build", "myBBCFavourites-Windows8FF31.0");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "Windows8FF31.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("Windows8Chrome36.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.chrome();
+            capability.setPlatform(Platform.WIN8);
+            capability.setVersion("36.0");
+            capability.setCapability("build", "myBBCFavourites-Windows8Chrome36.0");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "Windows8Chrome36.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("Windows8Opera12.16")) {
+            DesiredCapabilities capability = DesiredCapabilities.opera();
+            capability.setPlatform(Platform.WIN8);
+            capability.setVersion("12.16");
+            capability.setCapability("build", "myBBCFavourites-Windows8Opera12.16");
+            capability.setCapability("browserstack.debug", true);
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "Windows8Opera12.16 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("iPhone5Safari7.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.iphone();
+            capability.setPlatform(Platform.MAC);
+            capability.setCapability("device", "iPhone 5S");
+            capability.setVersion("7.0");
+            capability.setCapability("build", "myBBCFavourites-iPhone5Safari7.0");
+            capability.setCapability("browserstack.debug", true);
+            isDevice = true;
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "iPhone5Safari7.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("iPad4Safari7.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.ipad();
+            capability.setPlatform(Platform.MAC);
+            capability.setCapability("device", "iPad 4th Gen");
+            capability.setVersion("7.0");
+            capability.setCapability("build", "myBBCFavourites-iPad4Safari7.0");
+            capability.setCapability("browserstack.debug", true);
+            isDevice = true;
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "iPad4Safari7.0 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("SamsungS3Android4.1")) {
+            DesiredCapabilities capability = DesiredCapabilities.android();
+            capability.setPlatform(Platform.ANDROID);
+            capability.setCapability("device", "Samsung Galaxy S3");
+            capability.setVersion("4.1");
+            capability.setCapability("build", "myBBCFavourites-SamsungS3Android4.1");
+            capability.setCapability("browserstack.debug", true);
+            isDevice = true;
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "SamsungS3Android4.1 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("GoogleNexus7Android4.1")) {
+            DesiredCapabilities capability = DesiredCapabilities.android();
+            capability.setPlatform(Platform.ANDROID);
+            capability.setCapability("device", "Google Nexus 7");
+            capability.setVersion("4.1");
+            capability.setCapability("build", "myBBCFavourites-GoogleNexus7Android4.1");
+            capability.setCapability("browserstack.debug", true);
+            isDevice = true;
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "GoogleNexus7Android4.1 on BrowserStack");
+        } else if (browserName.equalsIgnoreCase("SamsungGalaxyNote10.1Android4.0")) {
+            DesiredCapabilities capability = DesiredCapabilities.android();
+            capability.setPlatform(Platform.ANDROID);
+            capability.setCapability("device", "Samsung Galaxy Note 10.1");
+            capability.setVersion("4.0");
+            capability.setCapability("build", "myBBCFavourites-SamsungGalaxyNote10.1Android4.0");
+            capability.setCapability("browserstack.debug", true);
+            isDevice = true;
+            driver = new RemoteWebDriver(new URL(URL), capability);
+            logger.info("Launching the Browser: " + "SamsungGalaxyNote10.1Android4.0 on BrowserStack");
         }
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
