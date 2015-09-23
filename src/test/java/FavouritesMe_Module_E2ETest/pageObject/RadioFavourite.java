@@ -26,7 +26,7 @@ public class RadioFavourite extends WebNavPage{
     public By getFavouriteButtonLabel = By.xpath("//*[@id='pf1']/span[@id='pfl1']");
     public By yourFavourites = By.cssSelector(".rsn-favourites-link");
     public By addedFavouriteButtonStatus = By.xpath("//*[@id='pf1'][@class='p-f-button p-f-added p-f-leave']");
-    public By categories = By.xpath("//a/span[text()='Categories']");
+    public By categories = By.xpath("//div[@class='section-inner']//*[@data-tab='categories']");
     public By secondCategory = By.xpath("//ul/li[2]/a/div/h3");
     public By firstBrand = By.xpath("//div[2]/div/ol/li[1]//h4/a/span/span");
     public By brandName = By.xpath("//*[@id='br-masthead']/div/div[1]/div[2]/a/div");
