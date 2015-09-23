@@ -109,15 +109,22 @@ public class SharedDriver extends WebDriverException {
         if(System.getProperty("browser")!=null)
             browserName=System.getProperty("browser");
 
-        System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
-        System.out.println("The Browser used is: " + browserName);
+
         if (browserName.equalsIgnoreCase("chrome")) {
+            System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
+            System.out.println("The Browser used is: " + browserName);
             setChromeDriver();
         } else if (browserName.equalsIgnoreCase("firefox")) {
+            System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
+            System.out.println("The Browser used is: " + browserName);
             setFirefoxDriver();
         } else if (browserName.equalsIgnoreCase("phantomJs")) {
+            System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
+            System.out.println("The Browser used is: " + browserName);
             setPhantomJs();
         } else if (browserName.equalsIgnoreCase("IE")){
+            System.out.println("The Operating system used is: " + System.getProperty("os.name").toLowerCase());
+            System.out.println("The Browser used is: " + browserName);
             setInternetExplorerDriver();
         } else if (browserName.equalsIgnoreCase("MacChrome36.0")) {
             DesiredCapabilities capability = DesiredCapabilities.chrome();
