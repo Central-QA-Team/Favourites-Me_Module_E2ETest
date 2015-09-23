@@ -130,7 +130,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.chrome();
             capability.setPlatform(Platform.MAC);
             capability.setVersion("36.0");
-            capability.setCapability("build", "myBBCFavourites-MacChrome");
+            capability.setCapability("build", "myBBC Favourites Mac:Chrome");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "MacChrome36.0 on BrowserStack");
@@ -138,7 +138,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.firefox();
             capability.setPlatform(Platform.MAC);
             capability.setVersion("31.0");
-            capability.setCapability("build", "myBBCFavourites-MacFirefox31.0");
+            capability.setCapability("build", "myBBC Favourites Mac:Firefox31.0");
             capability.setCapability("browserstack.debug", true);
             isDevice = true;
             driver = new RemoteWebDriver(new URL(URL), capability);
@@ -147,7 +147,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.safari();
             capability.setPlatform(Platform.MAC);
             capability.setVersion("7.0");
-            capability.setCapability("build", "myBBCFavourites-MacSafari7.0");
+            capability.setCapability("build", "myBBC Favourites Mac:Safari7.0");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "MACSafari7.0 on BrowserStack");
@@ -155,7 +155,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
             capability.setPlatform(Platform.WIN8);
             capability.setVersion("11.0");
-            capability.setCapability("build", "myBBCFavourites-WindowsIE");
+            capability.setCapability("build", "myBBC Favourites Windows:IE");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "WindowsIE11.0 on BrowserStack");
@@ -163,7 +163,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
             capability.setPlatform(Platform.WINDOWS);
             capability.setVersion("10.0");
-            capability.setCapability("build", "myBBCFavourites-Windows7IE10.0");
+            capability.setCapability("build", "myBBC Favourites Windows7:IE10.0");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "Windows7IE10.0 on BrowserStack");
@@ -171,7 +171,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
             capability.setPlatform(Platform.WINDOWS);
             capability.setVersion("9.0");
-            capability.setCapability("build", "myBBCFavourites-Windows7IE9.0");
+            capability.setCapability("build", "myBBC Favourites Windows7:IE9.0");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "Windows7IE9.0 on BrowserStack");
@@ -179,7 +179,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
             capability.setPlatform(Platform.WINDOWS);
             capability.setVersion("8.0");
-            capability.setCapability("build", "myBBCFavourites-Windows7IE8.0");
+            capability.setCapability("build", "myBBC Favourites Windows7:IE8.0");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "Windows7IE8.0 on BrowserStack");
@@ -187,7 +187,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.firefox();
             capability.setPlatform(Platform.WIN8);
             capability.setVersion("31.0");
-            capability.setCapability("build", "myBBCFavourites-Windows8FF31.0");
+            capability.setCapability("build", "myBBC Favourites Windows8:FF31.0");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "Windows8FF31.0 on BrowserStack");
@@ -195,7 +195,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.chrome();
             capability.setPlatform(Platform.WIN8);
             capability.setVersion("36.0");
-            capability.setCapability("build", "myBBCFavourites-Windows8Chrome36.0");
+            capability.setCapability("build", "myBBC Favourites Windows8:Chrome36.0");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "Windows8Chrome36.0 on BrowserStack");
@@ -203,7 +203,7 @@ public class SharedDriver extends WebDriverException {
             DesiredCapabilities capability = DesiredCapabilities.opera();
             capability.setPlatform(Platform.WIN8);
             capability.setVersion("12.16");
-            capability.setCapability("build", "myBBCFavourites-Windows8Opera12.16");
+            capability.setCapability("build", "myBBC Favourites Windows8:Opera12.16");
             capability.setCapability("browserstack.debug", true);
             driver = new RemoteWebDriver(new URL(URL), capability);
             logger.info("Launching the Browser: " + "Windows8Opera12.16 on BrowserStack");
@@ -212,7 +212,7 @@ public class SharedDriver extends WebDriverException {
             capability.setPlatform(Platform.MAC);
             capability.setCapability("device", "iPhone 5S");
             capability.setVersion("7.0");
-            capability.setCapability("build", "myBBCFavourites-iPhone5Safari7.0");
+            capability.setCapability("build", "myBBC Favourites iPhone5:Safari7.0");
             capability.setCapability("browserstack.debug", true);
             isDevice = true;
             driver = new RemoteWebDriver(new URL(URL), capability);
@@ -222,7 +222,7 @@ public class SharedDriver extends WebDriverException {
             capability.setPlatform(Platform.MAC);
             capability.setCapability("device", "iPad 4th Gen");
             capability.setVersion("7.0");
-            capability.setCapability("build", "myBBCFavourites-iPad4Safari7.0");
+            capability.setCapability("build", "myBBC Favourites iPad4:Safari7.0");
             capability.setCapability("browserstack.debug", true);
             isDevice = true;
             driver = new RemoteWebDriver(new URL(URL), capability);
@@ -232,7 +232,7 @@ public class SharedDriver extends WebDriverException {
             capability.setPlatform(Platform.ANDROID);
             capability.setCapability("device", "Samsung Galaxy S3");
             capability.setVersion("4.1");
-            capability.setCapability("build", "myBBCFavourites-SamsungS3Android4.1");
+            capability.setCapability("build", "myBBC Favourites SamsungS3:Android4.1");
             capability.setCapability("browserstack.debug", true);
             isDevice = true;
             driver = new RemoteWebDriver(new URL(URL), capability);
@@ -242,7 +242,7 @@ public class SharedDriver extends WebDriverException {
             capability.setPlatform(Platform.ANDROID);
             capability.setCapability("device", "Google Nexus 7");
             capability.setVersion("4.1");
-            capability.setCapability("build", "myBBCFavourites-GoogleNexus7Android4.1");
+            capability.setCapability("build", "myBBC Favourites GoogleNexus7:Android4.1");
             capability.setCapability("browserstack.debug", true);
             isDevice = true;
             driver = new RemoteWebDriver(new URL(URL), capability);
@@ -252,7 +252,7 @@ public class SharedDriver extends WebDriverException {
             capability.setPlatform(Platform.ANDROID);
             capability.setCapability("device", "Samsung Galaxy Note 10.1");
             capability.setVersion("4.0");
-            capability.setCapability("build", "myBBCFavourites-SamsungGalaxyNote10.1Android4.0");
+            capability.setCapability("build", "myBBC Favourites SamsungGalaxyNote10.1:Android4.0");
             capability.setCapability("browserstack.debug", true);
             isDevice = true;
             driver = new RemoteWebDriver(new URL(URL), capability);
@@ -418,6 +418,7 @@ public class SharedDriver extends WebDriverException {
 
     @After
     public static void close(Scenario scenario) {
+        driver.quit();
 
     	/*StringBuffer verificationErrors = new StringBuffer();
         System.out.println("hello, I'm running closeBrowser");
