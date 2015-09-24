@@ -56,8 +56,8 @@ public class SharedDriver extends WebDriverException {
 
 
     //final static Logger logger = Logger.getLogger(WebConnector.class.getName());
-    public static final String USERNAME = "kalyanipatil2";
-    public static final String AUTOMATE_KEY = "yRe1M5mzqUXP7oiBXpwz";
+    public static final String USERNAME = "profile2";
+    public static final String AUTOMATE_KEY = "BqHnxgb9rcBSs47frWyx";
     public static final String URL = "http://" + USERNAME + ":" + AUTOMATE_KEY + "@hub.browserstack.com/wd/hub";
     private static boolean isDevice = false;
     //private static final File FIREFOX_LOCATION = new File (getConfigFile().getProperty("firefox.path"));
@@ -105,7 +105,7 @@ public class SharedDriver extends WebDriverException {
 
     @Before("~@noWebDriver")
     public static void setUp() throws Exception {
-        String browserName = "firefox";
+        String browserName = "phantomJs";
         if(System.getProperty("browser")!=null)
             browserName=System.getProperty("browser");
 
